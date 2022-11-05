@@ -1,0 +1,14 @@
+.btn-mobile {
+    font-size: 0;
+}
+.btn-mobile i {
+    font-size: initial;
+}
+
+.wm-100 {
+    width: 100%!important;
+}
+
+.hide-mobile {
+    display: none;
+}

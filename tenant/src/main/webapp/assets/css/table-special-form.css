@@ -1,0 +1,23 @@
+/*
+
+    MIS EN FORME DES TABLES CUSTOM
+
+ */
+
+.table-special-form {
+
+}
+
+.table-special-form tbody tr {
+    cursor: pointer;
+}
+
+.table-special-form tbody tr:hover td {
+    background: rgba(0, 0, 0, .1) !important;
+}
+
+.table thead {
+    position: sticky;
+    top: -1px;
+    background: #3a444e;
+}

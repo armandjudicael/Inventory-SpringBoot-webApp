@@ -1,0 +1,261 @@
+.page-title {
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.content-page {
+    min-height: auto !important;
+}
+
+.table-unit > :not(caption) > * > * {
+    padding: .4em !important;
+}
+
+.page-title {
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+
+.content-page {
+    min-height: auto !important;
+}
+
+.table-unit > :not(caption) > * > * {
+    padding: .4em !important;
+}
+
+.btn-40 {
+    height: 40px !important;
+}
+
+.table-stock tr {
+    cursor: pointer;
+}
+
+.table-50 {
+    max-height: 350px !important;
+}
+
+.btn-info-stock {
+    cursor: pointer !important;
+}
+
+
+.table-facture tbody tr {
+    cursor: pointer !important;
+}
+
+.toutes-fonctions {
+    cursor: pointer;
+}
+
+/*------------------------------------------------------
+                            NOUVEAU ARTICLE
+-------------------------------------------------------*/
+
+#table-unite tbody tr {
+}
+
+/*------------------------------------------------------
+                            MENU PRIX
+-------------------------------------------------------*/
+
+.uil-size-40 {
+    font-size: 7.5em!important;
+}
+
+.uil-size-10 {
+    font-size: 2.5em !important;
+}
+
+/*------------------------------------------------------
+                            MENU CLIENT
+-------------------------------------------------------*/
+
+#table-client tbody tr td .action-client {
+    visibility: hidden;
+}
+
+#table-client tbody tr:hover td .action-client {
+    visibility: visible;
+}
+
+
+/*------------------------------------------------------
+                            MENU FOURNISSEUR
+-------------------------------------------------------*/
+
+#table-fournisseur tbody tr td .action-fournisseur {
+    visibility: hidden;
+}
+
+#table-fournisseur tbody tr:hover td .action-fournisseur {
+    visibility: visible;
+}
+
+
+/*------------------------------------------------------
+                            MENU VOYAGE
+-------------------------------------------------------*/
+
+#table-voyage tbody tr td .action-voyage {
+    visibility: hidden;
+}
+
+#table-voyage tbody tr:hover td .action-voyage {
+    visibility: visible;
+}
+
+/*------------------------------------------------------
+                            OTHER CSS PROPRIETIES
+ -------------------------------------------------------*/
+
+.force-to-bottom {
+    position:absolute;
+    bottom: 3%;
+    width: 100%;
+}
+
+.force-right {
+    right: 0;
+}
+
+.force-left {
+    left: 3%;
+}
+
+td.text-align-right {
+    text-align: right;
+}
+
+/*------------------------------------------------------
+                            TOAST
+ -------------------------------------------------------*/
+
+.toast-css {
+    z-index: 9999!important;
+    position: fixed!important;
+    right: 5vh;
+}
+.toast-css .toast-body {
+    text-shadow: 1px 1px 2px #262626, 0 0 1em #262626, 0 0 0.2em #262626;
+}
+
+/*------------------------------------------------------
+                            CAISSE
+ -------------------------------------------------------*/
+
+.type-caisse {
+    cursor: pointer;
+}
+.type-caisse:hover {
+    border-left: 2px solid azure;
+    opacity: .8;
+}
+
+/*--------------------------------------
+                BOX
+ ---------------------------------------*/
+
+.modal-content {
+    border: 2px solid gray!important;
+    box-shadow: 1px 5px 25px #262626;
+}
+
+.box-dashboard {
+    display: flex;
+}
+
+/* ------------------------------
+     validation formulaire
+------------------------------ */
+
+label.error {
+    /*display: none!important;*/
+}
+
+.error {
+    font-size: 12px;
+    color: #fa5c7c;
+}
+
+
+/*
+
+    AUTRES
+
+ */
+
+td.td-action {
+    height: 38.8px!important;
+}
+
+td.td-action div {
+    display: block!important;
+    opacity: .01;
+    transition: .1s opacity;
+}
+
+table tbody tr:hover .td-action div {
+    opacity: 1!important;
+}
+
+.t-list-75 {
+    /*height: 80vh!important;*/
+    /*overflow-y: scroll;*/
+}
+
+.foot-vente {
+    position: absolute;
+    bottom: 5%;
+    right : 5%;
+}
+
+
+.icon-excel {
+    width: 23px;
+    height: 23px;
+}
+
+.page-title-box .page-title {
+    font-size: 25px!important;
+}
+
+.footer {
+    padding: 10px!important;
+}
+
+
+/*
+
+CODE BAR
+
+ */
+
+
+.barcode-articles-list {
+    z-index: -9999!important;
+    height: 30px!important;
+    width: 80px!important;
+    cursor: help;
+}
+
+#info-barcode #info-barcode-svg {
+    /*width: 250px;*/
+}
+
+.table-info-barcode tr td{
+    padding: 0;
+}
+
+#form-vente, #form-sortie {
+    min-height: 90vh;
+}
+
+.label-count-footer {
+    padding: 5px 20px 5px 20px;
+    background: slategrey;
+    color: white;
+}
