@@ -2,41 +2,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<modules>
-		<module>tenant</module>
-	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.6.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<packaging>jar</packaging>
 	<groupId>mg.imwa</groupId>
 	<artifactId>admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>admin</name>
-	<description>multi module spring boot inventory web app </description>
-
+	<description>spring boot inventory web app </description>
 	<properties>
 		<java.version>11</java.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
-
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>5.3.23</version>
-		</dependency>
-
-		<dependency>
-			<groupId>mg.imwa</groupId>
-			<artifactId>tenant</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
 		<dependency>

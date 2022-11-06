@@ -1,17 +1,15 @@
 package mg.imwa.admin.model;
 import lombok.Data;
+import mg.imwa.tenant.model.tenantEntityBeans.Personne;
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 @Data
 @Entity
-public class Company{
+public class Company extends Personne{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  id;
-
-    @Column(columnDefinition = "TEXT")
-    private String nom;
 
     @Column(columnDefinition = "TEXT")
     private String verset;
@@ -30,13 +28,15 @@ public class Company{
 
     private String validationKey;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    private TenantUser admin;
+
     private boolean isValidated = false;
 
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
-                ", nom='" + nom + '\'' +
                 ", verset='" + verset + '\'' +
                 ", slogan='" + slogan + '\'' +
                 ", societeStatus=" + societeStatus +
@@ -45,4 +45,5 @@ public class Company{
                 ", isValidated=" + isValidated +
                 '}';
     }
+
 }

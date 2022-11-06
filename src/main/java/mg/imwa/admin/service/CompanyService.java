@@ -3,6 +3,7 @@ package mg.imwa.admin.service;
 import com.zaxxer.hikari.HikariDataSource;
 import mg.imwa.admin.model.Company;
 import mg.imwa.admin.model.CompanyDataSourceConfig;
+import mg.imwa.admin.repository.CompanyDatasourceConfigRepo;
 import mg.imwa.admin.repository.CompanyRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.flywaydb.core.Flyway;
@@ -12,6 +13,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.stereotype.Service;
 import java.sql.*;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
 @Service
@@ -25,11 +28,14 @@ public class CompanyService{
     @Autowired
     private CompanyRepository companyRepository;
 
+    @Autowired
+    private CompanyDatasourceConfigRepo companyDatasourceConfigRepo;
+
 //    @Autowired
 //    private EmailService emailService;
 
     @Autowired
-    private ExecutorService executor;
+    private Executor executor;
 
     @Autowired
     private LocalContainerEntityManagerFactoryBean entityManagerFactory;
@@ -39,10 +45,12 @@ public class CompanyService{
     }
 
     public Company create(Company company){
-        CompanyDataSourceConfig cdc = company.getCompanyDataSourceConfig();
-        HikariDataSource hikariDataSource = cdc.initDatasource();
-        String databaseName = cdc.getDatabaseName().toLowerCase();
-        createNewDatabase(databaseName,hikariDataSource);
+        executor.execute(() -> {
+            CompanyDataSourceConfig cdc = company.getCompanyDataSourceConfig();
+            HikariDataSource hikariDataSource = cdc.initDatasource();
+            String databaseName = cdc.getDatabaseName().toLowerCase();
+            createNewDatabase(databaseName,hikariDataSource);
+        });
         String validationKey = generateValidationKey(company.getNom());
         company.setValidationKey(validationKey);
         return companyRepository.save(company);
@@ -71,7 +79,7 @@ public class CompanyService{
     private Void createNewDatabase(String databaseName,HikariDataSource dataSource){
         try {
             if (databaseDontExist(databaseName)){
-                Connection connection = entityManagerFactory.getDataSource().getConnection();
+                Connection connection = Objects.requireNonNull(entityManagerFactory.getDataSource()).getConnection();
                 connection.createStatement().execute(" CREATE DATABASE "+ databaseName +";");
                 executeFlywayMigration(dataSource);
             }
@@ -82,6 +90,6 @@ public class CompanyService{
     }
 
     private Boolean databaseDontExist(String dbname){
-        return companyRepository.databaseDontExist(dbname) == 0;
+        return companyDatasourceConfigRepo.findAll().stream().noneMatch(companyDataSourceConfig -> companyDataSourceConfig.getDatabaseName().equals(dbname));
     }
 }

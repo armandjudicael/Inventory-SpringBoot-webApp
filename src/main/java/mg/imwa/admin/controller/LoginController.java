@@ -1,41 +1,86 @@
 package mg.imwa.admin.controller;
+import mg.imwa.admin.model.UserType;
+import mg.imwa.admin.repository.CompanyRepository;
+import mg.imwa.admin.repository.TenantUserRepository;
 import mg.imwa.admin.service.LoginService;
+import mg.imwa.tenant.repository.SubsidiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
+@SessionAttributes(names = {"tenantAdmin","imwaAdmin"})
 public class LoginController{
 
-    @Autowired
-    private LoginService loginService;
+    private final String COMPANY_LIST = "companies";
 
-//    @RequestMapping(method = RequestMethod.GET,value = "/company-admin-login.html")
-//    public String getCompanyAdminLogin(){
-//        return "company-admin-login";
-//    }
-//
-//    @RequestMapping(method = RequestMethod.GET,value = "/imwa-admin-login.html")
-//    public String getImwaAdminLogin(){
-//        return "imwa-admin-login";
-//    }
+    @Autowired private LoginService loginService;
+    @Autowired private CompanyRepository companyRepository;
+    @Autowired private TenantUserRepository tenantUserRepository;
 
-    @RequestMapping(method = RequestMethod.GET,value = {"/index.jsp","/"})
-    public String index(){
-        return "login/tenant-user-login";
+    @RequestMapping(method = RequestMethod.GET,value = {"/index","/"})
+    public ModelAndView index(){
+        ModelAndView modelAndView = new ModelAndView("login/tenant-user-login");
+        return modelAndView;
     }
 
-    @PostMapping("/signup")
+    @RequestMapping(method = RequestMethod.GET,value = {"/company-admin-login"})
+    public ModelAndView getCompanyAdminLogin(){
+        ModelAndView modelAndView = new ModelAndView("login/company-admin-login");
+        return modelAndView;
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = {"/imwa-admin-login"})
+    public ModelAndView getImwaAdminLogin(){
+        ModelAndView modelAndView = new ModelAndView("login/admin-login");
+        return modelAndView;
+    }
+
+    @PostMapping("/imwa-admin-signup")
+    public ModelAndView adminSignup(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView(        "login/admin-login");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,"ADMIN",UserType.IMWA_ADMIN).ifPresent(tenantUser -> {
+            modelAndView.addObject("imwaAdmin",tenantUser);
+            modelAndView.addObject(COMPANY_LIST,companyRepository.findAll());
+            modelAndView.setViewName("administrateur/dashboard");
+        });
+        return modelAndView;
+    }
+
+    @Autowired
+    private SubsidiaryRepository subsidiaryRepository;
+
+    @PostMapping("/company-admin-signup")
+    public ModelAndView companyAdminSignup(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView("login/company-admin-login");
+        String subsidiaryName = request.getParameter("subsidiary-name");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,subsidiaryName,UserType.COMPANY_ADMIN).ifPresent(tenantUser ->{
+            HttpSession session = request.getSession();
+            if (session.getAttribute("tenantAdmin")==null) modelAndView.addObject("tenantAdmin",tenantUser);
+            String databaseName = tenantUser.getKey();
+            loginService.initCurrentDatasourceAndTenantContext(databaseName);
+            modelAndView.addObject("subsdiaries",subsidiaryRepository.findAll());
+            modelAndView.setViewName("admin-client/dashboard");
+        });
+        return modelAndView;
+    }
+
+    @PostMapping("/tenant-signup")
     public ModelAndView signUp(HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String key = request.getParameter("filialeKey");
-        System.out.println(" Username = "+username+" - " + " Password = "+password);
-        ModelAndView modelAndView = loginService.checkTenantandSubsidiary(username, password, key);
+        ModelAndView modelAndView = loginService.checkTenantandSubsidiary(username,password,key);
         return modelAndView;
     }
 

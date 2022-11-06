@@ -15,8 +15,8 @@ public class CompanyController{
     @Autowired private CompanyService companyService;
 
     @PostMapping("/companies")
-    public Company create(@RequestBody Company company){
-        return companyService.create(company);
+    public ResponseEntity<Object> create(@RequestBody Company company){
+        return new ResponseEntity<>(companyService.create(company),HttpStatus.CREATED) ;
     }
 
     @GetMapping("/companies")

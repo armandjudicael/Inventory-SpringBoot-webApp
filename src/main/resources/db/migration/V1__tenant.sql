@@ -35,8 +35,7 @@ create table fonctionnalite
 
 alter table fonctionnalite owner to postgres;
 
-create table materiel_transport
-(
+create table materiel_transport(
     id bigserial not null
         constraint materiel_transport_pkey
             primary key,
@@ -94,10 +93,7 @@ create table fonction
         constraint fonction_pkey
             primary key,
     default_page integer,
-    nom_fonction text,
-    filiale_id bigint not null
-        constraint fkjprgv15d5mx8811r4pm8ayqkw
-            references filiale
+    nom_fonction text
 );
 
 alter table fonction owner to postgres;
