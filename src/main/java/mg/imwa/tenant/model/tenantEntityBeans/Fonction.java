@@ -20,6 +20,17 @@ import java.util.Set;
         @NamedQuery(name = "fonction.all", query = "from fonction")
 })
 public class Fonction{
+    
+    @Override
+    public String toString() {
+        return "Fonction{" +
+                "id=" + id +
+                ", nomFonction='" + nomFonction + '\'' +
+                ", filiale=" + filiale +
+                ", defaultPage=" + defaultPage +
+                '}';
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +39,8 @@ public class Fonction{
     private String nomFonction;
 
     @ElementCollection
-    @CollectionTable(name = "fonction_autorisation",
-            joinColumns = {@JoinColumn(name = "fonction_id", referencedColumnName = "id")})
+    @CollectionTable(name="fonction_autorisation",
+            joinColumns = {@JoinColumn(name = "fonction_id",referencedColumnName="id")})
     @MapKeyColumn(name = "fonctionnalite_id")
     @Column(name = "status")
     private Map<Fonctionnalite, Long> autorisationMap;

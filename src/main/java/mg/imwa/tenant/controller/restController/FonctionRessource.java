@@ -14,19 +14,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
-public class fonctionRessource {
+public class FonctionRessource{
     @Autowired
     private FonctionRepository fonctionRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FonctionService fonctionService;
 
     @GetMapping("/fonctions")
     public ResponseEntity<Object> getAll() {
-        return new ResponseEntity<>(fonctionRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(fonctionRepository.joinFetchfindAll(), HttpStatus.OK);
     }
-
-    @Autowired
-    private FonctionService fonctionService;
 
     @PostMapping("/fonctions")
     public ResponseEntity<Object> create(@RequestBody Fonction fonction){

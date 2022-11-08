@@ -13,12 +13,14 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>admin</name>
 	<description>spring boot inventory web app </description>
+
 	<properties>
 		<java.version>11</java.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
 		<dependency>

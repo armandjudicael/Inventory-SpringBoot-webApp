@@ -48,6 +48,8 @@ public class AdminConfig {
                 "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
         jpaPropertiesMap.put("hibernate.implicit_naming_strategy","org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
         jpaPropertiesMap.put("hibernate.hbm2ddl.auto", "update");
+        jpaPropertiesMap.put("hibernate.show_sql","true");
+        jpaPropertiesMap.put("hibernate.enable_lazy_load_no_trans","true");
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setJpaVendorAdapter(hibernateJpaVendorAdapter);

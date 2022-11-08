@@ -18,4 +18,9 @@ public interface TenantUserRepository extends JpaRepository<TenantUser,Long>{
                                                          @Param("key") String key,
                                                          @Param("type")UserType type);
 
+    @Query(value = "from TenantUser t where t.userName=:username and t.password=:password and t.key=:key and (t.userType = 1 OR t.userType = 2)")
+    Optional<TenantUser> findByUsernameAndPasswordAndKey(@Param("username") String username,
+                                                         @Param("password") String password,
+                                                         @Param("key") String key);
+
 }

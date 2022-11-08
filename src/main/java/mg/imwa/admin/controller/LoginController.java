@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes(names = {"tenantAdmin","imwaAdmin"})
+@SessionAttributes(names = {"tenantAdmin","imwaAdmin","connectedUser"})
 public class LoginController{
 
     private final String COMPANY_LIST = "companies";
@@ -75,13 +75,12 @@ public class LoginController{
         return modelAndView;
     }
 
-    @PostMapping("/tenant-signup")
+    @PostMapping("/imwa-user-signup")
     public ModelAndView signUp(HttpServletRequest request){
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String key = request.getParameter("filialeKey");
-        ModelAndView modelAndView = loginService.checkTenantandSubsidiary(username,password,key);
-        return modelAndView;
+        String key = request.getParameter("key");
+        return loginService.checkTenantandSubsidiary(username,password,key);
     }
 
 }

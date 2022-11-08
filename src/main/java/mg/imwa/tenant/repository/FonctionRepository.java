@@ -18,4 +18,7 @@ public interface FonctionRepository extends JpaRepository<Fonction,Long>{
 
     @Query(value = "from fonction f where trim(lower(f.nomFonction))=trim(lower(:name))")
     Optional<Fonction> findByName(@Param("name") String name);
+
+    @Query(" from fonction f join fetch f.autorisationMap")
+    List<Fonction> joinFetchfindAll();
 }

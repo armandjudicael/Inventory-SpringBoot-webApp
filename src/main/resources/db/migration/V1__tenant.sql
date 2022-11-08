@@ -1057,3 +1057,61 @@ create trigger on_insert_on_info_filiale_caisse
     for each row
 execute procedure on_insert_caisse_filiale();
 
+insert into fonctionnalite(nom) values ('menu-dashboard');
+insert into fonctionnalite(nom) values ('menu-article');
+insert into fonctionnalite(nom) values ('menu-vente');
+insert into fonctionnalite(nom) values ('menu-detail-vente');
+insert into fonctionnalite(nom) values ('menu-magasin');
+insert into fonctionnalite(nom) values ('menu-stock');
+insert into fonctionnalite(nom) values ('menu-facture');
+insert into fonctionnalite(nom) values ('menu-prix');
+insert into fonctionnalite(nom) values ('menu-embarquement');
+insert into fonctionnalite(nom) values ('menu-peremption');
+insert into fonctionnalite(nom) values ('menu-client');
+insert into fonctionnalite(nom) values ('menu-fournisseur');
+insert into fonctionnalite(nom) values ('menu-operation');
+insert into fonctionnalite(nom) values ('menu-operation-liste');
+insert into fonctionnalite(nom) values ('menu-operation-entree');
+insert into fonctionnalite(nom) values ('menu-operation-sortie');
+insert into fonctionnalite(nom) values ('menu-operation-transfert');
+insert into fonctionnalite(nom) values ('menu-livraison');
+insert into fonctionnalite(nom) values ('menu-caisse');
+insert into fonctionnalite(nom) values ('menu-utilisateur');
+insert into fonctionnalite(nom) values ('menu-choix-magasin');
+insert into fonctionnalite(nom) values ('menu-autorisation');
+insert into fonctionnalite(nom) values ('menu-transports');
+
+insert into fonctionnalite(nom) values ('crud-article');
+insert into fonctionnalite(nom) values ('crud-magasin');
+insert into fonctionnalite(nom) values ('crud-prix');
+insert into fonctionnalite(nom) values ('crud-facture');
+insert into fonctionnalite(nom) values ('crud-peremption');
+insert into fonctionnalite(nom) values ('crud-fournisseur');
+insert into fonctionnalite(nom) values ('crud-embarquement');
+insert into fonctionnalite(nom) values ('crud-caisse');
+insert into fonctionnalite(nom) values ('crud-utilisateur');
+insert into fonctionnalite(nom) values ('crud-client');
+
+insert into fonctionnalite(nom) values ('notification-facture');
+insert into fonctionnalite(nom) values ('notification-livraison');
+insert into fonctionnalite(nom) values ('notification-commande');
+insert into fonctionnalite(nom) values ('option-configuration systeme');
+
+insert into fonctionnalite(nom) values ('option-bloquer compte client');
+insert into fonctionnalite(nom) values ('impression-facture');
+insert into fonctionnalite(nom) values ('impression-livraison');
+
+insert into fonctionnalite(nom) values ('imprimer-facture');
+insert into fonctionnalite(nom) values ('imprimer-avoir');
+insert into fonctionnalite(nom) values ('imprimer-cheque');
+insert into fonctionnalite(nom) values ('imprimer-any maka vola');
+insert into fonctionnalite(nom) values ('imprimer-credit');
+insert into fonctionnalite(nom) values ('imprimer-recette depense');
+insert into fonctionnalite(nom) values ('imprimer-recu any maka vola');
+insert into fonctionnalite(nom) values ('imprimer-recu credit');
+insert into fonctionnalite(nom) values ('imprimer-Bon entre');
+insert into fonctionnalite(nom) values ('imprimer-Bon sortie');
+insert into fonctionnalite(nom) values ('imprimer-Bon transfert');
+insert into fonctionnalite(nom) values ('imprimer-Bon changement code article');
+
+

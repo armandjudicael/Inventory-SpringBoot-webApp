@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query(value = "from _user as u where u.username =:name AND u.password = :pass ")
     Optional<User> checkUser(@Param("name") String username,@Param("pass") String password);
 
-    @Query(value = "from _user u join u.filiale f where u.username =:name AND u.password = :pass AND f.nom =:subsidiaryName")
+    @Query(value = "from _user u join u.filiale f where u.username =:name AND u.password = :pass AND trim(f.nom)=:subsidiaryName")
     Optional<User> checkUser(@Param("name") String username,@Param("pass") String password,@Param("subsidiaryName") String subsidiaryName);
 
     @Query(value = "from _user u join u.magasin m where m.id=:idMagasin")

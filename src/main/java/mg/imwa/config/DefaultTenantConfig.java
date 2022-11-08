@@ -31,6 +31,7 @@ public class DefaultTenantConfig{
     public DataSourceProperties defaultTenantDataSourceProperties() {
         return new DataSourceProperties();
     }
+
     @Bean("defaultDatasource")
     @ConfigurationProperties("default.datasource.configuration")
     public DataSource defaultTenantDataSource(){
@@ -38,6 +39,7 @@ public class DefaultTenantConfig{
                 .type(BasicDataSource.class).build();
         return dataSource;
     }
+
     @Bean("defaultTenantEmf")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("defaultDatasource") DataSource dataSource,
                                                                        MapMultiTenantConnectionProvider multiTenantConnectionProvider,
@@ -81,6 +83,7 @@ public class DefaultTenantConfig{
         jpaPropertiesMap.put("hibernate.implicit_naming_strategy","org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");
         jpaPropertiesMap.put("hibernate.hbm2ddl.auto","update");
         jpaPropertiesMap.put("hibernate.show_sql","true");
+        jpaPropertiesMap.put("hibernate.enable_lazy_load_no_trans","true");
         jpaPropertiesMap.put(Environment.MULTI_TENANT,MultiTenancyStrategy.DATABASE);
         jpaPropertiesMap.put(Environment.MULTI_TENANT_CONNECTION_PROVIDER,multiTenantConnectionProvider);
         jpaPropertiesMap.put(Environment.MULTI_TENANT_IDENTIFIER_RESOLVER,tenantIdentifierResolver);

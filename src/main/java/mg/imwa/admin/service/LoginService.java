@@ -2,24 +2,28 @@ package mg.imwa.admin.service;
 
 import com.zaxxer.hikari.HikariDataSource;
 
-import mg.imwa.admin.model.UserType;
 import mg.imwa.config.MapMultiTenantConnectionProvider;
 import mg.imwa.config.TenantContext;
-import mg.imwa.admin.model.Company;
 import mg.imwa.admin.model.TenantUser;
 import mg.imwa.admin.repository.CompanyRepository;
 import mg.imwa.admin.repository.TenantUserRepository;
+import mg.imwa.tenant.model.tenantEntityBeans.ClientFournisseur;
 import mg.imwa.tenant.model.tenantEntityBeans.User;
 import mg.imwa.tenant.repository.CategorieRepository;
+import mg.imwa.tenant.repository.ClientFournisseurRepository;
 import mg.imwa.tenant.repository.UserRepository;
+import mg.imwa.tenant.service.CashService;
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class LoginService{
@@ -33,44 +37,64 @@ public class LoginService{
         return modelAndView;
     }
 
-
     @Autowired private UserRepository userRepository;
 
     @Autowired private CategorieRepository categorieRepository;
 
+    @Autowired private CashService cashService;
+
+    @Autowired private ClientFournisseurRepository clientFournisseurRepository;
+
     private final String CONNECTED_USER = "connectedUser";
     private final String DASHBOARD_VIEW = "dashboard";
-    private final String LOGIN_VIEW = "tenant-user-login";
+    private final String TENANT_LOGIN_VIEW = "login/tenant-user-login";
     private final String CATEGORIES = "categories";
 
-    private ModelAndView initDashboardView(String username,String password,String subsidiaryName){
-        ModelAndView modelAndView = new ModelAndView();
+    private ModelAndView initDashboardView(String username,String password,String subsidiaryName,ModelAndView modelAndView){
         Optional<User> optionalUser = userRepository.checkUser(username,password,subsidiaryName);
         optionalUser.ifPresentOrElse(user -> {
             if (user.getEnabled()) {
                 modelAndView.addObject(CONNECTED_USER, user);
+                Long filialeId = user.getFiliale().getId();
+                modelAndView.addObject(CATEGORIES, categorieRepository.findAll());
+                Map<String, Double> cashInfo = cashService.getCashInfo(filialeId);
+                modelAndView.addObject("espece", cashInfo.get(CashService.getSommeEspece()));
+                modelAndView.addObject("credit", cashInfo.get(CashService.getSommeCredit()));
+                modelAndView.addObject("depense", cashInfo.get(CashService.getSommeDepense()));
+                modelAndView.addObject("encaissement", cashInfo.get(CashService.getSommeEncaissement()));
+
+                List<ClientFournisseur> clientList = clientFournisseurRepository.getAllExternalEntities(0, filialeId)
+                        .stream()
+                        .filter(cf -> !cf.getTotalTrosa().equals(0.0)).collect(Collectors.toList());
+
+                List<ClientFournisseur> frsList = clientFournisseurRepository.getAllExternalEntities(1, filialeId)
+                        .stream()
+                        .filter(cf -> !cf.getTotalTrosa().equals(0.0)).collect(Collectors.toList());
+
+                modelAndView.addObject("client_list", clientList);
+                modelAndView.addObject("fournisseur_list", frsList);
                 modelAndView.setViewName(user.getFonction().getDefaultPage().getViewUrl());
+
             } else {
                 modelAndView.addObject("DISABLED_USER", "UTILISATEUR DESACTIVE");
                 modelAndView.addObject(CONNECTED_USER, null);
-                modelAndView.setViewName(LOGIN_VIEW);
+                modelAndView.setViewName(TENANT_LOGIN_VIEW);
             }
         },() -> {
             modelAndView.addObject(CONNECTED_USER, null);
-            modelAndView.setViewName(LOGIN_VIEW);
         });
         return modelAndView;
     }
 
     public ModelAndView checkTenantandSubsidiary(String username,String password,String key){
-        ModelAndView modelAndView = new ModelAndView("tenant-user-login");
-        Optional<TenantUser> optionalTenantUser = tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,key,UserType.SIMPLE_USER);
+        ModelAndView modelAndView = new ModelAndView(TENANT_LOGIN_VIEW);
+        Optional<TenantUser> optionalTenantUser = tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,key);
         if (optionalTenantUser.isPresent()){
             String[] split = key.split("-");
             String companyName = split[0].toLowerCase();
             String subsidiaryName = split[1];
             initCurrentDatasourceAndTenantContext(companyName);
-            return initDashboardView(username,password,subsidiaryName);
+            return initDashboardView(username,password,subsidiaryName,modelAndView);
         }
         return modelAndView;
     }
@@ -83,9 +107,7 @@ public class LoginService{
     }
 
     private void findOnCompanyTable(String companyName, Map<String, ConnectionProvider> connectionProviderMap){
-        Optional<Company> companyOptional = companyRepository.findByName(companyName);
-        if (companyOptional.isPresent()){
-            Company company = companyOptional.get();
+        companyRepository.findByName(companyName).ifPresent(company -> {
             HikariDataSource hikariDataSource = company.getCompanyDataSourceConfig().initDatasource();
             connectionProviderMap.put(companyName,new ConnectionProvider() {
                 @Override
@@ -114,6 +136,6 @@ public class LoginService{
                 }
             });
             TenantContext.setTenantId(companyName);
-        }
+        });
     }
 }

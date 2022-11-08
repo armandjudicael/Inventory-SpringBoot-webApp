@@ -46,7 +46,7 @@
                         <div>
                             ${DISABLED_USER}
                         </div>
-                        <form action="signup" method="post">
+                        <form action="imwa-user-signup" method="post">
 
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nom d'utilisateur</label>
@@ -69,7 +69,7 @@
                             <div class="mb-3">
                                 <label for="password" class="form-label">clé</label>
                                 <div class="input-group input-group-merge">
-                                    <input type="password" name="filialeKey" id="filiale" class="form-control"
+                                    <input type="password" name="key" id="filiale" class="form-control"
                                            placeholder="Entrer votre clé">
                                     <div class="input-group-text" data-password="false">
                                         <span class="password-eye"></span>
