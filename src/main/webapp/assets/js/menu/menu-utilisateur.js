@@ -1,6 +1,6 @@
 $(function () {
-    $fonctionUrl = "http://localhost:8080/api/v1/fonctions";
-    $userUrl = "http://localhost:8080/api/v1/users";
+    $fonctionUrl = "http://80.241.220.194:8080/api/v1/fonctions";
+    $userUrl = "http://80.241.220.194:8080/api/v1/users";
     $NEW_USER = true;
     let namespace = "#menu-utilisateur "
     let filiale_id = $(namespace +'#filiale-id').attr("value-id");
@@ -246,7 +246,7 @@ $(function () {
     });
 
     const init_form = ($userId)=>{
-        let url = "http://localhost:8080/api/v1/users/"+$userId;
+        let url = "http://80.241.220.194:8080/api/v1/users/"+$userId;
         execute_ajax_request("get",url,null,(data)=>{
             $(namespace + "#nouveau-utilisateur #input-nom").val(data.nom);
             $(namespace + "#nouveau-utilisateur #input-adresse").val(data.adresse);
@@ -307,7 +307,7 @@ $(function () {
     $(document).on("click",namespace+"#search-btn",()=>{
         let text = $(namespace+"#top-search").val();
         if (text!==""){
-            let url = "http://localhost:8080/api/v1/users/name/"+filiale_id+"/"+text;
+            let url = "http://80.241.220.194:8080/api/v1/users/name/"+filiale_id+"/"+text;
             execute_ajax_request("get",url,null,(data)=> {
                 clear_table(namespace+"#table-liste-utilisateur");
                 append_user_item(data);
@@ -343,7 +343,7 @@ $(function () {
     }
 
     $(document).on("click",namespace+"#refresh-btn",()=>{
-        let url = "http://localhost:8080/api/v1/subsidiaries/"+filiale_id+"/users";
+        let url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+filiale_id+"/users";
         execute_ajax_request("get",url,null,(data)=> {
             clear_table(namespace+"#table-liste-utilisateur");
             append_user_item(data)

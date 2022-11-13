@@ -31,9 +31,6 @@ public class CompanyService{
     @Autowired
     private CompanyDatasourceConfigRepo companyDatasourceConfigRepo;
 
-//    @Autowired
-//    private EmailService emailService;
-
     @Autowired
     private Executor executor;
 
@@ -45,15 +42,16 @@ public class CompanyService{
     }
 
     public Company create(Company company){
-        executor.execute(() -> {
-            CompanyDataSourceConfig cdc = company.getCompanyDataSourceConfig();
-            HikariDataSource hikariDataSource = cdc.initDatasource();
-            String databaseName = cdc.getDatabaseName().toLowerCase();
-            createNewDatabase(databaseName,hikariDataSource);
-        });
-        String validationKey = generateValidationKey(company.getNom());
-        company.setValidationKey(validationKey);
-        return companyRepository.save(company);
+            if(databaseDontExist(company.getNom().toLowerCase())){
+                CompanyDataSourceConfig cdc = company.getCompanyDataSourceConfig();
+                HikariDataSource hikariDataSource = cdc.initDatasource();
+                String databaseName = cdc.getDatabaseName().toLowerCase();
+                createNewDatabase(databaseName,hikariDataSource);
+                String validationKey = generateValidationKey(company.getNom());
+                company.setValidationKey(validationKey);
+                return companyRepository.save(company);
+            }
+            return null;
     }
 
     private String generateValidationKey(String companyName){
@@ -66,23 +64,26 @@ public class CompanyService{
     }
 
     private void sendEmail(String[] keyTab , String companyName){
+
         for (int i = 0; i < keyTab.length; i++) {
+
         //   emailService.sendEmail(emailTab[i],"Clé d'activation de la societé "+companyName+" : "+keyTab[i]," Activation de la societé "+companyName);
+
         }
+
     }
 
     private void executeFlywayMigration(HikariDataSource dataSource){
         Flyway flyway = Flyway.configure().dataSource(dataSource).load();
         MigrateResult migrate = flyway.migrate();
+        dataSource.close();
     }
 
     private Void createNewDatabase(String databaseName,HikariDataSource dataSource){
         try {
-            if (databaseDontExist(databaseName)){
                 Connection connection = Objects.requireNonNull(entityManagerFactory.getDataSource()).getConnection();
                 connection.createStatement().execute(" CREATE DATABASE "+ databaseName +";");
                 executeFlywayMigration(dataSource);
-            }
         } catch (SQLException throwables){
             throwables.printStackTrace();
         }

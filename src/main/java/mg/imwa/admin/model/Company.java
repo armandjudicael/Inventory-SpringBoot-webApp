@@ -31,7 +31,7 @@ public class Company extends Personne{
     @OneToOne(cascade = CascadeType.PERSIST)
     private TenantUser admin;
 
-    private boolean isValidated = false;
+    private boolean isValidated = true;
 
     @Override
     public String toString() {

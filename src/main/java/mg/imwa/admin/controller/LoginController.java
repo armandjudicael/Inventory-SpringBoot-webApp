@@ -1,5 +1,6 @@
 package mg.imwa.admin.controller;
 import mg.imwa.admin.model.UserType;
+import mg.imwa.admin.repository.AdminUserRepository;
 import mg.imwa.admin.repository.CompanyRepository;
 import mg.imwa.admin.repository.TenantUserRepository;
 import mg.imwa.admin.service.LoginService;
@@ -23,8 +24,9 @@ public class LoginController{
     @Autowired private LoginService loginService;
     @Autowired private CompanyRepository companyRepository;
     @Autowired private TenantUserRepository tenantUserRepository;
+    @Autowired private AdminUserRepository adminUserRepository;
 
-    @RequestMapping(method = RequestMethod.GET,value = {"/index","/"})
+    @RequestMapping(method = RequestMethod.GET,value = {"/index","/user-login"})
     public ModelAndView index(){
         ModelAndView modelAndView = new ModelAndView("login/tenant-user-login");
         return modelAndView;
@@ -47,8 +49,8 @@ public class LoginController{
         ModelAndView modelAndView = new ModelAndView(        "login/admin-login");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,"ADMIN",UserType.IMWA_ADMIN).ifPresent(tenantUser -> {
-            modelAndView.addObject("imwaAdmin",tenantUser);
+        adminUserRepository.findByUserNameAndPassword(username,password).ifPresent(admin -> {
+            modelAndView.addObject("imwaAdmin",admin);
             modelAndView.addObject(COMPANY_LIST,companyRepository.findAll());
             modelAndView.setViewName("administrateur/dashboard");
         });

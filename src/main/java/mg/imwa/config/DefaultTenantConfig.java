@@ -1,4 +1,5 @@
 package mg.imwa.config;
+import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.MultiTenancyStrategy;
 import org.hibernate.cfg.Environment;
@@ -34,10 +35,9 @@ public class DefaultTenantConfig{
 
     @Bean("defaultDatasource")
     @ConfigurationProperties("default.datasource.configuration")
-    public DataSource defaultTenantDataSource(){
-        DataSource dataSource = defaultTenantDataSourceProperties().initializeDataSourceBuilder()
-                .type(BasicDataSource.class).build();
-        return dataSource;
+    public HikariDataSource defaultTenantDataSource(){
+        return defaultTenantDataSourceProperties().initializeDataSourceBuilder()
+                .type(HikariDataSource.class).build();
     }
 
     @Bean("defaultTenantEmf")

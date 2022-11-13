@@ -152,6 +152,10 @@
       </div>
     </c:forEach>
 
+  <div id="company-creation" >
+
+  </div>
+
   </div>
 
   <!-- end row -->

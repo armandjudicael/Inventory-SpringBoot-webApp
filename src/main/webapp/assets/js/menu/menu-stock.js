@@ -3,8 +3,8 @@ $(function () {
     const namespace = "#menu-stock ";
     let filiale_id = $(namespace+"#filiale-id").attr("value-id");
     const TOUTES = "";
-    const INVENTORY_URL = "http://localhost:8080/api/v1/inventories/"+filiale_id;
-    const STORE_INVENTORY_URL = "http://localhost:8080/api/v1/inventories/stores/";
+    const INVENTORY_URL = "http://80.241.220.194:8080/api/v1/inventories/"+filiale_id;
+    const STORE_INVENTORY_URL = "http://80.241.220.194:8080/api/v1/inventories/stores/";
     const INVENTORY_TABLE = $(namespace+"#inventory-table tbody");
     let magasin_id = 0;
     let unite_id = 0;
@@ -35,12 +35,12 @@ $(function () {
 
     $(namespace+"#btn-article-alert").click(()=>{
         $filialeId = $(namespace+"#filiale-id").attr("value-id");
-        let url = "http://localhost:8080/api/v1/subsidiaries/"+$filialeId+"/inventories";
+        let url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+$filialeId+"/inventories";
         execute_ajax_request("get",url,null,(data)=> append_inventory_item_to_table(data));
     });
 
     function fetchInventoryActivities(magasinId, articleId, uniteId){
-        let url = "http://localhost:8080/api/v1/activities/" + magasinId + "/" + articleId + "/" + uniteId;
+        let url = "http://80.241.220.194:8080/api/v1/activities/" + magasinId + "/" + articleId + "/" + uniteId;
         magasin_id = magasinId;
         unite_id = uniteId;
         article_id = articleId;
@@ -72,7 +72,7 @@ $(function () {
     }
 
     function fetchInventoryAlert(articleId,filialeId){
-        let url = "http://localhost:8080/api/v1/inventories-alert/" + filialeId + "/" + articleId;
+        let url = "http://80.241.220.194:8080/api/v1/inventories-alert/" + filialeId + "/" + articleId;
         execute_ajax_request("get", url, null, (data) => {
             $('#info-stock p.label-quantite-alerte-article').text(" Quantité alert : " + data);
         })
@@ -105,7 +105,7 @@ $(function () {
         let name = $(namespace+"#stock-search").val();
         let filialeId = $(namespace+"#filiale-id").attr("value-id");
         if (name!==""){
-            let url = "http://localhost:8080/api/v1/subsidiaries/"+filialeId+"/inventories/"+name;
+            let url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+filialeId+"/inventories/"+name;
             execute_ajax_request("get",url,null,(data)=>{
                 clear_table(namespace+"#inventory-table")
                 $.each(data,(key,value)=>{
@@ -130,9 +130,9 @@ $(function () {
     /* EVENT SELECT */
     $(document).on('change',namespace+"#magasin-select",function(){
         let val = $(this).val();
-        let url = val===TOUTES ? INVENTORY_URL : "http://localhost:8080/api/v1/magasins/"+val+"/inventories";
+        let url = val===TOUTES ? INVENTORY_URL : "http://80.241.220.194:8080/api/v1/magasins/"+val+"/inventories";
         execute_ajax_request("get",url,null,(data)=>append_inventory_item_to_table(data));
-        update_montant_lable( val==TOUTES ? "http://localhost:8080/api/v1/inventories/"+filiale_id+"/total-values" : "http://localhost:8080/api/v1/inventories/"+filiale_id+"/store/"+val+"/total-values");
+        update_montant_lable( val==TOUTES ? "http://80.241.220.194:8080/api/v1/inventories/"+filiale_id+"/total-values" : "http://80.241.220.194:8080/api/v1/inventories/"+filiale_id+"/store/"+val+"/total-values");
 
     });
     /* button event */
@@ -145,7 +145,7 @@ $(function () {
     $('.btn-stock-valeur').click(function(){
         $('.s-value').toggle();
         $('.s-no-value').toggle();
-        let  url = "http://localhost:8080/api/v1/inventories/"+filiale_id+"/total-values";
+        let  url = "http://80.241.220.194:8080/api/v1/inventories/"+filiale_id+"/total-values";
         update_montant_lable(url);
     });
 

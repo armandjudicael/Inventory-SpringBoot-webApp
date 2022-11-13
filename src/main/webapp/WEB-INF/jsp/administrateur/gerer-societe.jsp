@@ -239,14 +239,6 @@
               </tr>
               </thead>
               <tbody>
-              <% for (int i = 0; i < 10; i++) { %>
-              <tr>
-                <td>123</td>
-                <td>12/12/12 10:00 - 12/12/12 12:00</td>
-                <td>120 min</td>
-                <td>192.168.15.1</td>
-              </tr>
-              <% } %>
               </tbody>
             </table>
           </div> <!-- end table responsive-->

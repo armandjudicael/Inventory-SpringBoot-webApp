@@ -10,7 +10,7 @@ $(function() {
         $magasinId = data[0];
         $articleId = data[1];
         $userId = $(namespace+"#user-id").attr("value-id");
-        let url = "http://localhost:8080/api/v1/articles/"+$articleId+"/"+$filialeId;
+        let url = "http://80.241.220.194:8080/api/v1/articles/"+$articleId+"/"+$filialeId;
         execute_ajax_request("get",url,null,(data)=>{
             $("#inventaire-table-unite tbody").empty();
             $.each(data,(key,value)=>{
@@ -50,7 +50,7 @@ $(function() {
             infoArticleMagasin.reference = "INV-"+infoArticleMagasin.date.getUTCDate();
             tab.push(infoArticleMagasin);
         }
-       let url = "http://localhost:8080/api/v1/info";
+       let url = "http://80.241.220.194:8080/api/v1/info";
        execute_ajax_request("post",url,tab,(data)=>{
            $('#modal-inventaire-stock').modal('hide');
        })
@@ -74,7 +74,7 @@ $(function() {
         $magasinId = data[0];
         $articleId = data[1];
         let qtt_alert = $("#input-quantite-stock").val();
-        let url = "http://localhost:8080/api/v1/inventories-alert/"+$filialeId+"/"+$articleId+"/"+qtt_alert;
+        let url = "http://80.241.220.194:8080/api/v1/inventories-alert/"+$filialeId+"/"+$articleId+"/"+qtt_alert;
         execute_ajax_request("put",url,null,(data)=>{
              $('#modal-qtt-alert-stock').modal('hide');
         });

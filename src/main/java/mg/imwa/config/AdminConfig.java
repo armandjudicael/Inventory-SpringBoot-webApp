@@ -21,7 +21,7 @@ import java.util.HashMap;
 @EnableJpaRepositories(basePackages = {"mg.imwa.admin.model","mg.imwa.admin.repository","mg.imwa.admin.service"}
 ,entityManagerFactoryRef = "adminEntityManagerFactory",transactionManagerRef = "adminTransactionManager")
 @EnableTransactionManagement
-public class AdminConfig {
+public class AdminConfig{
     /*  ADMIN DATASOURCE */
     @Bean
     @Primary
@@ -33,7 +33,7 @@ public class AdminConfig {
     @Bean
     @Primary
     @ConfigurationProperties("admin.datasource.configuration")
-    public DataSource adminDataSource() {
+    public HikariDataSource adminDataSource(){
         return adminDataSourceProperties().initializeDataSourceBuilder()
                 .type(HikariDataSource.class).build();
     }

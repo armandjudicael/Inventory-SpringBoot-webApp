@@ -184,19 +184,13 @@
 </div>
 
 <!-- end row -->
-
-
 <!-- end row -->
 
 </div>
 <!-- container -->
 <%@ include file='template/footer.jsp' %>
-
 </div>
-
 <!-- ============================================================== -->
 <!-- End Page content -->
 <!-- ============================================================== -->
-
-
 <%@ include file="template/setting.jsp" %>

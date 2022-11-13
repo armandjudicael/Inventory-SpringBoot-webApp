@@ -1,6 +1,6 @@
 $(function () {
     let namespace = "#menu-voyage ";
-    voyageURL = "http://localhost:8080/api/v1/voyages";
+    voyageURL = "http://80.241.220.194:8080/api/v1/voyages";
 
     /*-----------------------
 

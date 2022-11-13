@@ -1,6 +1,6 @@
 $(function(){
     let namespace = "#liste-operation ";
-    let url = "http://localhost:8080/api/v1/magasins/";
+    let url = "http://80.241.220.194:8080/api/v1/magasins/";
     let filiale_id = $(namespace + '#filiale-id').attr("value-id");
     exportToExcel('.btn-export-to-excel','liste-prix-articles', '.table-liste-operation');
     _count_table_content(namespace + '.table-liste-operation', namespace + '.text-count-operation-list');
@@ -32,7 +32,7 @@ $(function(){
         let magasinId = $(this).val();
         let ressource_url = "";
         let subsisdiary_id = $(namespace + '#filiale-id').attr("value-id")
-        if (magasinId === "toutes")  ressource_url = "http://localhost:8080/api/v1/subsidiaries/"+subsisdiary_id+"/activities";
+        if (magasinId === "toutes")  ressource_url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+subsisdiary_id+"/activities";
         else ressource_url = url+magasinId+"/activities";
         getAllActivities(ressource_url);
         _count_table_content(namespace + '.table-liste-operation', namespace + '.text-count-operation-list')
@@ -45,7 +45,7 @@ $(function(){
             if (beginDate!==undefined && beginDate!==null
                 && endDate!==undefined && endDate!==null
                 && beginDate!=="" && endDate!==""){
-                let url = "http://localhost:8080/api/v1/subsidiaries/"+filiale_id+"/activities/date/"+beginDate+"/"+endDate;
+                let url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+filiale_id+"/activities/date/"+beginDate+"/"+endDate;
                 getAllActivities(url);
             }
     });

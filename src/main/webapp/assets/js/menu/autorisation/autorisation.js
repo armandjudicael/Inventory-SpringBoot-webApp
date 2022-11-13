@@ -6,7 +6,7 @@ $(function() {
     */
     const init_autorisation = ()=>{
         let fonction_id = $(namespace+"#fonction-id").text();
-        let url ="http://localhost:8080/api/v1/fonctions/"+fonction_id;
+        let url ="http://80.241.220.194:8080/api/v1/fonctions/"+fonction_id;
         execute_ajax_request("get",url,null,(data)=>{
             let autorisationMap = data.autorisationMap;
             let nomFonction = data.nomFonction;

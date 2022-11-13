@@ -1,5 +1,6 @@
 package mg.imwa.tenant.controller.restController;
 
+import mg.imwa.admin.repository.AdminSubsidiaryRepository;
 import mg.imwa.tenant.model.tenantEntityBeans.ArticleUnite;
 import mg.imwa.tenant.model.tenantEntityBeans.Filiale;
 import mg.imwa.tenant.model.tenantEntityBeans.InfoArticleMagasin;
@@ -175,6 +176,10 @@ public class SubsidiaryRessource{
             return new ResponseEntity<>(e.getMessage(), HttpStatus.valueOf(500));
         }
     }
+
+
+    @Autowired
+    private AdminSubsidiaryRepository adminSubsidiaryRepository;
 
     @PostMapping(value = "/subsidiaries")
     public ResponseEntity<Object> create(@RequestBody final Filiale filiale) {

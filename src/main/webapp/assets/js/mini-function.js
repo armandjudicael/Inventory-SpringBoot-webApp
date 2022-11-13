@@ -510,8 +510,22 @@ const  init_seach_cf_btn = (type,namespace,table,$filiale_id)=>{
     $(document).on("keyup",namespace+"#top-search",()=> $(namespace+"#search-btn").click());
 }
 
-function execute_ajax_request(method_type, api_url, data = null, onsuccess) {
-    let requestObject = {type: method_type, url: api_url, success: onsuccess, contentType: "application/json"};
+function execute_ajax_request(method_type, api_url, data = null,onsuccess) {
+    let requestObject = {type: method_type, url: api_url ,async: true  ,success: onsuccess, contentType: "application/json"};
+    if (data !== null) requestObject.data = JSON.stringify(data);
+    $.ajax(requestObject);
+}
+
+function execute_ajax_request(method_type, api_url, data = null,onsuccess,beforeSendFunction,onErrorFunction,onCompleteFunction) {
+    let requestObject =  {type: method_type,
+                         url: api_url ,
+                         // async: true  ,
+                         beforeSend : beforeSendFunction,
+                         success: onsuccess,
+                         contentType: "application/json",
+                         error : onErrorFunction,
+                         complete : onCompleteFunction
+                         };
     if (data !== null) requestObject.data = JSON.stringify(data);
     $.ajax(requestObject);
 }

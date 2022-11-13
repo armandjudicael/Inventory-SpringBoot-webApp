@@ -1,6 +1,5 @@
 //package mg.imwa.admin.service;
 //
-//import com.jayway.jsonpath.internal.filter.ValueNodes;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.mail.SimpleMailMessage;
 //import org.springframework.mail.javamail.JavaMailSender;
@@ -12,9 +11,11 @@
 //import java.util.Date;
 //
 //@Service
-//public class EmailService {
+//public class EmailService{
+//
 //    @Autowired
 //    private JavaMailSender javaMailSender;
+//
 //    final String DEFAULT_MAIL= "armandjudicaelratombotiana@gmail.com";
 //    public void sendEmail(String to ,String body,String subject){
 //        SimpleMailMessage smm = new SimpleMailMessage();

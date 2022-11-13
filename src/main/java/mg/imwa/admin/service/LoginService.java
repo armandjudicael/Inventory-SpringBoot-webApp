@@ -2,6 +2,8 @@ package mg.imwa.admin.service;
 
 import com.zaxxer.hikari.HikariDataSource;
 
+import mg.imwa.admin.model.Company;
+import mg.imwa.admin.model.SocieteStatus;
 import mg.imwa.config.MapMultiTenantConnectionProvider;
 import mg.imwa.config.TenantContext;
 import mg.imwa.admin.model.TenantUser;
@@ -50,6 +52,43 @@ public class LoginService{
     private final String TENANT_LOGIN_VIEW = "login/tenant-user-login";
     private final String CATEGORIES = "categories";
 
+    private ModelAndView initDashboardView(String username,String password,String subsidiaryName){
+        ModelAndView modelAndView = new ModelAndView();
+        Optional<User> optionalUser = userRepository.checkUser(username,password,subsidiaryName);
+        optionalUser.ifPresentOrElse(user -> {
+            if (user.getEnabled()) {
+                modelAndView.addObject(CONNECTED_USER, user);
+                Long filialeId = user.getFiliale().getId();
+                modelAndView.addObject(CATEGORIES, categorieRepository.findAll());
+                Map<String, Double> cashInfo = cashService.getCashInfo(filialeId);
+                modelAndView.addObject("espece", cashInfo.get(CashService.getSommeEspece()));
+                modelAndView.addObject("credit", cashInfo.get(CashService.getSommeCredit()));
+                modelAndView.addObject("depense", cashInfo.get(CashService.getSommeDepense()));
+                modelAndView.addObject("encaissement", cashInfo.get(CashService.getSommeEncaissement()));
+
+                List<ClientFournisseur> clientList = clientFournisseurRepository.getAllExternalEntities(0, filialeId)
+                        .stream()
+                        .filter(cf -> !cf.getTotalTrosa().equals(0.0)).collect(Collectors.toList());
+
+                List<ClientFournisseur> frsList = clientFournisseurRepository.getAllExternalEntities(1, filialeId)
+                        .stream()
+                        .filter(cf -> !cf.getTotalTrosa().equals(0.0)).collect(Collectors.toList());
+
+                modelAndView.addObject("client_list", clientList);
+                modelAndView.addObject("fournisseur_list", frsList);
+                modelAndView.setViewName(user.getFonction().getDefaultPage().getViewUrl());
+
+            } else {
+                modelAndView.addObject("DISABLED_USER", "UTILISATEUR DESACTIVE");
+                modelAndView.addObject(CONNECTED_USER, null);
+                modelAndView.setViewName(TENANT_LOGIN_VIEW);
+            }
+        },() -> {
+            modelAndView.addObject(CONNECTED_USER, null);
+        });
+        return modelAndView;
+    }
+
     private ModelAndView initDashboardView(String username,String password,String subsidiaryName,ModelAndView modelAndView){
         Optional<User> optionalUser = userRepository.checkUser(username,password,subsidiaryName);
         optionalUser.ifPresentOrElse(user -> {
@@ -87,26 +126,46 @@ public class LoginService{
     }
 
     public ModelAndView checkTenantandSubsidiary(String username,String password,String key){
+
         ModelAndView modelAndView = new ModelAndView(TENANT_LOGIN_VIEW);
+
         Optional<TenantUser> optionalTenantUser = tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,key);
+
         if (optionalTenantUser.isPresent()){
+
             String[] split = key.split("-");
             String companyName = split[0].toLowerCase();
             String subsidiaryName = split[1];
-            initCurrentDatasourceAndTenantContext(companyName);
-            return initDashboardView(username,password,subsidiaryName,modelAndView);
+
+            Optional<Company> optionalCompany = companyRepository.findByName(companyName);
+
+            if (optionalCompany.isPresent()){
+
+                Company company = optionalCompany.get();
+
+                SocieteStatus societeStatus = company.getSocieteStatus();
+
+                if (societeStatus.equals(SocieteStatus.ENABLED)){
+
+                    initCurrentDatasourceAndTenantContext(companyName);
+
+                    return initDashboardView(username,password,subsidiaryName,modelAndView);
+
+                }else modelAndView.addObject("COMPANY_DISABLED"," Votre filiale n'est pas disponible pour le moment ! Veuillez contacter les responsables du site pour plus d'information ");
+            }
         }
+
         return modelAndView;
     }
 
-    public void initCurrentDatasourceAndTenantContext(String companyName) {
+    public void initCurrentDatasourceAndTenantContext(String companyName){
         Map<String, ConnectionProvider> connectionProviderMap = mapMultiTenantConnectionProvider.getConnectionProviderMap();
         if (!connectionProviderMap.isEmpty() && connectionProviderMap.containsKey(companyName)) {
             TenantContext.setTenantId(companyName);
         } else findOnCompanyTable(companyName,connectionProviderMap);
     }
 
-    private void findOnCompanyTable(String companyName, Map<String, ConnectionProvider> connectionProviderMap){
+    private void findOnCompanyTable(String companyName,Map<String, ConnectionProvider> connectionProviderMap){
         companyRepository.findByName(companyName).ifPresent(company -> {
             HikariDataSource hikariDataSource = company.getCompanyDataSourceConfig().initDatasource();
             connectionProviderMap.put(companyName,new ConnectionProvider() {
@@ -138,4 +197,5 @@ public class LoginService{
             TenantContext.setTenantId(companyName);
         });
     }
+
 }
