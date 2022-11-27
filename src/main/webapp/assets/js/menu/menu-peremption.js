@@ -81,15 +81,17 @@ $(function () {
     /*
      ajouter bouton date de peremption
      */
-    function setLabelPeremption($datePeremption) {
+    function setLabelPeremption($datePeremption){
         if ($datePeremption > new Date())
             return $('<span class="badge badge-primary-lighten">Forte</span>').html()
         return $('<span class="badge badge-danger-lighten">p&eacute;rim&eacute;</span>').html()
     }
 
-    /*
+       /*
+
     *  FILTRER EN FONCTION MAGASIN
-    * */
+    *
+       */
     // Magasin filter
 
     $(document).on('change',namespace+"#magasin-select-item",function(){

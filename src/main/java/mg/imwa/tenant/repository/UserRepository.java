@@ -13,7 +13,8 @@ import java.util.Optional;
 
 @Repository
 @Transactional(transactionManager = "defaultTenantTxManager")
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface UserRepository extends JpaRepository<User,Long>{
+
     @Query(value = "from _user as u where u.username =:name AND u.password = :pass ")
     Optional<User> checkUser(@Param("name") String username,@Param("pass") String password);
 

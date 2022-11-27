@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.sql.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 
@@ -52,6 +53,20 @@ public class CompanyService{
                 return companyRepository.save(company);
             }
             return null;
+    }
+
+    public Boolean delete(Long id){
+        return true;
+    }
+
+
+    public Company update(Company company,Long id){
+        Optional<Company> byId = companyRepository.findById(id);
+        if (byId.isPresent()){
+            company.setId(id);
+            return companyRepository.save(company);
+        }
+        return company;
     }
 
     private String generateValidationKey(String companyName){

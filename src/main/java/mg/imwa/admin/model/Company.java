@@ -18,7 +18,7 @@ public class Company extends Personne{
     private String slogan;
 
     @Enumerated(EnumType.ORDINAL)
-    private SocieteStatus societeStatus = SocieteStatus.DISABLED;
+    private SocieteStatus societeStatus = SocieteStatus.ENABLED;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private CompanyDataSourceConfig companyDataSourceConfig;

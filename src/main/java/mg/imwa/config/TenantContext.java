@@ -2,7 +2,6 @@ package mg.imwa.config;
 
 
 import java.util.concurrent.atomic.AtomicReference;
-
 public class TenantContext{
   static String DEFAULT_TENANT = "default_tenant";
   private static AtomicReference<String> stringAtomicReference = new AtomicReference<>();

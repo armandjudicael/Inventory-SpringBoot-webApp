@@ -117,8 +117,8 @@ const create_consumer_by_id = (item_type, value) => {
 
 function find_item(table_id, filiale_id, item_name, type,tab){
     let url = "";
-    if (type === "ARTICLE") url = "http://localhost:8080/api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
-    else url = "http://localhost:8080/api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
+    if (type === "ARTICLE") url = "http://80.241.220.194:8080/api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
+    else url = "http://80.241.220.194:8080/api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
    execute_ajax_request("get", url, null, (data) => append_data_to_table(table_id, type, data, tab))
 }
 
@@ -136,8 +136,8 @@ const init_input_search_keyup = function (item_type,input_id,table_id, filiale_i
             if (finded_item === undefined){
 
                 let url = "";
-                if (item_type === "ARTICLE") url = "http://localhost:8080/api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
-                else url = "http://localhost:8080/api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
+                if (item_type === "ARTICLE") url = "http://80.241.220.194:8080/api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
+                else url = "http://80.241.220.194:8080/api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
                 execute_ajax_request("get", url, null, (data) => append_data_to_table(table_id, item_type, data, tab))
 
             } else push_item_table(item_type,finded_item, table_id);
@@ -192,7 +192,7 @@ const createBadge = (montant)=>{
 }
 
 function fetch_trosa_data(namespace,$cf_id){
-    let url = "http://localhost:8080/api/v1/trosas/cf/" + $cf_id;
+    let url = "http://80.241.220.194:8080/api/v1/trosas/cf/" + $cf_id;
     execute_ajax_request("get", url, null, (data) => {
         append_trosa_item(namespace,data)
     })
@@ -225,7 +225,7 @@ function init_enregistrer_trosa_btn(namespace){
             trosa.date = $date_dette;
             trosa.dateEcheance = $date_echeance;
             trosa.reste = $montant;
-            let url = "http://localhost:8080/api/v1/trosas";
+            let url = "http://80.241.220.194:8080/api/v1/trosas";
             execute_ajax_request("post", url, trosa, (data) => {
                 let tr = ["",
                     trosa.date,
@@ -315,7 +315,7 @@ const init_payement_dette_btn = (namespace,filiale_id,user_id)=>{
             ifc.modePayement = type_payement;
             ifc.filiale = {id:filiale_id};
             ifc.date = new Date();
-            let url = "http://localhost:8080/api/v1/ifc";
+            let url = "http://80.241.220.194:8080/api/v1/ifc";
             execute_ajax_request("post",url,ifc,(data)=>{
                 $(namespace+"#Montant-payer").val("");
                 $(namespace+"#description-payement").val("");
@@ -326,7 +326,7 @@ const init_payement_dette_btn = (namespace,filiale_id,user_id)=>{
 
     function update_reste(namespace,montant_payer,type_trosa) {
         let montant_reste = $montant_reste - parseFloat(montant_payer);
-        execute_ajax_request("put", "http://localhost:8080/api/v1/trosas/" + $trosa_id,montant_reste, (data) => {
+        execute_ajax_request("put", "http://80.241.220.194:8080/api/v1/trosas/" + $trosa_id,montant_reste, (data) => {
             let title = type_trosa +'payé';
             let content = type_trosa +'payé avec succès';
             createToast('bg-success', 'uil-check', title.toLowerCase(), content.toLowerCase());
@@ -441,7 +441,7 @@ const init_delete_class = (type)=>{
 }
 
 const fetch_all_cf_and_append_to_table = (type,namespace,table,$filiale_id)=>{
-    let url = "http://localhost:8080/api/v1/externalEntities/"+type+"/"+$filiale_id;
+    let url = "http://80.241.220.194:8080/api/v1/externalEntities/"+type+"/"+$filiale_id;
     execute_ajax_request("get",url,null,(data)=> {
         append_cf_item(namespace,table,data,type)
     });
@@ -470,7 +470,7 @@ const init_modal_on_showing = (modal_type,namespace,$modal,$table,$filiale_id,ty
 
             case "FOURNISEUR_OU_CLIENT": {
 
-                let url = "http://localhost:8080/api/v1/externalEntities/"+type+"/"+$filiale_id;
+                let url = "http://80.241.220.194:8080/api/v1/externalEntities/"+type+"/"+$filiale_id;
                 execute_ajax_request("get",url,null,(data)=>{
                     clear_table(namespace+"#"+$table);
                     data.forEach(value=>{
@@ -502,7 +502,7 @@ const  init_seach_cf_btn = (type,namespace,table,$filiale_id)=>{
     $(namespace+"#search-btn").click(()=>{
         let text = $(namespace +"#top-search").val();
         if (undefined !== text && text!==""){
-            let url = "http://localhost:8080/api/v1/externalEntities/"+type+"/"+$filiale_id+"/name/"+text;
+            let url = "http://80.241.220.194:8080/api/v1/externalEntities/"+type+"/"+$filiale_id+"/name/"+text;
             execute_ajax_request("get",url,null,(data)=> append_cf_item(namespace,table,data,type))
         }else $(namespace+"#refresh-btn").click();
     });

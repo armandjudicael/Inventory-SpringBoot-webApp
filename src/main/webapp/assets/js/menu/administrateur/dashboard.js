@@ -1,9 +1,9 @@
 $(function () {
+    let namespace = "#dashboard-administrateur ";
     $(namespace+"#company-creation").hide();
     /*
     Tableau de bord societe
      */
-    let namespace = "#dashboard-administrateur "
     let NEW = "nouveau", EDIT = "editer";
     /*
     event create new societe
@@ -94,7 +94,7 @@ $(function () {
             cdc.username = "postgres";
             cdc.password = "root";
             cdc.driverClassName = "org.postgresql.Driver";
-            cdc.host = "80.241.220.194";
+            cdc.host = "localhost";
             cdc.port = "5432";
             cdc.databaseType = "POSTGRESQL";
             cdc.databaseName = $nom.trim()+"_db";
@@ -104,7 +104,7 @@ $(function () {
             admin.userName= $username;
             admin.password = $password;
             admin.key = $nom;
-            admin.userType =1;
+            admin.userType =0;
             company.admin = admin;
 
             let spinner = `
@@ -116,7 +116,9 @@ $(function () {
                     </div>
             `;
 
-            let url = "http://80.241.220.194:8080/api/imwa/v1/companies";
+            let url = "http://localhost:8080/api/imwa/v1/companies";
+            // modal hidden
+            $(namespace + '#nouveau-societe').modal('hide');
             execute_ajax_request("post",url,company,function (data){
                 $(namespace + '.liste-societe').append(createItemSociete(new Date().toLocaleTimeString(),$nom,$adresse, $contact,$verset,$slogan))
                 createToast('bg-success', 'uil-file-check', 'Nouveau Societe cree', 'Creation d\'un nouveau societe fait!');
@@ -129,8 +131,6 @@ $(function () {
                 $(namespace + '#nouveau-societe input#verset').val('')
                 $(namespace + '#nouveau-societe input#slogan').val('')
                 $(namespace+"#logo").val("");
-                // modal hidden
-                $(namespace + '#nouveau-societe').modal('hide');
             } ,()=>{
                 $(namespace+"#company-creation").html(spinner);
                 $(namespace+"#company-creation").show();
@@ -182,7 +182,7 @@ $(function () {
         </div>
         <!-- project title-->
         <h4 class="mt-0">
-          <img src="http://80.241.220.194:8080/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
+          <img src="http://localhost:8080/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
           <a href="" class="text-title label-nom">` + $nom + `</a>
         </h4>
         <div class="badge bg-danger mb-3 label-statut">Suspendu (activation requis)</div>

@@ -1,10 +1,7 @@
 $(function () {
     /*---------------
-
         MAIN JS
-
     -------------- */
-
     const data_selector = '[nbs]';
     const data_class = '.nbs';
     const separator = ' ';

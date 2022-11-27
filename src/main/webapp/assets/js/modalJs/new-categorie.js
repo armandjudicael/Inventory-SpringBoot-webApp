@@ -1,11 +1,7 @@
 $(function () {
-
     /*------------------------------
-
         JS NOUVEAU CATEGORIE
-
      -------------------------------*/
-
     let namespace = "#standard-modal2 ";
 
     let isUpdateOperation = false;
@@ -119,14 +115,14 @@ $(function () {
         siblings = $(this).parent().parent().siblings();
         let text = siblings.html();
         selectedVal = $("#nomCategorie").val(text);
+
     });
 
     /*
      supprimer categorie
      */
 
-    $(document).on('click', ".deleteCategorie", function () {
-
+    $(document).on('click', ".deleteCategorie",function (){
         let btn = $(this);
         let deleteBtnId = btn.attr("id");
         let url = "http://80.241.220.194:8080/api/v1/categories/" + deleteBtnId;
@@ -143,4 +139,5 @@ $(function () {
                 });
             })
     });
+
 });

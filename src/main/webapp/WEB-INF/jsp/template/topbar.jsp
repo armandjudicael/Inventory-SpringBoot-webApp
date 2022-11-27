@@ -79,7 +79,7 @@
           </a>
 
           <!-- item-->
-          <a href="/" class="dropdown-item notify-item">
+          <a href="/user-login" class="dropdown-item notify-item">
             <i class="mdi mdi-logout me-1"></i>
             <span>Deconnexion</span>
           </a>
@@ -93,4 +93,5 @@
     <div class="app-search dropdown d-none d-lg-block">
 
     </div>
+  </div>
   </div>

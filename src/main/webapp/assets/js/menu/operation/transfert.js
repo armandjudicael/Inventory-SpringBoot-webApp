@@ -170,7 +170,7 @@ $(function() {
 
     function persitTransfertData() {
 
-        let url = "http://80.241.220.194:8080/api/v1/transferts";
+        let url = "http://localhost:8080/api/v1/transferts";
         execute_ajax_request("post",url,transferTab,(data)=>{
             transferTab = [];
             $(namespace + '.table-liste-article-transfert tbody tr').remove();

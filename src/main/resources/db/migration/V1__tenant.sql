@@ -6,9 +6,7 @@ create table categorie
             primary key,
     libelle text
 );
-
 alter table categorie owner to postgres;
-
 create table article
 (
     article_id bigserial not null
@@ -22,9 +20,7 @@ create table article
         constraint article_categorie_key_constraint
             references categorie
 );
-
 alter table article owner to postgres;
-
 create table fonctionnalite
 (
     id bigserial not null
@@ -32,9 +28,7 @@ create table fonctionnalite
             primary key,
     nom text
 );
-
 alter table fonctionnalite owner to postgres;
-
 create table materiel_transport(
     id bigserial not null
         constraint materiel_transport_pkey
@@ -43,9 +37,7 @@ create table materiel_transport(
     type_materiel text,
     is_location boolean
 );
-
 alter table materiel_transport owner to postgres;
-
 create table personne
 (
     id bigserial not null
@@ -84,9 +76,7 @@ create table client_fournisseur
         constraint fk8gfv4wed4y8gg2y1hg5ot6s83
             references filiale
 );
-
 alter table client_fournisseur owner to postgres;
-
 create table fonction
 (
     id bigserial not null
@@ -95,9 +85,7 @@ create table fonction
     default_page integer,
     nom_fonction text
 );
-
 alter table fonction owner to postgres;
-
 create table fonction_autorisation
 (
     fonction_id bigint not null
@@ -110,9 +98,7 @@ create table fonction_autorisation
     constraint fonction_autorisation_pkey
         primary key (fonction_id, autorisation_map_key)
 );
-
 alter table fonction_autorisation owner to postgres;
-
 create table inventory_alert
 (
     article_id bigint not null
@@ -126,9 +112,7 @@ create table inventory_alert
     constraint inventory_alert_pkey
         primary key (article_id, filiale_id)
 );
-
 alter table inventory_alert owner to postgres;
-
 create table magasin
 (
     id_magasin bigserial not null
@@ -140,9 +124,7 @@ create table magasin
         constraint magasin_filiale_key_constraint
             references filiale
 );
-
 alter table magasin owner to postgres;
-
 create table personne_physique
 (
     cin text,
@@ -159,9 +141,7 @@ create table personne_physique
         constraint user_fonction_key_constraint
             references fonction
 );
-
 alter table personne_physique owner to postgres;
-
 create table _user
 (
     enabled boolean,
@@ -360,8 +340,8 @@ create table approv
 
 alter table approv owner to postgres;
 
-create table approvisionement_fournisseur
-(
+create table approvisionement_fournisseur(
+
     fournisseur_id bigint
         constraint fk7ek5k7lqe5ir888sy1dmvnhkr
             references client_fournisseur,
@@ -374,8 +354,8 @@ create table approvisionement_fournisseur
 
 alter table approvisionement_fournisseur owner to postgres;
 
-create table prix_article_filiale
-(
+create table prix_article_filiale(
+
     id bigserial not null
         constraint prix_article_filiale_pkey
             primary key,
@@ -412,8 +392,8 @@ create table sortie
 
 alter table sortie owner to postgres;
 
-create table stock
-(
+create table stock(
+
     article_id bigint not null
         constraint fk_stock_article_id
             references article
@@ -461,8 +441,8 @@ create table user_magasin
 
 alter table user_magasin owner to postgres;
 
-create table vente
-(
+create table vente(
+
     id bigserial not null
         constraint vente_pkey
             primary key,

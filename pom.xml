@@ -14,7 +14,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>admin</name>
 	<description>spring boot inventory web app </description>
-
 	<properties>
 		<java.version>11</java.version>
 		<commons.dbcp.version>1.4</commons.dbcp.version>
@@ -128,12 +127,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-<!--		<dependency>-->
-<!--			<groupId>com.zaxxer</groupId>-->
-<!--			<artifactId>HikariCP</artifactId>-->
-<!--			<version>3.3.1</version>-->
-<!--		</dependency>-->
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -173,6 +166,7 @@
 			<plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+
 				<configuration>
                     <excludes>
                         <exclude>
@@ -181,6 +175,7 @@
                         </exclude>
                     </excludes>
                 </configuration>
+
             </plugin>
 
 			<plugin>
@@ -198,7 +193,7 @@
 							<cargo.remote.username>admin</cargo.remote.username>
 							<cargo.remote.password>moi117121000</cargo.remote.password>
 							<cargo.tomcat.manager.url>
-								http://localhost:8080/manager/
+								http://80.241.220.194:8080/manager/text
 							</cargo.tomcat.manager.url>
 						</properties>
 					</configuration>
@@ -208,7 +203,5 @@
 		</plugins>
 
 	</build>
-
-
 
 </project>

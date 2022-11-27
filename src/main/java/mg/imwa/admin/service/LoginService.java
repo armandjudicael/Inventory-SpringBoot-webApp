@@ -126,35 +126,22 @@ public class LoginService{
     }
 
     public ModelAndView checkTenantandSubsidiary(String username,String password,String key){
-
-        ModelAndView modelAndView = new ModelAndView(TENANT_LOGIN_VIEW);
-
-        Optional<TenantUser> optionalTenantUser = tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,key);
-
-        if (optionalTenantUser.isPresent()){
-
-            String[] split = key.split("-");
-            String companyName = split[0].toLowerCase();
-            String subsidiaryName = split[1];
-
-            Optional<Company> optionalCompany = companyRepository.findByName(companyName);
-
-            if (optionalCompany.isPresent()){
-
-                Company company = optionalCompany.get();
-
-                SocieteStatus societeStatus = company.getSocieteStatus();
-
-                if (societeStatus.equals(SocieteStatus.ENABLED)){
-
-                    initCurrentDatasourceAndTenantContext(companyName);
-
-                    return initDashboardView(username,password,subsidiaryName,modelAndView);
-
-                }else modelAndView.addObject("COMPANY_DISABLED"," Votre filiale n'est pas disponible pour le moment ! Veuillez contacter les responsables du site pour plus d'information ");
+            ModelAndView modelAndView = new ModelAndView(TENANT_LOGIN_VIEW);
+            Optional<TenantUser> optionalTenantUser = tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,key);
+            if (optionalTenantUser.isPresent()){
+                String[] split = key.split("-");
+                String companyName = split[0].toLowerCase();
+                String subsidiaryName = split[1];
+                Optional<Company> optionalCompany = companyRepository.findByName(companyName);
+                if (optionalCompany.isPresent()){
+                    Company company = optionalCompany.get();
+                    SocieteStatus societeStatus = company.getSocieteStatus();
+                    if (societeStatus.equals(SocieteStatus.ENABLED)){
+                        initCurrentDatasourceAndTenantContext(companyName);
+                        return initDashboardView(username,password,subsidiaryName,modelAndView);
+                    }else modelAndView.addObject("COMPANY_DISABLED"," Votre filiale n'est pas disponible pour le moment ! Veuillez contacter les responsables du site pour plus d'information ");
+                }
             }
-        }
-
         return modelAndView;
     }
 

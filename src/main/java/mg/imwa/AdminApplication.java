@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-
 import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages ={
@@ -23,19 +22,16 @@ import java.util.Optional;
 		"mg.imwa.tenant.repository",
 		"mg.imwa.tenant.controller",
 		"mg.imwa.tenant.service"
-
 },exclude = {DataSourceAutoConfiguration.class})
 public class AdminApplication extends SpringBootServletInitializer implements CommandLineRunner{
 
-	@Autowired
-	private AdminUserRepository adminUserRepository;
+	@Autowired private AdminUserRepository adminUserRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AdminApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
+	@Override public void run(String... args) throws Exception{
 	    String adminUsername = "armand_judicael";
 		Optional<Admin> byUserName = adminUserRepository.findByUserName(adminUsername);
         if (byUserName.isEmpty()){
@@ -46,8 +42,7 @@ public class AdminApplication extends SpringBootServletInitializer implements Co
 		}
 	}
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return super.configure(builder);
+	@Override protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(AdminApplication.class);
 	}
 }

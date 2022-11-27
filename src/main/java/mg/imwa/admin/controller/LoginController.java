@@ -20,7 +20,6 @@ import javax.servlet.http.HttpSession;
 public class LoginController{
 
     private final String COMPANY_LIST = "companies";
-
     @Autowired private LoginService loginService;
     @Autowired private CompanyRepository companyRepository;
     @Autowired private TenantUserRepository tenantUserRepository;
@@ -32,13 +31,13 @@ public class LoginController{
         return modelAndView;
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = {"/company-admin-login"})
+    @RequestMapping(method = RequestMethod.GET,value = {"/company-admin-login","/company-admin-log-out"})
     public ModelAndView getCompanyAdminLogin(){
         ModelAndView modelAndView = new ModelAndView("login/company-admin-login");
         return modelAndView;
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = {"/imwa-admin-login"})
+    @RequestMapping(method = RequestMethod.GET,value = {"/imwa-admin-login","/imwa-admin-log-out"})
     public ModelAndView getImwaAdminLogin(){
         ModelAndView modelAndView = new ModelAndView("login/admin-login");
         return modelAndView;
