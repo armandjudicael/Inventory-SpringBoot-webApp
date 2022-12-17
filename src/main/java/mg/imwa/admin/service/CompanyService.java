@@ -33,9 +33,6 @@ public class CompanyService{
     private CompanyDatasourceConfigRepo companyDatasourceConfigRepo;
 
     @Autowired
-    private Executor executor;
-
-    @Autowired
     private LocalContainerEntityManagerFactoryBean entityManagerFactory;
 
     public List<Company> getAll(){
@@ -45,9 +42,8 @@ public class CompanyService{
     public Company create(Company company){
             if(databaseDontExist(company.getNom().toLowerCase())){
                 CompanyDataSourceConfig cdc = company.getCompanyDataSourceConfig();
-                HikariDataSource hikariDataSource = cdc.initDatasource();
                 String databaseName = cdc.getDatabaseName().toLowerCase();
-                createNewDatabase(databaseName,hikariDataSource);
+                createNewDatabase(databaseName,cdc);
                 String validationKey = generateValidationKey(company.getNom());
                 company.setValidationKey(validationKey);
                 return companyRepository.save(company);
@@ -94,11 +90,14 @@ public class CompanyService{
         dataSource.close();
     }
 
-    private Void createNewDatabase(String databaseName,HikariDataSource dataSource){
+    private Void createNewDatabase(String databaseName,CompanyDataSourceConfig cdc){
         try {
                 Connection connection = Objects.requireNonNull(entityManagerFactory.getDataSource()).getConnection();
                 connection.createStatement().execute(" CREATE DATABASE "+ databaseName +";");
-                executeFlywayMigration(dataSource);
+                if (!databaseDontExist(databaseName)){
+                    HikariDataSource hikariDataSource = cdc.initDatasource();
+                    executeFlywayMigration(hikariDataSource);
+                }
         } catch (SQLException throwables){
             throwables.printStackTrace();
         }

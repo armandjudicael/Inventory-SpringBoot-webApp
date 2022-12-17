@@ -3,7 +3,7 @@ $(function () {
         MENU FOURNISSEUR
      ----------------------------*/
     let namespace = "#menu-fournisseur ";
-    let cfUrl = "http://80.241.220.194:8080/api/v1/externalEntities";
+    let cfUrl = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities";
     let idCf = 1;
     let NOUVEAU_FOURNISSEUR = true;
     $montant_reste = 0;
@@ -109,7 +109,7 @@ $(function () {
         $trFournisseur = $(this);
         $(namespace + "#info-credit").addClass("show")
     })
-    
+
     /* suppression fournisseur */
     $(document).on('click', namespace + '#table-fournisseur .deleteFournisseur', function () {
         $trFournisseur = $(this).closest('tr');
@@ -118,7 +118,7 @@ $(function () {
         $idModalDelete = "suppression-fournisseur";
         create_confirm_dialog('Suppression Fournisseur', 'Voulez vous vraiment supprimer le fournisseur '+name+' ?', $idModalDelete, 'Oui,supprimer', 'btn-danger')
             .on('click', function () {
-                let url = "http://80.241.220.194:8080/api/v1/externalEntities/"+id;
+                let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities/"+id;
                 execute_ajax_request('DELETE',url,null,(data)=>{
                     $trFournisseur.remove();
                     createToast('bg-danger', 'uil-trash-alt', 'Suppression fait', 'Le fournisseur est supprime avec success!');

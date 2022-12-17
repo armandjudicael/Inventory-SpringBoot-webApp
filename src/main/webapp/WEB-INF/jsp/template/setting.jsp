@@ -1,5 +1,3 @@
-</div>
-
 <!-- END wrapper -->
 
 <!-- Right Sidebar -->

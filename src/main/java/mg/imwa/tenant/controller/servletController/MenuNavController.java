@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 @Controller
 @SessionAttributes(names = {"connectedUser", "articles"})
 public class MenuNavController{
-
     private final String VOYAGE_LIST = "voyages";
     private final String CATEGORIE_LIST = "categories";
     private final String ARTICLE_LIST = "articles";

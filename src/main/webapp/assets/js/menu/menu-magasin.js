@@ -1,14 +1,11 @@
 
 $(function () {
     let namespace = "#menu-magasin ";
-    let clientUrl = "http://80.241.220.194:8080/api/v1/magasins";
+    let clientUrl = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/magasins";
     let NOUVEAU_UTILISATEUR = true;
     /*-------------------------
-
             MENU MAGASIN
-
      --------------------------*/
-
     // export
 
     exportToExcel(namespace + '.btn-export-to-excel','listes-utilisateurs-magasin', namespace + '#table-liste-utilisateur-magasin')

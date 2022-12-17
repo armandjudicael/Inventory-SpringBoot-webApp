@@ -7,13 +7,9 @@ $(function () {
     $remise_article = 0;
     $prix_article_reel = 0;
     $prix_remise_article = 0;
-
     let namespace = "#menu-vente ";
-
     $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-
     push_Type_paiement(namespace + "#select-payement");
-
     _count_table_content(namespace + '#table-liste-client', namespace + '.text-count-client-vente');
     /* Selecter client */
     function clearForm() {
@@ -26,7 +22,6 @@ $(function () {
         $(namespace + '#nouveau-client input#nomClient').val("");
     }
     // ENREGISTRER NOUVEAU CLIENT
-
     /* mask et validation */
     $(function() {
         $(namespace + 'form#form-nouveau-client').validate({
@@ -72,7 +67,7 @@ $(function () {
             client.cif = cif;
             client.typeCf = 0;
             client.filiale = {id: filialeId};
-            let url = "http://80.241.220.194:8080/api/v1/externalEntities";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities";
             execute_ajax_request("post", url, client, (data) => {
                 get_select_affect_to_input(namespace + '#name-client',data.id,data.nom)
                 $(namespace+"#nouveau-client").modal("hide");
@@ -88,7 +83,6 @@ $(function () {
         get_select_affect_to_input(namespace + '#name-client', $(this).attr('id'),$(this).children().eq(0).text());
         $(namespace + '#modal-liste-client').modal('hide');
     })
-
     /*------------------------------------------------------------------------------
                                             SELECTER ARTICLE
     -------------------------------------------------------------------------------*/
@@ -291,7 +285,7 @@ $(function () {
             $vente.date = date;
             $vente.payements = [pm];
 
-            let url = "http://80.241.220.194:8080/api/v1/sales";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales";
             execute_ajax_request("post",url,$vente, (data) =>{
                 // persist_payements(data.id,pm)
               //  impresion
@@ -308,7 +302,7 @@ $(function () {
 
     const persist_payements = (vente_id,pm)=>{
         pm.vente = { id : vente_id};
-        let url = "http://80.241.220.194:8080/api/v1/payments";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/payments";
         execute_ajax_request("post",url,pm,(data)=>{
             console.log(data);
         })
@@ -378,7 +372,7 @@ $(function () {
         let filiale_id = $(namespace + '#filiale-id').attr("value-id");
 
         if (ARTICLE_TAB.length===0){
-            let url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+filiale_id+"/itemsInfo";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/"+filiale_id+"/itemsInfo";
             execute_ajax_request("get",url,null,(data)=> {
                 data.forEach(au=>{
                     let tr = `

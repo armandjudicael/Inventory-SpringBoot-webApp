@@ -31,7 +31,6 @@
               </p>
             </a>
           </div>
-
           <!-- All-->
           <a href="" class="dropdown-item text-center text-primary notify-item notify-all">
             Voir tout
@@ -67,19 +66,19 @@
           </div>
 
           <!-- item-->
-          <a href="/gerer-utilisateur" class="dropdown-item notify-item">
+          <a href = "<c:url value = "admin-0.0.1-SNAPSHOT/gerer-utilisateur"/>" class="dropdown-item notify-item">
             <i class="mdi mdi-account-circle me-1"></i>
             <span>Gérer mon compte</span>
           </a>
 
           <!-- item-->
-          <a href="/gerer-utilisateur#anchor-history-session" class="dropdown-item notify-item">
+          <a href = "<c:url value = "admin-0.0.1-SNAPSHOT/gerer-utilisateur"/>" class="dropdown-item notify-item">
             <i class="mdi mdi-account-edit me-1"></i>
             <span>Historiques de session</span>
           </a>
 
           <!-- item-->
-          <a href="/user-login" class="dropdown-item notify-item">
+          <a href = "<c:url value = "admin-0.0.1-SNAPSHOT/user-login"/>" class="dropdown-item notify-item">
             <i class="mdi mdi-logout me-1"></i>
             <span>Deconnexion</span>
           </a>

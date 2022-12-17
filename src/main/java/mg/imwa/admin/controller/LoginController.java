@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 @SessionAttributes(names = {"tenantAdmin","imwaAdmin","connectedUser"})
 public class LoginController{
 
-    private final String COMPANY_LIST = "companies";
+    private final String COMPANY_LIST="companies";
     @Autowired private LoginService loginService;
     @Autowired private CompanyRepository companyRepository;
     @Autowired private TenantUserRepository tenantUserRepository;
@@ -83,5 +83,4 @@ public class LoginController{
         String key = request.getParameter("key");
         return loginService.checkTenantandSubsidiary(username,password,key);
     }
-
 }

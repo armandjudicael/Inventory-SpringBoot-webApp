@@ -1,16 +1,14 @@
-$(function () {
-
+$(function (){
     /*--------------------------
         JS NOUVEAU ARTICLE
      ---------------------------*/
-
     let namespace = "#new-article ";
     let isCreateArticle = true;
     let editedArticleId = 1;
     // Tout les champ non editable par default
-    let categorieUrl = 'http://80.241.220.194:8080/api/v1/categories';
+    let categorieUrl = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/categories';
     let filiale_id = $(namespace + '#filiale-id').attr("value-id");
-    $articleUrl = 'http://80.241.220.194:8080/api/v1/articles';
+    $articleUrl = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/articles';
     $deleted = true;
     $articleTable = $("#articleTable tbody");
 
@@ -31,7 +29,7 @@ $(function () {
                 $("#table-unite tbody tr th #edit_" + length).hide();
                 $("#table-unite tbody tr th #del_" + length).hide();
                 let count = $('#table-unite tbody tr').length+1;
-                let tr = `<tr status = "NEW" >
+                let tr = `<tr status="NEW" >
                             <td><input disabled type="text" required  class="form-control input-sm not-editable" value="`+count+`"></td>
                             <td><input type="text" required  class="form-control input-sm" value="designation"></td>
                             <td><input type="text" required  class="form-control input-sm" value="1"></td>
@@ -45,9 +43,7 @@ $(function () {
                 table.append(tr);
             }
         )
-
         /* Edition ou enregistrement enregistrement */
-
         $('#table-unite').on('click', '.btn-add-unite', (function (){
             let type = $("#new-article").attr("operation-type");
             let au_id = $(this).closest('tr').attr("id");
@@ -59,7 +55,7 @@ $(function () {
                 let quantite_niveau = $(inputTab[2]).val();
                 let poids = $(inputTab[3]).val();
                 if (status==="NEW"){
-                    let url = "http://80.241.220.194:8080/api/v1/unites";
+                    let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/unites";
                     let au = {};
                     au.article = {id : editedArticleId};
                     au.niveau = niveau;
@@ -76,7 +72,7 @@ $(function () {
                     au_wrapper.poids = poids;
                     au_wrapper.quantiteNiveau = quantite_niveau;
                     au_wrapper.designationUnite = designation_unite;
-                    let url = "http://80.241.220.194:8080/api/v1/unites/item-unity/"+au_id;
+                    let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/unites/item-unity/"+au_id;
                     execute_ajax_request("put",url,au_wrapper,(data)=>{
                         createToast('bg-success', 'uil-trash-alt', 'Enregistrement Fait', 'Modification unité enregistré avec succes !');
                     });
@@ -85,18 +81,16 @@ $(function () {
             $(this).closest('tr').find('input').attr('disabled', '');
             $(this).hide();
         }))
-
         /*  suppression unite */
-
         $('#table-unite').on('click', '.btn-del-unite', (function(){
             let type = $("#new-article").attr("operation-type");
             if (type==="EDIT"){
                 let au_id = $(this).closest('tr').attr("id");
                 let unite_id = $(this).closest('tr').attr("unite-id");
-                let url = "http://80.241.220.194:8080/api/v1/info/check/"+unite_id;
+                let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/info/check/"+unite_id;
                 execute_ajax_request("GET",url,null,(data)=>{
                     if (data===true){
-                        let url = "http://80.241.220.194:8080/api/v1/articles/item-unite/"+au_id;
+                        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/articles/item-unite/"+au_id;
                         $(this).closest('tr').remove();
                         execute_ajax_request("DELETE",url,null,()=>{
                             createToast('bg-danger', 'uil-trash-alt', 'Suppression Fait', 'Suppression de l\' article effectu&eacute; avec succ&egrave;s!')
@@ -177,7 +171,7 @@ $(function () {
                 fuap.prixVente = "0";
                 pvuafTab.push(fuap);
             });
-            let url = "http://80.241.220.194:8080/api/v1/prices";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/prices";
             execute_ajax_request("POST",url,pvuafTab,null);
         };
 
@@ -200,7 +194,7 @@ $(function () {
 
         function save_all_unite(data){
             let articleUniteTab = get_all_unite_on_table(data);
-            execute_ajax_request("POST","http://80.241.220.194:8080/api/v1/unites",articleUniteTab,(data)=>{
+            execute_ajax_request("POST","http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/unites",articleUniteTab,(data)=>{
                data.forEach(function (au){
                     let tableRow = `
                              <tr id=` + au.article.id + `>
@@ -261,7 +255,7 @@ $(function () {
             if (type==="CREATE") persist_item();
             else{
                 let new_item_name = $("#designation").val();
-                let url = "http://80.241.220.194:8080/api/v1/items/"+editedArticleId+"/"+new_item_name;
+                let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/items/"+editedArticleId+"/"+new_item_name;
                 execute_ajax_request("put",url,null,(data)=>{
                 });
             }
@@ -317,7 +311,7 @@ $(function () {
             $('input#designation').val(designation)
             $('select#categorie').append('<option>' + categorie + '</option>');
             $('select#categorie').attr('disabled','true');
-            let url = 'http://80.241.220.194:8080/api/v1/articles/' + editedArticleId + "/unites";
+            let url = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/articles/' + editedArticleId + "/unites";
             execute_ajax_request('get',url,null,(data)=> append_item_unite(data));
         });
 

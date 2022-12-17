@@ -1,36 +1,21 @@
 $(function () {
     let namespace = "#menu-voyage ";
-    voyageURL = "http://80.241.220.194:8080/api/v1/voyages";
-
+    voyageURL = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages";
     /*-----------------------
-
             MENU VOYAGE
-
     ------------------------- */
-
-
     exportToExcel(namespace + '.btn-export-to-excel','voyages', namespace + '#table-liste-voyage')
-
-
     const NOUVEAU = 'nouveau', EDITION = 'edition';
-
     /*
      click de bouton nouveau
      */
-
     $(namespace + '#btn-nouveau-voyage').on('click', function () {
-
         $(namespace + '#nouveau-voyage').modal('show')
         $(namespace + '#nouveau-voyage').attr('data-type', NOUVEAU);
         $(namespace + '#nouveau-voyage .modal-title').html('Nouveau voyage');
-
     })
-
-
     /*-------------------------------------------------------
-
     Enregistrement nouveau voyage ou edition d'un voyage
-
     --------------------------------------------------------- */
 
 

@@ -1,26 +1,15 @@
 $(function() {
-
     /*
-
     GERER UTILISATEUR JS
-
      */
-
     let namespace = "#gerer-utilisateur ";
-
     // default states
-
     $(namespace + '.btn-enregistrer-infos-general').hide();
     $(namespace + '.btn-enregistrer-infos-securite').hide();
-
     /*
-
     INFOS GENERAL
-
      */
-
     // mask et validation
-
     $(namespace + '#infos-general form .input-contact').mask('+261 99 99 999 99');
 
     $(namespace + '#infos-general form').validate({

@@ -1,21 +1,18 @@
 $(function () {
+
     let namespace = "#dashboard-administrateur ";
     $(namespace+"#company-creation").hide();
     /*
     Tableau de bord societe
      */
     let NEW = "nouveau", EDIT = "editer";
-    /*
-    event create new societe
-     */
+    /* Event create new societe */
     $(namespace + "#btn-nouveau-societe").on('click', function () {
-        $(namespace + "#nouveau-societe .modal-title").text("Nouveau Societe")
-        $(namespace + "#nouveau-societe").modal('show')
-        $(namespace + "#nouveau-societe").attr('data-id', NEW)
+        $(namespace +"#nouveau-societe .modal-title").text("Nouveau Societe")
+        $(namespace +"#nouveau-societe").modal('show')
+        $(namespace +"#nouveau-societe").attr('data-id', NEW)
     })
-    /*
-     edit societe
-     */
+    /* Edit societe */
     $(document).on('click', namespace + ' .btn-editer-societe', function () {
         $(namespace + "#nouveau-societe .modal-title").text('Editer Societe')
         $(namespace + "#nouveau-societe").modal('show')
@@ -28,10 +25,7 @@ $(function () {
         $(namespace + '#nouveau-societe input#input-slogan-i').val($(namespace + '#' + $cardCurrent + ' .label-slogan-i').text())
         $(namespace + '#nouveau-societe input#input-slogan-ii').val($(namespace + '#' + $cardCurrent + ' .label-slogan-ii').text())
     })
-
-    /*
-     enregsitrement societe
-     */
+    /* Enregsitrement societe */
 
     /*
     mask et validation
@@ -79,20 +73,21 @@ $(function () {
             $password = $(namespace + '#nouveau-societe input#input-password').val()
 
             $slogan = $(namespace + '#slogan').val();
-            $verset = $(namespace + '#verset').val();
-            $logo = $(namespace + '#input-logo').val();
-            $typeOperation = $(namespace + "#nouveau-societe").attr('data-id');
+            $verset=$(namespace + '#verset').val();
+            $logo=$(namespace + '#input-logo').val();
+            $typeOperation=$(namespace + "#nouveau-societe").attr('data-id');
 
-            let company = {};
-            company.nom = $nom;
-            company.slogan = $slogan;
-            company.verset = $verset;
-            company.adresse = $adresse;
-            company.numTel = $contact;
 
-            let cdc = {};
-            cdc.username = "postgres";
-            cdc.password = "root";
+            let company={};
+            company.nom=$nom;
+            company.slogan=$slogan;
+            company.verset=$verset;
+            company.adresse=$adresse;
+            company.numTel=$contact;
+
+            let cdc={};
+            cdc.username="postgres";
+            cdc.password="root";
             cdc.driverClassName = "org.postgresql.Driver";
             cdc.host = "localhost";
             cdc.port = "5432";
@@ -116,9 +111,11 @@ $(function () {
                     </div>
             `;
 
-            let url = "http://localhost:8080/api/imwa/v1/companies";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/imwa/v1/companies";
+
             // modal hidden
             $(namespace + '#nouveau-societe').modal('hide');
+
             execute_ajax_request("post",url,company,function (data){
                 $(namespace + '.liste-societe').append(createItemSociete(new Date().toLocaleTimeString(),$nom,$adresse, $contact,$verset,$slogan))
                 createToast('bg-success', 'uil-file-check', 'Nouveau Societe cree', 'Creation d\'un nouveau societe fait!');
@@ -134,35 +131,34 @@ $(function () {
             } ,()=>{
                 $(namespace+"#company-creation").html(spinner);
                 $(namespace+"#company-creation").show();
-            },null,()=>{
+            },()=>{
+               console.log(" :::: Database initialisation error :::: ");
+            },()=>{
                 $(namespace+"#company-creation").hide();
             })
         };
-
     })
     /*
      suppression societe
      */
-    $(document).on('click', '.btn-desactiver-societe', function () {
+    $(document).on('click', '.btn-desactiver-societe', function(){
+
         $cardCurrent = $(this).closest('.item-societe').attr('id');
+
         $idModal = 'desactiver-societe';
-        create_confirm_dialog('Suppression Filial', 'Voulez vous vraiment desactiver le societe', $idModal, 'Oui, desactiver', 'btn-danger')
-            .on('click', function () {
+
+        create_confirm_dialog('Suppression Filial', 'Voulez vous vraiment desactiver le societe', $idModal, 'Oui, desactiver', 'btn-danger').on('click', function () {
                 $(namespace + '.label-statut').toggleClass('bg-danger')
                 $(namespace + '.label-statut').toggleClass('bg-success')
 
                 $(this).text($(this).text() == 'Desactive' ? 'Active' : 'Desactive');
                 hideAndRemove($(namespace + '#' + $idModal))
             })
+
     })
-
-
     /*
-
     HTML CONTENT FILIAL
-
      */
-
     function createItemSociete($id, $nom, $adresse, $contact, $sloganI, $sloganII) {
         return `<div id='item-societe-` + $id + `' class="col-3 item-societe">
     <div class="card d-block">
@@ -182,7 +178,7 @@ $(function () {
         </div>
         <!-- project title-->
         <h4 class="mt-0">
-          <img src="http://localhost:8080/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
+          <img src="http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
           <a href="" class="text-title label-nom">` + $nom + `</a>
         </h4>
         <div class="badge bg-danger mb-3 label-statut">Suspendu (activation requis)</div>
@@ -220,7 +216,7 @@ $(function () {
       
     </div> <!-- end card-->
   </div>
-  
-`
+`;
+
     }
 })

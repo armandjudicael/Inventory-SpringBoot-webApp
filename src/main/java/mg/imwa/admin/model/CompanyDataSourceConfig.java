@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 public class CompanyDataSourceConfig{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,8 +39,6 @@ public class CompanyDataSourceConfig{
 
       dsp.setDriverClassName(driverClassName);
 
-
       return dsp.initializeDataSourceBuilder().type(HikariDataSource.class).build();
-
     }
 }

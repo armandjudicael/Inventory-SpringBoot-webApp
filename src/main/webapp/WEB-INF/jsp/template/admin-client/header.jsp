@@ -9,26 +9,22 @@
   <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
   <meta content="Coderthemes" name="author">
   <!-- App favicon -->
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}..//assets/images/favicon.ico">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.ico">
 
   <!-- third party css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+  <link href="${pageContext.request.contextPath}/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
         type="text/css">
   <!-- third party css end -->
 
   <!-- App css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/icons.min.css" rel="stylesheet" type="text/css">
-  <link href="${pageContext.request.contextPath}..//assets/css/app.min.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/assets/css/app.min.css" rel="stylesheet" type="text/css"
         id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
         id="dark-style">
-
 
   <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
         id="light-style">
-
-  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
-        id="dark-style">
 
 
 </head>

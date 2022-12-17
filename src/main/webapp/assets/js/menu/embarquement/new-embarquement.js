@@ -135,7 +135,7 @@
 //                 voyage.statutVoyage = 0;
 //                 voyage.trajet = {id : trajet_id};
 //                 voyage.dateCreation = date;
-//                 let url = " http://localhost:8080/api/v1/voyages";
+//                 let url = " http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages";
 //                 execute_ajax_request("post",url,voyage,(voyage)=>{
 //                     createToast('bg-success', 'uil-file-check-alt', 'Enregistrement voyage', 'Voyage enregistr&eacute; avec succ&egrave;s!')
 //                 });
@@ -165,7 +165,7 @@
 //
 //     // Enregistrement materiel de transport
 //     function enregistrerMaterielTransport($object){
-//         let materieltransportURL = 'http://localhost:8080/api/v1/materieltransport';
+//         let materieltransportURL = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport';
 //         execute_ajax_request("post",materieltransportURL,$object,(data)=>{
 //             //reset the input
 //             $(namespace + '#nouveau-materiel-de-transport input').val('');
@@ -198,7 +198,7 @@
 //
 //     /* Enregistrement materiel de transport */
 //     function enregistrerClientOuFournisseur($object) {
-//         let clientOuFournisseurURL = 'http://localhost:8080/api/v1/externalEntities';
+//         let clientOuFournisseurURL = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities';
 //         execute_ajax_request("post",clientOuFournisseurURL,$object,(data)=>{
 //             //reset the input
 //             $(namespace + '#nouveau-fournisseur input').val('');
@@ -214,7 +214,7 @@
 //                 let trajet = {};
 //                 trajet.depart = t_depart;
 //                 trajet.destination = t_destination;
-//                 let url = "http://localhost:8080/api/v1/trajets";
+//                 let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/trajets";
 //                 execute_ajax_request("post",url,trajet,(trajet)=>{
 //                     let option = `<option value="`+trajet.id+`">`+trajet.depart+` - `+trajet.destination+`</option>`;
 //                     $(namespace+"#select-trajet").append(option);
@@ -362,7 +362,7 @@ $(function () {
                 voyage.statutVoyage = 0;
                 voyage.trajet = {id : trajet_id};
                 voyage.dateCreation = date;
-                let url = " http://localhost:8080/api/v1/voyages";
+                let url = " http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages";
                 execute_ajax_request("post",url,voyage,(voyage)=>{
                     createToast('bg-success', 'uil-file-check-alt', 'Enregistrement voyage', 'Voyage enregistr&eacute; avec succ&egrave;s!')
                 });
@@ -392,7 +392,7 @@ $(function () {
 
     // Enregistrement materiel de transport
     function enregistrerMaterielTransport($object){
-        let materieltransportURL = 'http://localhost:8080/api/v1/materieltransport';
+        let materieltransportURL = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport';
         execute_ajax_request("post",materieltransportURL,$object,(data)=>{
             //reset the input
             $(namespace + '#nouveau-materiel-de-transport input').val('');
@@ -425,7 +425,7 @@ $(function () {
 
     /* Enregistrement materiel de transport */
     function enregistrerClientOuFournisseur($object) {
-        let clientOuFournisseurURL = 'http://localhost:8080/api/v1/externalEntities';
+        let clientOuFournisseurURL = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities';
         execute_ajax_request("post",clientOuFournisseurURL,$object,(data)=>{
             //reset the input
             $(namespace + '#nouveau-fournisseur input').val('');
@@ -441,7 +441,7 @@ $(function () {
         let trajet = {};
         trajet.depart = t_depart;
         trajet.destination = t_destination;
-        let url = "http://localhost:8080/api/v1/trajets";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/trajets";
         execute_ajax_request("post",url,trajet,(trajet)=>{
             let option = `<option value="`+trajet.id+`">`+trajet.depart+` - `+trajet.destination+`</option>`;
             $(namespace+"#select-trajet").append(option);

@@ -44,7 +44,7 @@
     // Magasin filter
     $(document).on('change',namespace+"#magasin-select-operation",function(){
         let magasinId = $(this).val();
-        let url = "http://80.241.220.194:8080/api/v1/stores/"+magasinId+"/sales"
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/stores/"+magasinId+"/sales"
         getAllSales(url);
     });
     // NAME FILTER
@@ -53,8 +53,8 @@
         let url = "";
         let filiale_id = $(namespace + '#filiale-id').attr("value-id");
         let typeFilter = $(namespace+"#type-filter option:selected").val();
-        if (text!==undefined && text!=="") url = "http://80.241.220.194:8080/api/v1/sales/subsdiary/"+filiale_id+"/filter-type/"+typeFilter+"/"+text.toLowerCase();
-        else url = "http://80.241.220.194:8080/api/v1/subsidiaries/"+filiale_id+"/sales";
+        if (text!==undefined && text!=="") url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/subsdiary/"+filiale_id+"/filter-type/"+typeFilter+"/"+text.toLowerCase();
+        else url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/"+filiale_id+"/sales";
         getAllSales(url);
     });
     // SEARCH BUTTON
@@ -62,7 +62,7 @@
         let beginDate = $(namespace+"#begin-date-input").val();
         let endDate = $(namespace+"#end-date-input").val();
         let filiale_id = $(namespace + '#filiale-id').attr("value-id");
-        let url = "http://80.241.220.194:8080/api/v1/sales/subsdiary/"+filiale_id+"/between-date/"+beginDate+"/"+endDate;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/subsdiary/"+filiale_id+"/between-date/"+beginDate+"/"+endDate;
         getAllSales(url);
     });
 

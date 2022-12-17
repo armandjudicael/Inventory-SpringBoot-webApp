@@ -1,11 +1,7 @@
 $(function() {
-
     /*
-
     LISTE FOURNISSEUR
-
      */
-
     let namespace = '#modal-liste-fournisseur ';
 
     $fournisseur = [

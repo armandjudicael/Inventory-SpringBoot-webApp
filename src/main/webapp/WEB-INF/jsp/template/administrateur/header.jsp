@@ -1,43 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+
   <meta charset="utf-8">
   <title>Horizontal Layout | Hyper - Responsive Bootstrap 5 Admin Dashboard</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
   <meta content="Coderthemes" name="author">
   <!-- App favicon -->
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}..//assets/images/favicon.ico">
-
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.ico">
   <!-- third party css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+  <link href="${pageContext.request.contextPath}/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
         type="text/css">
-  <!-- third party css end -->
-
   <!-- App css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/icons.min.css" rel="stylesheet" type="text/css">
-  <link href="${pageContext.request.contextPath}..//assets/css/app.min.css" rel="stylesheet" type="text/css"
-        id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
-        id="dark-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/custom.css" rel="stylesheet" type="text/css"
-        id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/custom.css" rel="stylesheet" type="text/css"
-        id="dark-style">
-
-
-  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
-        id="light-style">
-
-  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
-        id="dark-style">
-
+  <link href="${pageContext.request.contextPath}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/assets/css/app.min.css" rel="stylesheet" type="text/css" id="light-style">
+  <link href="${pageContext.request.contextPath}/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css" id="light-style">
 
 </head>
 
-<body class="loading" data-layout="topnav"
-      data-layout-config='{"layoutBoxed":false,"darkMode":true,"showRightSidebarOnStart": true}'>
+<body class="loading" data-layout="topnav" data-layout-config='{"layoutBoxed":false,"darkMode":true,"showRightSidebarOnStart": true}'>
 <!-- Begin page -->
 <div class="wrapper">
   <!-- ============================================================== -->
@@ -51,12 +34,11 @@
 
           <!-- LOGO -->
           <a href="" class="topnav-logo">
-            <img src="${pageContext.request.contextPath}../assets//images/logo.png" alt="" height="16">
+            <img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="" height="16">
             I-jeery OnLine v1.0
           </a>
 
           <ul class="list-unstyled topbar-menu float-end mb-0">
-
             <li class="dropdown notification-list d-xl-none">
               <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                  role="button" aria-haspopup="false" aria-expanded="false">
@@ -69,9 +51,8 @@
                 </form>
               </div>
             </li>
-
-
             <li class="dropdown notification-list">
+
               <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
                  id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="dripicons-bell noti-icon"></i>
@@ -82,6 +63,7 @@
 
                 <!-- item-->
                 <div class="dropdown-item noti-title">
+
                   <h5 class="m-0">
                                                 <span class="float-end">
                                                     <a href="javascript: void(0);" class="text-dark">
@@ -89,6 +71,7 @@
                                                     </a>
                                                 </span>Notification
                   </h5>
+
                 </div>
 
                 <div style="max-height: 230px;" data-simplebar="">
@@ -112,14 +95,11 @@
                 </div>
               </div>
             </li>
-
-
             <li class="notification-list">
               <a class="nav-link end-bar-toggle" href="javascript: void(0);">
                 <i class="dripicons-gear noti-icon"></i>
               </a>
             </li>
-
             <li class="notification-list">
               <a class="nav-link dropdown-toggle nav-user arrow-none me-0"
                  href="/imwa-admin-log-out" role="button" aria-expanded="false">
@@ -128,8 +108,8 @@
               </a>
 
             </li>
-
           </ul>
+
           <a class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
             <div class="lines">
               <span></span>
@@ -137,7 +117,9 @@
               <span></span>
             </div>
           </a>
+
           <div class="app-search">
+
             <form>
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search..." id="top-search">
@@ -146,9 +128,10 @@
               </div>
             </form>
 
-
           </div>
+
         </div>
+      </div>
       </div>
       <!-- end Topbar -->
 
@@ -167,20 +150,16 @@
                 <li class="nav-item dropdown">
                   <a href="/admin/apropos" class="dropdown-item"><i class="uil-info-circle me-1"></i>A propos</a>
                 </li>
-
               </ul>
             </div>
           </nav>
         </div>
       </div>
+      </div>
 
-      <!--
+    </div>
 
-      Start Content
+</div>
 
-      -->
-
-      <div class="container-fluid">
-
-
+</body>
 

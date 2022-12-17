@@ -2,7 +2,7 @@ $(function() {
 
     let namespace = "#menu-article ";
 
-    let ressource = "http://80.241.220.194:8080/api/v1/subsidiaries/";
+    let ressource = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/";
 
     $item_table = $("#articleTable tbody");
 

@@ -15,9 +15,9 @@ class CompanyRepositoryTest{
 
     @Test
     void findAllCompany(){
-        List<Company> companies = companyRepository.findAll();
-        Assertions.assertThat(companies).isNotEmpty();
-        companies.forEach(System.out::println);
+//        List<Company> companies = companyRepository.findAll();
+//        Assertions.assertThat(companies).isNotEmpty();
+//        companies.forEach(System.out::println);
     }
 
     @Test
