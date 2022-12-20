@@ -12,6 +12,7 @@
 	<groupId>mg.imwa</groupId>
 	<artifactId>admin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<name>admin</name>
 	<description>spring boot inventory web app </description>
 	<properties>
 		<java.version>11</java.version>

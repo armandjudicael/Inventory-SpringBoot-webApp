@@ -16,7 +16,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class ActivityRessource {
-
     @Autowired
     private ActivityRepository activityRepository;
 

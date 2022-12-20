@@ -24,13 +24,10 @@ import java.util.Optional;
 		"mg.imwa.tenant.service"
 },exclude = {DataSourceAutoConfiguration.class})
 public class AdminApplication extends SpringBootServletInitializer implements CommandLineRunner{
-
 	@Autowired private AdminUserRepository adminUserRepository;
-
 	public static void main(String[] args) {
 		SpringApplication.run(AdminApplication.class, args);
 	}
-
 	@Override public void run(String... args) throws Exception{
 	    String adminUsername = "armand_judicael";
 		Optional<Admin> byUserName = adminUserRepository.findByUserName(adminUsername);
@@ -41,7 +38,6 @@ public class AdminApplication extends SpringBootServletInitializer implements Co
 			adminUserRepository.save(admin);
 		}
 	}
-
 	@Override protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
 		return builder.sources(AdminApplication.class);
 	}
