@@ -53,7 +53,7 @@ $(function () {
 
     // click of tr, open infos list articles in facture
     function fetchFactureInfo(reference) {
-        var url = "http://localhost:8080/api/v1/sales/"+reference;
+        var url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/"+reference;
         execute_ajax_request("get", url, null, (vente)=>{
             if (vente.infoArticleMagasin.length > 0) on_invoice_info_fetched(vente);
             // initialisation de information du detail facture
@@ -132,7 +132,7 @@ $(function () {
 
         create_confirm_dialog(' Annulation payement ', " Voulez vous annulé le payement ( ref = "+ref+") , cette operation effectue un décaissement d'une montant de "+montant+" Ar", "annulation-payement", "Oui ,"+"supprimer", "btn-danger").on('click', function (){
 
-            let url = "http://localhost:8080/api/v1/payments/"+id+"/status/0";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/payments/"+id+"/status/0";
 
             execute_ajax_request("PUT",url,null,()=>{
                 effectuer_decaissement(ifc);
@@ -143,7 +143,7 @@ $(function () {
     });
 
     const effectuer_decaissement = (ifc)=>{
-        let url = "http://localhost:8080/api/v1/ifc";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/ifc";
         execute_ajax_request("post",url,ifc,(data)=>{
             createToast('bg-danger', 'uil-trash-alt', 'Annulation payement', "Payement annul&eacute; avec succ&egrave;s!");
         });
@@ -156,7 +156,7 @@ $(function () {
         if (status==="annulé"){
             create_confirm_dialog('Suppression payement ', " Voulez vous supprim&eacute; le payement ( ref = "+ref+") ", "suppression-payement", "Oui ,"+"supprimer", "btn-danger").on('click', function (){
                 let id = $(tr).attr("id");
-                let url = "http://localhost:8080/api/v1/payments/"+id;
+                let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/payments/"+id;
                 execute_ajax_request("delete",url,null,()=>{
                     tr.remove();
                     createToast('bg-success', 'uil-file-check-alt', 'Suppression payement', 'payement supprim&eacute; avec succ&egrave;s!');
@@ -280,7 +280,7 @@ $(function () {
         invoice.infoFilialeCaisse = ifc;
         invoice.date = date;
 
-        let url = "http://localhost:8080/api/v1/regulations";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/regulations";
         execute_ajax_request("post", url, invoice, (data) => {
             // effectué operation AVOIR
             createToast('bg-danger', 'uil-trash-alt', 'Avoir valid&eacute;', 'Avoir effectu&eacute; avec success!')
@@ -344,7 +344,7 @@ $(function () {
         pm.vente = {id : vente_id};
 
         if (type_payement!=="CREDIT") pm.ifc = ifc;
-        let url = "http://localhost:8080/api/v1/payments";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/payments";
 
         $(namespace+"#mode-payement-modal").modal("hide");
 
@@ -368,7 +368,7 @@ $(function () {
         trosa.date = $date;
         trosa.dateEcheance = $date_echeance;
         trosa.reste = $montant-montant_a_credit;
-        let url = "http://localhost:8080/api/v1/trosas";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/trosas";
         execute_ajax_request("post", url, trosa, (data) => {
             createToast('bg-success', 'uil-check-sign', 'Dette enregistre', 'Nouveau dette enregistre avec success!');
         });
@@ -414,7 +414,7 @@ $(function () {
         if (magasin_id==="TOUTE") $(namespace+"#refresh-btn").click();
         else {
             $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-            let url = "http://localhost:8080/api/v1/sales/subsdiary/"+$filiale_id+"/store/"+magasin_id;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/subsdiary/"+$filiale_id+"/store/"+magasin_id;
             execute_ajax_request("get",url,null,(data)=> {
                 append_item(data);
             });
@@ -453,7 +453,7 @@ $(function () {
     // ACTUALISER
     $(document).on("click",namespace+"#refresh-btn",()=>{
         let filiale_id = $(namespace + '#filiale-id').attr("value-id");
-        let url = "http://localhost:8080/api/v1/sales/subsdiary/"+ filiale_id;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/subsdiary/"+ filiale_id;
         execute_ajax_request("get",url,null,(data)=> {
             append_item(data);
         });
@@ -469,7 +469,7 @@ $(function () {
         let date_fin = $(namespace+"#input-date-fin").val();
         if (date_debut!==""&& date_fin!==""){
             $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-            url = " http://localhost:8080/api/v1/sales/subsdiary/"+$filiale_id+"/between-date/"+date_debut+"/"+date_fin;
+            url = " http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/subsdiary/"+$filiale_id+"/between-date/"+date_debut+"/"+date_fin;
             execute_ajax_request("get",url,null,(data)=>append_item(data));
         }
     });
@@ -480,8 +480,8 @@ $(function () {
         let filiale_id = $(namespace + '#filiale-id').attr("value-id");
         let typeFilter = $(namespace+"#type-filter option:selected").val();
 
-        if (text!==undefined && text!=="") url = "http://localhost:8080/api/v1/sales/subsdiary/"+filiale_id+"/filter-type/"+typeFilter+"/"+text;
-        else url = "http://localhost:8080/api/v1/subsidiaries/"+filiale_id+"/sales"
+        if (text!==undefined && text!=="") url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/subsdiary/"+filiale_id+"/filter-type/"+typeFilter+"/"+text;
+        else url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/"+filiale_id+"/sales"
 
         execute_ajax_request("get",url,null,(data)=>{
             append_item(data);
@@ -510,7 +510,7 @@ $(function () {
 
     // RAFRAICHIR LA LISTE DES PAYEMENTS
     $(document).on('click',namespace+".btn-refresh-payement-list",function(){
-        var url = "http://localhost:8080/api/v1/sales/"+$reference;
+        var url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sales/"+$reference;
         execute_ajax_request("get", url, null, (vente)=>{
             clear_table(namespace+"#table-liste-payement");
             append_payement_item(vente.payements,false);

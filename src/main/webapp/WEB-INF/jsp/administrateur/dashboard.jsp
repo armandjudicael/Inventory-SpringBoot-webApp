@@ -112,7 +112,7 @@
 
             <!-- project title-->
             <h4 class="mt-0">
-              <img src="http://localhost:8080/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
+              <img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
               <a href="" class="text-title label-nom">${company.nom}</a>
             </h4>
 

@@ -1,6 +1,6 @@
 $(function () {
     let namespace = "#menu-embarquement ";
-    let url = "http://localhost:8080/api/v1/voyages";
+    let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages";
     $NEW_VOYAGE = true;
     /* MENU EMBARQUEMENT */
     exportToExcel(namespace + '.btn-export-to-excel','embarquements', namespace + '#table-voyage');
@@ -70,7 +70,7 @@ $(function () {
         let date_fin = $(namespace+"#end-date-input").val();
         let date_type = $(namespace+"#select-date-type option:selected").val();
         if (date_debut!==""&& date_fin!==""){
-            let url = "http://localhost:8080/api/v1/voyages/"+date_type+"/"+date_debut+"/"+date_fin;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/"+date_type+"/"+date_debut+"/"+date_fin;
             execute_ajax_request("get",url,null,(data)=>{
                 clear_table(namespace+"#table-voyage");
                 append_item(data);
@@ -85,7 +85,7 @@ $(function () {
         let trajet = $(tr).children().eq(1).text();
         create_confirm_dialog(' Supprimer voyage ', " Voulez vous supprimer le voyage ("+reference + ") sur le trajet  ("+trajet+")", "suppression-article", "Oui ,"+"supprimer", "btn-danger").on('click', function (){
             let id = $(tr).closest("tr").attr("id");
-            let url = "http://localhost:8080/api/v1/voyages/"+id;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/"+id;
             execute_ajax_request("DELETE",url,null,()=>{
                 tr.remove();
                 hideAndRemove('#suppression-article ');
@@ -102,7 +102,7 @@ $(function () {
 
         $current_tr_id = $(tr_or_button).closest("tr").attr("id");
         $statut_voyage = $(tr_or_button).closest("tr").attr("id");
-        let url = "http://localhost:8080/api/v1/voyages/"+$current_tr_id;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/"+$current_tr_id;
 
         execute_ajax_request("get",url,null,(voyage)=>{
 
@@ -125,7 +125,7 @@ $(function () {
     // RECHERCHER
     $(document).on('keyup',namespace+"#top-search",function (){
         let text = $(namespace+"#top-search").val();
-        if (text!=="") execute_ajax_request("get","http://localhost:8080/api/v1/voyages/reference/"+text,null,(voyages)=> {
+        if (text!=="") execute_ajax_request("get","http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/reference/"+text,null,(voyages)=> {
             clear_table(namespace+"#table-voyage");
             append_item(voyages);
         });
@@ -149,7 +149,7 @@ $(function () {
         let designation_article = $(tr).children().eq(2).text();
         let designation_unite = $(tr).children().eq(3).text();
         let reference = $(tr).children().eq(0).text();
-        let url = "http://localhost:8080/api/v1/iav/"+id;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/iav/"+id;
         create_confirm_dialog(' Supprimer article (embarquement) ', " Voulez vous vraiment supprimer l'article ("+designation_article+"-"+designation_unite+") de l'embarquement ("+reference+")", "suppression-article-embarquement", "Oui ,supprimer", "btn-danger").on('click', function (){
             execute_ajax_request("delete",url,null,()=>{
                 tr.remove();
@@ -192,7 +192,7 @@ $(function () {
         info.voyage = {id : $current_tr_id};
         info.materielTransport = {id : camion_id};
         info.datePeremption = date_peremption;
-        let url = "http://localhost:8080/api/v1/iav";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/iav";
         execute_ajax_request("post",url,info,(iav)=>{
             createToast('bg-success', 'uil-file-check-alt', 'Enregistrement article dans embarquement', 'article enregistr&eacute; avec succ&egrave;s!')
             append_travel_item([iav],"table-liste-article-embarquement-info");
@@ -201,7 +201,7 @@ $(function () {
     })
 
     $(document).on('click',namespace+"#refresh-item-voyage-btn",function (){
-        let url = "http://localhost:8080/api/v1/voyages/"+$current_tr_id;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/"+$current_tr_id;
         execute_ajax_request("get",url,null,(voyage)=>{
             clear_table(namespace+"#table-liste-article-embarquement-info");
             append_travel_item(voyage.infoArticleVoyages,"table-liste-article-embarquement-info");
@@ -231,7 +231,7 @@ $(function () {
 
     const save_or_update_voyage = (voyage)=>{
         let method = $NEW_VOYAGE ? "POST" : "PUT";
-        let url = $NEW_VOYAGE ? "http://localhost:8080/api/v1/voyages/" : "http://localhost:8080/api/v1/voyages/"+$current_tr_id;
+        let url = $NEW_VOYAGE ? "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/" : "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/"+$current_tr_id;
         let title = $NEW_VOYAGE ? 'Enregister voyage':'Modification voyage';
         let content = $NEW_VOYAGE ? ' Enregistrement voyage enregistr&eacute; avec succ&egrave;s!' : 'Modification voyage enregistr&eacute; avec succ&egrave;s!';
         execute_ajax_request(method,url,voyage,(v)=>{
@@ -247,7 +247,7 @@ $(function () {
 
     /* INITIALISATION DU MODAL TRANSFERT VOYAGE */
     $(document).on('shown.bs.modal',"#transfert-voyage-modal",function(){
-        let url = "http://localhost:8080/api/v1/subsidiaries/"+filiale_id+"/stores";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/"+filiale_id+"/stores";
         execute_ajax_request('get',url,null,(data)=>{
             $(namespace+"#select-magasin option").remove();
             data.forEach(value =>{
@@ -308,14 +308,14 @@ $(function () {
         supplyWrapper.supplies = [supply];
         supplyWrapper.prixArticleFiliales = [fuap];
 
-        let url = "http://localhost:8080/api/v1/supplies";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/supplies";
         execute_ajax_request("post", url, supplyWrapper, (data) =>{
             update_iav_quantity(quantite,$iav_id);
         });
     });
 
     const update_iav_quantity = (quantite,iav_id)=>{
-        let url = "http://localhost:8080/api/v1/iav/"+iav_id;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/iav/"+iav_id;
         let info = {};
         info.quantite = quantite;
         execute_ajax_request("put",url,info,(data)=>{
@@ -412,7 +412,7 @@ $(function () {
         let prix_vente = $(namespace + '#input-prix-vente-article-voyage').val();
         let prix_achat = $(namespace + '#input-prix-achat-article-voyage').val();
         let prix_transport = $(namespace + '#input-prix-transport-article-voyage').val();
-        let url = "http://localhost:8080/api/v1/iav/"+$iav_id+"/price";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/iav/"+$iav_id+"/price";
         let info = {};
         info.prixVente = prix_vente;
         info.prixAchat = prix_achat;
@@ -430,7 +430,7 @@ $(function () {
         let trajet = {};
         trajet.depart = t_depart;
         trajet.destination = t_destination;
-        let url = "http://localhost:8080/api/v1/trajets";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/trajets";
         execute_ajax_request("post",url,trajet,(trajet)=>{
             let option = `<option value="`+trajet.id+`">`+trajet.depart+` - `+trajet.destination+`</option>`;
             $(namespace+"#select-trajet").append(option);
@@ -443,7 +443,7 @@ $(function () {
     $(document).on('keyup',namespace+"#top-search-iav",function () {
         let text = $(namespace+"#top-search-iav").val();
         if (text!==""){
-            let url = "http://localhost:8080/api/v1/voyages/"+$current_tr_id+"/iavs/"+text;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/voyages/"+$current_tr_id+"/iavs/"+text;
             execute_ajax_request("get",url,null,(data)=>{
                 clear_table(namespace+"#table-liste-article-embarquement-info");
                 append_travel_item(data,"table-liste-article-embarquement-info");

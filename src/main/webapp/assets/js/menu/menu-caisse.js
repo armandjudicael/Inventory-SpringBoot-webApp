@@ -69,7 +69,7 @@ $(function () {
         ifc.user = {id:$user_id};
         ifc.filiale = {id : $filiale_id};
         ifc.description = description;
-        let url = "http://localhost:8080/api/v1/ifc";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/ifc";
         execute_ajax_request("post",url,ifc,(data)=>{
             $(namespace+"#operation-caisse").modal("hide");
             switch ($typeOperation) {
@@ -151,7 +151,7 @@ $(function () {
         if ($value_filter==="FACTURE" || $value_filter==="DECAISSEMENT" || $value_filter==="AVOIR") filter_type = "OPERATION";
         else filter_type = "MODE-PAYEMENT";
         $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-        let url = "http://localhost:8080/api/v1/ifc/"+$filiale_id+"/"+filter_type+"/"+$value_filter;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/ifc/"+$filiale_id+"/"+filter_type+"/"+$value_filter;
         execute_ajax_request("get",url,null,(data)=> append_ifc_tr($idtable,data))
     }
 
@@ -159,7 +159,7 @@ $(function () {
     $(document).on('change',namespace+"#select-user",function(){
         let userId = $(this).val();
         $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-        let url = "http://localhost:8080/api/v1/ifc/"+$filiale_id+"/user/"+userId;
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/ifc/"+$filiale_id+"/user/"+userId;
         execute_ajax_request("get",url,null,(data)=> append_ifc_tr(namespace + ".table-liste-operation-caisse",data))
     });
 
@@ -168,7 +168,7 @@ $(function () {
         let magasinId = $(this).val();
         if (magasinId!=="TOUTE"){
             $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-            let url = "http://localhost:8080/api/v1/ifc/"+$filiale_id+"/magasin/"+magasinId;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/ifc/"+$filiale_id+"/magasin/"+magasinId;
             execute_ajax_request("get",url,null,(data)=> append_ifc_tr(namespace + ".table-liste-operation-caisse",data))
         }
     });
@@ -179,7 +179,7 @@ $(function () {
         let date_fin = $(namespace+"#input-date-fin").val();
         if (date_debut!==""&& date_fin!==""){
             let filiale_id = $(namespace + '#filiale-id').attr("value-id");
-            let url = "http://localhost:8080/api/v1/ifc/"+filiale_id+"/date/"+date_debut+"/"+date_fin;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/ifc/"+filiale_id+"/date/"+date_debut+"/"+date_fin;
             execute_ajax_request("get",url,null,(data)=>{
                 clear_table(namespace + ".table-liste-operation-caisse");
                 append_ifc_tr(namespace + ".table-liste-operation-caisse",data);

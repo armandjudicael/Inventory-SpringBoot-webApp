@@ -5,12 +5,12 @@ $(function () {
     exportToExcel('.btn-export-to-excel','liste-prix-articles', '#table-historique-prix')
     _count_table_content(namespace + '#table-prix', namespace + '.text-count-prix-articles');
 
-    const PRICES_RESOURCES = "http://localhost:8080/api/v1/prices";
+    const PRICES_RESOURCES = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/prices";
     const $table_prix = $(namespace+"#table-prix tbody");
     /*
     EVENT MANAGER
      */
-    const SUBSDIARIES_URL = "http://localhost:8080/api/v1/subsidiaries";
+    const SUBSDIARIES_URL = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries";
     function append_price_to_table(data){
         $(namespace+"#table-historique-prix tbody tr").empty();
         $.each(data, (key, value) => {
@@ -92,7 +92,7 @@ $(function () {
     /* REFRESH BUTTON */
     $(document).on("click",namespace+"#refresh-btn",()=>{
         let filialeId = $(namespace+"#filiale-id").attr("value-id");
-        let url = "http://localhost:8080/api/v1/subsidiaries/"+filialeId+"/prices";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/"+filialeId+"/prices";
         execute_ajax_request("get",url,null,(data)=> append_price_item(data));
     })
 
@@ -124,7 +124,7 @@ $(function () {
         let text = $(namespace+"#prices-search").val();
         let filialeId = $(namespace+"#filiale-id").attr("value-id");
         if ( text!==undefined &&  text!==""){
-            let url = "http://localhost:8080/api/v1/subsidiaries/"+filialeId+"/prices/"+text;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/subsidiaries/"+filialeId+"/prices/"+text;
             execute_ajax_request("get",url,null,(data)=> append_price_item(data));
         }else $(namespace+"#refresh-btn").click();
     });

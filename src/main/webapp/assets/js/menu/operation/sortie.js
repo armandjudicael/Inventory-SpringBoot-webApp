@@ -115,7 +115,7 @@ $(function () {
     });
 
     function persist_sortie(){
-        let url = "http://localhost:8080/api/v1/sorties";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/sorties";
        execute_ajax_request("POST",url,sortieTab,function (data){
            $ref = data.id;
            sortieTab = [];

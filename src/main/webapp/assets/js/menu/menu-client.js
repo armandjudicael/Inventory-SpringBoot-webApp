@@ -10,7 +10,7 @@ $(function () {
     });
 
     let namespace = "#menu-client ";
-    let cfUrl = "http://localhost:8080/api/v1/externalEntities";
+    let cfUrl = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities";
 
     let filiale_id = $(namespace +'#filiale-id').attr("value-id");
     let user_id = $(namespace+"#user-id").attr("value-id");

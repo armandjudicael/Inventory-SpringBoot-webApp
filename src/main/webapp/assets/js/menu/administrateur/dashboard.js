@@ -107,7 +107,7 @@ $(function () {
 
             company.admin = admin;
 
-            let url = "http://localhost:8080/api/imwa/v1/companies";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/imwa/v1/companies";
             execute_ajax_request("post",url,company,function (data){
                 $(namespace + '.liste-societe').append(createItemSociete(new Date().toLocaleTimeString(),$nom,$adresse, $contact,$verset,$slogan))
                 createToast('bg-success', 'uil-file-check', 'Nouveau Societe cree', 'Creation d\'un nouveau societe fait!');

@@ -49,7 +49,7 @@ $(function () {
             fr.numTel = contact;
             fr.type = 1;
             fr.filiale = {id: filialeId};
-            let url = "http://localhost:8080/api/v1/externalEntities";
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/externalEntities";
             execute_ajax_request("POST", url, fr, (data) => {
                 get_select_affect_to_input(namespace + '#input-nom-fournisseur', data.id, nomFournisseur);
                 // vider les champs fournisseurs
@@ -224,7 +224,7 @@ $(function () {
         trosa.date = new Date;
         trosa.dateEcheance = new Date();
         trosa.reste = $sommeMontant;
-        let url = "http://localhost:8080/api/v1/trosas";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/trosas";
         execute_ajax_request("post", url, trosa, null);
     }
 
@@ -240,7 +240,7 @@ $(function () {
                 let supplyWrapper = {};
                 supplyWrapper.supplies = supplyTab;
                 supplyWrapper.prixArticleFiliales = pvuafTab;
-                let url = "http://localhost:8080/api/v1/supplies";
+                let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/supplies";
                 execute_ajax_request("post", url, supplyWrapper, (data) =>{
                     impression_entree();
                     onSuppliesCreated();

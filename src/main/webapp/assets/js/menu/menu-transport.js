@@ -18,7 +18,7 @@
 //             numTel: contact,
 //             cin : numCin
 //         };
-//         let url = "http://localhost:8080/api/v1/persons/fonction/chauffeur";
+//         let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/persons/fonction/chauffeur";
 //         execute_ajax_request("post",url,$ps,(ps)=>{
 //             let option = `<option value="`+ps.id+`" >`+ps.nom+`</option>`;
 //             $(namespace+"#select-responsable").append(option);
@@ -45,7 +45,7 @@
 //
 //     /* ACTUALISER LISTE */
 //     $(document).on("click",namespace+"#refresh-btn",function () {
-//         let url = "http://localhost:8080/api/v1/materieltransport";
+//         let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport";
 //         execute_ajax_request("get",url,null,(data)=> {
 //             clear_table("#table-materiel-transport");
 //             append_item(data)
@@ -81,7 +81,7 @@
 //
 //     // Enregistrement materiel de transport
 //     function enregistrerMaterielTransport($object){
-//         let materieltransportURL = 'http://localhost:8080/api/v1/materieltransport';
+//         let materieltransportURL = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport';
 //         let methodType = $NEW_MT ? "POST" : "PUT";
 //         let userRessourceUrl = $NEW_MT ? materieltransportURL : materieltransportURL + '/' +  $id;
 //         execute_ajax_request(methodType,userRessourceUrl,$object, (data) => {
@@ -100,7 +100,7 @@
 //
 //         let tr = $(this).closest("tr");
 //         let id = $(this).closest("tr").attr('id');
-//         let url = 'http://localhost:8080/api/v1/materieltransport/'+id;
+//         let url = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport/'+id;
 //         let reference = $(tr).children().eq(0).text();
 //
 //         create_confirm_dialog(' supprimer materiel de transport ', " Voulez-vous supprimer "+reference, "supprimer-materiel", "Oui ,supprimer", "btn-danger").on('click', function (){
@@ -143,7 +143,7 @@ $(function (){
             numTel: contact,
             cin : numCin
         };
-        let url = "http://localhost:8080/api/v1/persons/fonction/chauffeur";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/persons/fonction/chauffeur";
         execute_ajax_request("post",url,$ps,(ps)=>{
             let option = `<option value="`+ps.id+`" >`+ps.nom+`</option>`;
             $(namespace+"#select-responsable").append(option);
@@ -170,7 +170,7 @@ $(function (){
 
     /* ACTUALISER LISTE */
     $(document).on("click",namespace+"#refresh-btn",function () {
-        let url = "http://localhost:8080/api/v1/materieltransport";
+        let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport";
         execute_ajax_request("get",url,null,(data)=> {
             clear_table("#table-materiel-transport");
             append_item(data)
@@ -206,7 +206,7 @@ $(function (){
 
     // Enregistrement materiel de transport
     function enregistrerMaterielTransport($object){
-        let materieltransportURL = 'http://localhost:8080/api/v1/materieltransport';
+        let materieltransportURL = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport';
         let methodType = $NEW_MT ? "POST" : "PUT";
         let userRessourceUrl = $NEW_MT ? materieltransportURL : materieltransportURL + '/' +  $id;
         execute_ajax_request(methodType,userRessourceUrl,$object, (data) => {
@@ -225,7 +225,7 @@ $(function (){
 
         let tr = $(this).closest("tr");
         let id = $(this).closest("tr").attr('id');
-        let url = 'http://localhost:8080/api/v1/materieltransport/'+id;
+        let url = 'http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/materieltransport/'+id;
         let reference = $(tr).children().eq(0).text();
 
         create_confirm_dialog(' supprimer materiel de transport ', " Voulez-vous supprimer "+reference, "supprimer-materiel", "Oui ,supprimer", "btn-danger").on('click', function (){

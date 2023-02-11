@@ -22,7 +22,7 @@ $(function () {
             let date_wrapper = {};
             date_wrapper.newDate = new Date($datePeremption);
             date_wrapper.oldDate = new Date(old_date);
-            let url = "http://localhost:8080/api/v1/expirations/"+magasin_id+"/"+article_id+"/"+unite_id;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/expirations/"+magasin_id+"/"+article_id+"/"+unite_id;
             execute_ajax_request("PUT",url,date_wrapper,(data)=>{
                 $(tr).children().eq(3).text(new Date($datePeremption).toLocaleDateString());
                 $('#modal-date-peremption #input-date-peremption').val(null);
@@ -62,7 +62,7 @@ $(function () {
         let product_name = $(namespace+"#top-search").val();
         if (product_name!==""){
             let filialeId = $(namespace + '#filiale-id').attr("value-id");
-            let url = "http://localhost:8080/api/v1/expirations/"+filialeId+"/"+product_name;
+            let url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/expirations/"+filialeId+"/"+product_name;
             execute_ajax_request("get",url,null,(expiration_data)=> appendExpirationData(expiration_data));
         }
     })
@@ -75,7 +75,7 @@ $(function () {
     $(namespace+".btn-status").click(function (){
         let expiration_status = $(this).text();
         let filialeId = $(namespace + '#filiale-id').attr("value-id");
-        let url ="http://localhost:8080/api/v1/expirations/"+filialeId+"/status/"+expiration_status;
+        let url ="http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/expirations/"+filialeId+"/status/"+expiration_status;
         execute_ajax_request("get",url,null,(expiration_data)=> appendExpirationData(expiration_data));
     })
     /*
@@ -96,8 +96,8 @@ $(function () {
         let magasinId = $(this).val();
         let url = "";
         let filialeId = $(namespace + '#filiale-id').attr("value-id");
-        if (magasinId!=="toutes") url = "http://localhost:8080/api/v1/expirations/"+magasinId;
-        else url ="http://localhost:8080/api/v1/expirations/"+filialeId+"/status/toutes";
+        if (magasinId!=="toutes") url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/expirations/"+magasinId;
+        else url ="http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/api/v1/expirations/"+filialeId+"/status/toutes";
         execute_ajax_request('get',url,null,(data)=>appendExpirationData(data));
     });
 

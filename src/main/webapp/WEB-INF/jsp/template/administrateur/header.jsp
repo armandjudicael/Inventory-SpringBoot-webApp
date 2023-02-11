@@ -8,22 +8,22 @@
   <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
   <meta content="Coderthemes" name="author">
   <!-- App favicon -->
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}..//assets/images/favicon.ico">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.ico">
 
   <!-- third party css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+  <link href="${pageContext.request.contextPath}/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
         type="text/css">
   <!-- third party css end -->
 
   <!-- App css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/icons.min.css" rel="stylesheet" type="text/css">
-  <link href="${pageContext.request.contextPath}..//assets/css/app.min.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/assets/css/app.min.css" rel="stylesheet" type="text/css"
         id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
         id="dark-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/custom.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
         id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/custom.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
         id="dark-style">
 
 
@@ -51,7 +51,7 @@
 
           <!-- LOGO -->
           <a href="" class="topnav-logo">
-            <img src="${pageContext.request.contextPath}../assets//images/logo.png" alt="" height="16">
+            <img src="${pageContext.request.contextPath}/assets//images/logo.png" alt="" height="16">
             I-jeery OnLine v1.0
           </a>
 
@@ -124,7 +124,7 @@
               <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown"
                  id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
      <span class="account-user-avatar">
-                                            <img src="${pageContext.request.contextPath}../assets/images/users/avatar-1.jpg"
+                                            <img src="${pageContext.request.contextPath}/assets/images/users/avatar-1.jpg"
                                                  alt="user-image"
                                                  class="rounded-circle">
                                         </span>
