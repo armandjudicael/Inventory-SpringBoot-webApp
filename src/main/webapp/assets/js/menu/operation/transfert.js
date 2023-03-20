@@ -170,7 +170,7 @@ $(function() {
 
     function persitTransfertData() {
 
-        let url = "http://localhost:8080/api/v1/transferts";
+        let url = _url + "api/v1/transferts";
         execute_ajax_request("post",url,transferTab,(data)=>{
             transferTab = [];
             $(namespace + '.table-liste-article-transfert tbody tr').remove();
@@ -202,13 +202,13 @@ $(function() {
     function impression_transfert() {
 
         $societe = {
-            nom : 'Manantsoa',
-            slogan : 'Manantsoa, Mora, Mandroso',
-            adresse : 'Morafeno, Toamasina',
-            ville : 'Toamasina',
-            contact : '+261 34 56 456 89',
-            nif : '123 456 789 0',
-            stat : '1234 5678 7 12345'
+            nom : 'STE TAVARATRA',
+            slogan : 'Ankino amin\'ny Jehovah ny asanao dia ho lavorary izay kasainao. Ohabolana 16:3',
+            adresse : 'Chez Mme Noeline',
+            ville : 'Grossiste et Marchandises',
+            contact : '032 28 024 69 / 034 08 535 34',
+            nif : '4000323979',
+            stat : '51367 322006 0 00061'
         }
 
         $infos = {

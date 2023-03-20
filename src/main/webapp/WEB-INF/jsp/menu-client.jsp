@@ -41,6 +41,8 @@
     <%@ include file="modal/client/info-dette-cf.jsp" %>
     <%@ include file="modal/fournisseur/new-dette.jsp" %>
     <%@ include file="modal/fournisseur/payement-dette.jsp" %>
+    <%@ include file="modal/impression/facture-acceptation.jsp" %>
+
   </div>
   <!-- suite -->
   <div><br>
@@ -62,7 +64,7 @@
             <tr id="${cf.id}">
               <td>${cf.nom}</td>
               <td>${cf.adresse}</td>
-              <td>${cf.numTel}</td>
+              <td class="${cf.numTel}">${cf.numTel}</td>
               <td>${cf.totalTrosa}</td>
               <td class="crud-client">
                 <div class="action-client">

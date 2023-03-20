@@ -18,8 +18,8 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-start ps-3">
             <address class="m-t-5 m-b-5">
-              <strong class="text-inverse label-nom-societe">(Nom de la societe)</strong><br>
-              <strong class="label-adresse">(Adresse)</strong><br>
+              <strong class="text-inverse label-nom-societe">STE TAVARATRA</strong><br>
+              <strong class="label-adresse">Chez Mme Noeline - Ampitarihana</strong><br>
             </address>
           </div>
         </div>

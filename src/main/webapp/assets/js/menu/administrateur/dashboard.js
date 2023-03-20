@@ -107,7 +107,7 @@ $(function () {
 
             company.admin = admin;
 
-            let url = "http://localhost:8080/api/imwa/v1/companies";
+            let url = _url + "api/imwa/v1/companies";
             execute_ajax_request("post",url,company,function (data){
                 $(namespace + '.liste-societe').append(createItemSociete(new Date().toLocaleTimeString(),$nom,$adresse, $contact,$verset,$slogan))
                 createToast('bg-success', 'uil-file-check', 'Nouveau Societe cree', 'Creation d\'un nouveau societe fait!');
@@ -169,7 +169,7 @@ $(function () {
         </div>
         <!-- project title-->
         <h4 class="mt-0">
-          <img src="http://localhost:8080/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
+          <img src=_url + "assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
           <a href="" class="text-title label-nom">` + $nom + `</a>
         </h4>
         <div class="badge bg-danger mb-3 label-statut">Suspendu (activation requis)</div>

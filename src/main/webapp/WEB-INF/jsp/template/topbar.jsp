@@ -4,7 +4,7 @@
   <div class="navbar-custom">
     <ul class="list-unstyled topbar-menu float-end mb-0">
       <li class="dropdown notification-list">
-        <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
+        <a class="nav-link dropdown-toggle arrow-none d-none" data-bs-toggle="dropdown" href="#" role="button"
            aria-haspopup="false" aria-expanded="false">
           <i class="dripicons-bell noti-icon"></i>
           <span class="noti-icon-badge"></span>
@@ -55,8 +55,8 @@
                                              alt="user-image" class="rounded-circle">
                         </span>
                         <span>
-                            <span class="account-user-name">${connectedUser.nom}</span>
-                            <span class="account-position">${connectedUser.fonction.nomFonction}</span>
+                          <span class="account-user-name">${connectedUser.nom} </span>
+                          <span>${connectedUser.fonction.nomFonction}</span>
                             <span id="fonction-id"  class=" d-none account-position">${connectedUser.fonction.id}</span>
                         </span>
         </a>
@@ -67,19 +67,19 @@
           </div>
 
           <!-- item-->
-          <a href="/gerer-utilisateur" class="dropdown-item notify-item">
+          <a href="/gerer-utilisateur" class="dropdown-item notify-item d-none">
             <i class="mdi mdi-account-circle me-1"></i>
             <span>Gérer mon compte</span>
           </a>
 
           <!-- item-->
-          <a href="/gerer-utilisateur#anchor-history-session" class="dropdown-item notify-item">
+          <a href="/gerer-utilisateur#anchor-history-session" class="dropdown-item notify-item d-none">
             <i class="mdi mdi-account-edit me-1"></i>
             <span>Historiques de session</span>
           </a>
 
           <!-- item-->
-          <a href="/" class="dropdown-item notify-item">
+          <a href="${pageContext.request.contextPath}/" class="dropdown-item notify-item">
             <i class="mdi mdi-logout me-1"></i>
             <span>Deconnexion</span>
           </a>

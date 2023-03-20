@@ -20,6 +20,7 @@
   </div>
   <!-- end page title -->
   <input type="hidden" id="user-id" value-id="${connectedUser.id}">
+  <input type="hidden" id="user-id" value-id="${connectedUser.id}">
   <input type="hidden" id="filiale-id" value-id="${connectedUser.filiale.id}">
   <div class="row">
     <div class="col-12">

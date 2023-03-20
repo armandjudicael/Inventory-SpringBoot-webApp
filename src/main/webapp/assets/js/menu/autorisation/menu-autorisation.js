@@ -28,7 +28,7 @@ $(function() {
 
     $(document).on("click",namespace+"#fonction-tab tbody tr",function (){
         $fonction_id = $(this).attr("id");
-        let url ="http://localhost:8080/api/v1/fonctions/"+$fonction_id;
+        let url =_url + "api/v1/fonctions/"+$fonction_id;
         execute_ajax_request("get",url,null,(data)=>{
             let autorisationMap = data.autorisationMap;
             $(namespace+"#auto-tab tbody tr").remove();
@@ -60,7 +60,7 @@ $(function() {
        let feature_id = $(this).closest("tr").attr("feature-id");
        $fonction_id= $(this).closest("tr").attr("fonction-id");
        let text = $(this).text();
-       let url = "http://localhost:8080/api/v1/fonctionnalities/autorization/"+feature_id+"/"+$fonction_id+"/"+(text==="Desactiver" ? 0 : 1);
+       let url = _url + "api/v1/fonctionnalities/autorization/"+feature_id+"/"+$fonction_id+"/"+(text==="Desactiver" ? 0 : 1);
        update_btn_status(this,(text==="Desactiver" ? 1 : 0));
        execute_ajax_request("put",url,null,function (data) {
            createToast('bg-success', 'uil-file-check-alt', 'Fait', ' modification enregistr&eacute; avec succ&egrave;s!')
@@ -125,7 +125,7 @@ $(function() {
     $(document).on("click",namespace+"#save-welcome-page-btn",function (){
         let value = $(namespace+"#welcome-page-select").val();
         if ($fonction_id!==0){
-            let url = "http://localhost:8080/api/v1/fonctions/"+$fonction_id+"/welcome-page/"+value;
+            let url = _url + "api/v1/fonctions/"+$fonction_id+"/welcome-page/"+value;
             execute_ajax_request("put",url,null,(data)=>{
                 createToast('bg-success', 'uil-file-check-alt', 'Enregistrement Page d\'acceuil',"Page d'acceuil enregistr&eacute; avec succ&egrave;s!")
             });

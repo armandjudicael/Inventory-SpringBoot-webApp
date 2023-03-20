@@ -18,8 +18,6 @@
               </p>
               <p class="text-center label-unite-article">
               </p>
-              <p class="text-center label-date-prix">
-              </p>
               <hr>
               <input type="hidden" id="user-id" value-id="${connectedUser.id}" >
               <div class="d-inline-flex">
@@ -30,11 +28,13 @@
             </div>
           </div>
           <div class="col-md-8">
-            <div class="page-title-box">
+            <div class="page-title-box custom-export">
               <div class="page-title-right">
                 <a class="btn btn-success btn-export-to-excel-modal bg-forest mb-1"><img src="${pageContext.request.contextPath}/assets/images/excel.png" alt="user-image" class="icon-excel">&nbsp;</a>
               </div>
             </div>
+
+            <%= start_content_table() %>
             <table id="table-historique-prix" class="table table-special-form table-striped norwap dt-responsive">
               <thead>
               <th>Date</th>
@@ -44,6 +44,7 @@
               <tbody>
               </tbody>
             </table>
+            <%= end_content_table() %>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 $(function () {
     let namespace = "#menu-voyage ";
-    voyageURL = "http://localhost:8080/api/v1/voyages";
+    voyageURL = _url + "api/v1/voyages";
 
     /*-----------------------
 
@@ -96,7 +96,7 @@ $(function () {
             //         }
             //         // EDITION MAGASIN OPERATION
             //         else{
-            //             console.log(" UPDATE ");
+            //             //console.log(" UPDATE ");
             //             update_to_table_list(namespace + '#table-liste-voyage', $(namespace + '#nouveau-voyage').attr('data-id'), $oneVoyage);
             //             createToast('bg-success', 'uil-pen', 'Modification Fait', 'Modification du voyage effectu&eacute; avec succ&egrave;s!')
             //         }

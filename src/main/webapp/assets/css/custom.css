@@ -137,7 +137,10 @@ td.text-align-right {
 .toast-css {
     z-index: 9999!important;
     position: fixed!important;
-    right: 5vh;
+    right: 5vw;
+}
+.toast-css.custom {
+    left: 25vw;
 }
 .toast-css .toast-body {
     text-shadow: 1px 1px 2px #262626, 0 0 1em #262626, 0 0 0.2em #262626;
@@ -259,3 +262,43 @@ CODE BAR
     background: slategrey;
     color: white;
 }
+
+
+/*
+
+BARRE DE DEFILEMENT
+
+*/
+
+.scroll-table-custom {
+  max-height: 500px;
+  overflow-y: scroll;
+  /* Ajouter une largeur pour la barre de d�filement */
+  padding-right: 20px;
+}
+
+/* Personnaliser la barre de d�filement */
+.scroll-table-custom::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll-table-custom::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroll-table-custom::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #f1f1f1;
+}
+
+.scroll-table-custom::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+
+/*
+
+    custom export excel
+
+ */

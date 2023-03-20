@@ -1,3 +1,9 @@
+// ip adress
+
+// let _url = "http://80.241.220.194:8080/admin-0.0.1-SNAPSHOT/";
+//let _url = "http://rodibrian:8080/";
+let _url = "http://localhost:8080/";
+
 function appendOptionToSelect($value, $select){
     $($select)
         .append($("<option></option>")
@@ -117,8 +123,8 @@ const create_consumer_by_id = (item_type, value) => {
 
 function find_item(table_id, filiale_id, item_name, type,tab){
     let url = "";
-    if (type === "ARTICLE") url = "http://localhost:8080/api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
-    else url = "http://localhost:8080/api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
+    if (type === "ARTICLE") url = _url + "api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
+    else url = _url + "api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
    execute_ajax_request("get", url, null, (data) => append_data_to_table(table_id, type, data, tab))
 }
 
@@ -136,8 +142,8 @@ const init_input_search_keyup = function (item_type,input_id,table_id, filiale_i
             if (finded_item === undefined){
 
                 let url = "";
-                if (item_type === "ARTICLE") url = "http://localhost:8080/api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
-                else url = "http://localhost:8080/api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
+                if (item_type === "ARTICLE") url = _url + "api/v1/subsidiaries/" + filiale_id + "/itemsInfo/" + item_name;
+                else url = _url + "api/v1/externalEntities/" + (type === "CLIENT" ? "0" : "1") + "/" + filiale_id;
                 execute_ajax_request("get", url, null, (data) => append_data_to_table(table_id, item_type, data, tab))
 
             } else push_item_table(item_type,finded_item, table_id);
@@ -192,7 +198,7 @@ const createBadge = (montant)=>{
 }
 
 function fetch_trosa_data(namespace,$cf_id){
-    let url = "http://localhost:8080/api/v1/trosas/cf/" + $cf_id;
+    let url = _url + "api/v1/trosas/cf/" + $cf_id;
     execute_ajax_request("get", url, null, (data) => {
         append_trosa_item(namespace,data)
     })
@@ -225,7 +231,7 @@ function init_enregistrer_trosa_btn(namespace){
             trosa.date = $date_dette;
             trosa.dateEcheance = $date_echeance;
             trosa.reste = $montant;
-            let url = "http://localhost:8080/api/v1/trosas";
+            let url = _url + "api/v1/trosas";
             execute_ajax_request("post", url, trosa, (data) => {
                 let tr = ["",
                     trosa.date,
@@ -242,7 +248,9 @@ function init_enregistrer_trosa_btn(namespace){
                 createToast('bg-success', 'uil-check-sign',  title.toLowerCase(), content.toLowerCase());
                 $(namespace + '#nouveau-dette input').val('');
                 $(namespace + '#nouveau-dette textarea').val('');
-               // impression facture
+
+                // impression facture
+
                 function impression_credit_dette(){
                     $infos = {
                         titre: $(namespace + '#nouveau-dette .modal-title').text().replace("Nouveau ",""),
@@ -250,13 +258,15 @@ function init_enregistrer_trosa_btn(namespace){
                         nom_client: trosa.clientFournisseur,
                         magasin: '-',
                         operateur: '-',
-                        montant_facture: trosa.montant,
+                        montant_facture: trosa.montant + " Ar",
                         montant_payer: $(namespace + '#mode-payement-modal #montant').val(),
                         description: $(namespace + '#mode-payement-modal textarea#description').val(),
                         date_echeance : $(namespace + '#mode-payement-modal #date-echeance').val()
                     }
-                    generate_ticket_acceptation($infos.titre, $societe, $infos);
+
+                    //generate_ticket_acceptation($infos.titre, $societe, $infos);
                     generate_facture_acceptation($infos.titre, $societe, $infos);
+
                 };
                 impression_credit_dette()
             });
@@ -315,7 +325,7 @@ const init_payement_dette_btn = (namespace,filiale_id,user_id)=>{
             ifc.modePayement = type_payement;
             ifc.filiale = {id:filiale_id};
             ifc.date = new Date();
-            let url = "http://localhost:8080/api/v1/ifc";
+            let url = _url + "api/v1/ifc";
             execute_ajax_request("post",url,ifc,(data)=>{
                 $(namespace+"#Montant-payer").val("");
                 $(namespace+"#description-payement").val("");
@@ -326,7 +336,7 @@ const init_payement_dette_btn = (namespace,filiale_id,user_id)=>{
 
     function update_reste(namespace,montant_payer,type_trosa) {
         let montant_reste = $montant_reste - parseFloat(montant_payer);
-        execute_ajax_request("put", "http://localhost:8080/api/v1/trosas/" + $trosa_id,montant_reste, (data) => {
+        execute_ajax_request("put", _url + "api/v1/trosas/" + $trosa_id,montant_reste, (data) => {
             let title = type_trosa +'payé';
             let content = type_trosa +'payé avec succès';
             createToast('bg-success', 'uil-check', title.toLowerCase(), content.toLowerCase());
@@ -441,7 +451,7 @@ const init_delete_class = (type)=>{
 }
 
 const fetch_all_cf_and_append_to_table = (type,namespace,table,$filiale_id)=>{
-    let url = "http://localhost:8080/api/v1/externalEntities/"+type+"/"+$filiale_id;
+    let url = _url + "api/v1/externalEntities/"+type+"/"+$filiale_id;
     execute_ajax_request("get",url,null,(data)=> {
         append_cf_item(namespace,table,data,type)
     });
@@ -459,7 +469,7 @@ const init_modal_on_showing = (modal_type,namespace,$modal,$table,$filiale_id,ty
                  execute_ajax_request("get",url,null,(data)=>{
                      clear_table(namespace+"#"+$table);
                      data.forEach(value =>{
-                         console.log(value);
+                         //console.log(value);
                          let tr = [value.itemName, value.uniteName, value.stock,value.price];
                          let tr_id = value.itemId + "-" + value.uniteId;
                          push_to_table_list(namespace+"#"+$table,tr_id, tr);
@@ -470,7 +480,7 @@ const init_modal_on_showing = (modal_type,namespace,$modal,$table,$filiale_id,ty
 
             case "FOURNISEUR_OU_CLIENT": {
 
-                let url = "http://localhost:8080/api/v1/externalEntities/"+type+"/"+$filiale_id;
+                let url = _url + "api/v1/externalEntities/"+type+"/"+$filiale_id;
                 execute_ajax_request("get",url,null,(data)=>{
                     clear_table(namespace+"#"+$table);
                     data.forEach(value=>{
@@ -502,7 +512,7 @@ const  init_seach_cf_btn = (type,namespace,table,$filiale_id)=>{
     $(namespace+"#search-btn").click(()=>{
         let text = $(namespace +"#top-search").val();
         if (undefined !== text && text!==""){
-            let url = "http://localhost:8080/api/v1/externalEntities/"+type+"/"+$filiale_id+"/name/"+text;
+            let url = _url + "api/v1/externalEntities/"+type+"/"+$filiale_id+"/name/"+text;
             execute_ajax_request("get",url,null,(data)=> append_cf_item(namespace,table,data,type))
         }else $(namespace+"#refresh-btn").click();
     });
@@ -521,9 +531,10 @@ function push_to_inventory_table_list($table, $id, $array_td) {
     for (let i = 0; i < $array_td.length; i++) {
         if (i !== 4) $tr.append($('<td></td>').html($array_td[i]))
         else {
+            $stock_2dec = Number($array_td[i]).toFixed(2);
             $a = $('<a></a>')
                 .attr("type", "button")
-                .attr("class", "btn-default mr-1 btn-info-stock").html($array_td[i] + " " + $array_td[i - 3])
+                .attr("class", "btn-default mr-1 btn-info-stock").html($stock_2dec + " " + $array_td[i - 3])
             $tr.append($('<td></td>').append($a))
         }
     }
@@ -578,13 +589,28 @@ function formatDate(date) {
 function createToast($theme, $icon, $title, $content) {
     // create toast
     $idToast = "toast-" + new Date().getTime().toString();
-    $('body').append($('<div>' + '<div class="toast toast-css ' + $theme + ' text-dark" role="alert" id="' + $idToast + '">\n' + '      <div class="toast-header">\n' + $title + '\n' + '      </div>\n' + '      <div class="toast-body">\n' + '        <i class="' + $icon + '"></i>\n' + $content + '\n' + '      </div>\n' + '    </div></div>').html());
+    $('body').append($('<div>' + '<div class="toast toast-css ' + $theme + ' text-light" role="alert" id="' + $idToast + '">\n' + '      <div class="toast-header">\n' + $title + '\n' + '      </div>\n' + '      <div class="toast-body">\n' + '        <i class="' + $icon + '"></i>\n' + $content + '\n' + '      </div>\n' + '    </div></div>').html());
     $('#' + $idToast).toast({delay: 3000});
     $('#' + $idToast).toast('show');
     // position CSS toast
     $countToast = $('.toast').length;
     $posBottom = 5 + ($countToast - 1) * 18;
     $('#' + $idToast).css('bottom', $posBottom + 'vh');
+    // dynamic toast
+    setTimeout(function () {
+        $('#' + $idToast).remove();
+    }, 6000);
+}
+
+function createToastConnected($content) {
+
+    // create toast
+    $idToast = "toast-" + new Date().getTime().toString();
+    $('body').append($('<div class="d-flex justify-content-center">' + '<div class="toast toast-css custom bg-primary text-light" role="alert" id="' + $idToast + '">\n' + '      <div class="toast-body text-center">\n' + '        <i class="uil-check-circle"></i>\n' + $content + '\n' + '      </div>\n' + '    </div></div>').html());
+    $('#' + $idToast).toast({delay: 5000});
+    $('#' + $idToast).toast('show');
+    $('#' + $idToast).css('top',  '1vh');
+
     // dynamic toast
     setTimeout(function () {
         $('#' + $idToast).remove();
@@ -685,3 +711,87 @@ function to_js_number($n) {
     $n = $n.replaceAll(',', '.');
     return parseFloat($n);
 }
+
+function shortDate() {
+let now = new Date();
+let heure = now.getHours();
+let minute = now.getMinutes();
+let dateCourte = now.toLocaleDateString() + ' ' + heure + ':' + (minute < 10 ? '0' : '') + minute;
+
+return dateCourte;
+
+}
+
+function fSearch($input, $table) {
+    $(document).ready(function() {
+        $($input).on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $($table).filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+}
+
+
+/*---------------
+
+        MAIN JS
+
+    -------------- */
+
+const data_selector = '[nbs]';
+const data_class = '.nbs';
+const separator = ' ';
+function numberSeparator(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
+}
+
+function toFixed(x) {
+    if (Math.abs(x) < 1.0) {
+        let e = parseInt(x.toString().split('e-')[1]);
+        if (e) {
+            x *= Math.pow(10, e - 1);
+            x = '0.' + (new Array(e)).join('0') + x.toString().substring(2);
+        }
+    } else {
+        let e = parseInt(x.toString().split('+')[1]);
+        if (e > 20) {
+            e -= 20;
+            x /= Math.pow(10, e);
+            x += (new Array(e + 1)).join('0');
+        }
+    }
+    return x;
+}
+
+function setSeparateAllNumber() {
+    $(data_selector).each(function(key,value) {
+        $(this).text(toFixed(Number($(this).text())))
+        $(this).text(numberSeparator($(this).text().replace('.',',')))
+    })
+    $(data_class).each(function(key,value) {
+        $(this).text(toFixed(Number($(this).text())))
+        $(this).text(numberSeparator($(this).text().replace('.',',')))
+    })
+}
+
+
+
+setSeparateAllNumber();
+
+// modal clear on hide
+
+$('.modal-temporaire').on('hidden.bs.modal', function () {
+    $(this).remove();
+});
+
+
+// set date update
+
+$allDate = $('input[type="date"]');
+
+$allDate.each(function(key,value){
+    $d = new Date();
+    $(this).val('2023-03-15');
+})

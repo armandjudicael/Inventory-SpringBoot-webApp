@@ -12,4 +12,21 @@ $(function () {
 
     init_modal_credit_dette_btn(namespace,filiale_id,user_id);
 
+    /*
+
+    event export
+
+     */
+
+    exportToExcel(namespace + '.btn-export-client','table-liste-dette-client', '.table-liste-dette-client');
+    exportToExcel(namespace + '.btn-export-fournisseur','table-liste-dette-fournisseur', '.table-liste-dette-fournisseur');
+
+
+
+    fSearch(namespace + "#top-search", namespace + '#articleTable tbody tr');
+
+    // client temporaire
+
+    $(namespace + '.table-liste-dette-client tbody tr.-').hide()
+
 })

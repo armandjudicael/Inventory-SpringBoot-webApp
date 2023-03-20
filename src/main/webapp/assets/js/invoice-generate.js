@@ -63,7 +63,7 @@
         $(space + '.label-somme-en-lettre').text(NumberToLetter($somme - $infos.remise) + ' ariary');
 
         // print
-        $(space).printThis()
+        //$(space).printThis()
     }
 
     function generate_ticket_caisse($societe, $infos, $table, $isAvoir) {

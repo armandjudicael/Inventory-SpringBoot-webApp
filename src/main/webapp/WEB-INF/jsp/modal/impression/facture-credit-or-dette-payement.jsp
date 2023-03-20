@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-4 d-flex justify-content-center">
             <address class="m-t-5 m-b-5">
-              <strong class="text-inverse">Nom de la societe</strong><br>
+              <strong class="text-inverse">STE TAVARATRA</strong><br>
               <strong>Adresse</strong><br>
               <strong>Ville</strong><br>
               Tel : <strong>+261 00 00 000 00</strong><br>

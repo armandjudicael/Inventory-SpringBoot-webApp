@@ -43,6 +43,38 @@
     }
 }
 
+#impression-facture-vente, impression-ticket-caisse {
+   line-height: 1.1!important;
+}
+
+
+/* Delete css border */
+
+
+.row-borderless {
+  border-collapse: collapse!important;
+}
+
+.row-borderless td, th {
+  border: 1px solid black!important;
+  padding: 8px!important;
+}
+
+.row-borderless tr:first-child {
+  border-bottom: 1px solid black!important;
+}
+
+.row-borderless tr:not(:first-child) {
+  border-top: none!important;
+}
+
+* {
+
+font-family: Arial!important;
+
+}
+
+
 body {
     margin: 0;
     font-family: Nunito, sans-serif;
@@ -13345,6 +13377,7 @@ body {
 }
 
 .side-nav .side-nav-link {
+    font-size: 16px!important;
     color: #cedce4;
     display: block;
     padding: 10px 30px;
@@ -13419,7 +13452,8 @@ body {
 }
 
 .side-nav .menuitem-active > a {
-    color: #fff !important
+    background: #262626;
+    color: #fff !important;
 }
 
 [dir=ltr] .side-nav .side-nav-item .menu-arrow:before {

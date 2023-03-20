@@ -28,8 +28,8 @@
 
                     <!-- Logo -->
                     <div class="card-header pt-4 pb-4 text-center bg-danger text-light">
-                        <a class="text-dark fw-bold" href="#">
-                            <span><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="" height="18">&nbsp;admin </span>
+                        <a class="text-light fw-bold d-5" href="#">
+                            <h3><span><img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="" height="50">&nbsp;<br>IOL - Administrateur</span></h3>
                         </a>
                     </div>
 
@@ -50,7 +50,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <a href="#" class="text-muted float-end"><small>Mot de passe oublié?</small></a>
+                                <a href="#" class="text-muted float-end d-none"><small>Mot de passe oublié?</small></a>
                                 <label for="password" class="form-label">Mot de passe</label>
                                 <div class="input-group input-group-merge">
                                     <input type="password" name="password" id="password" class="form-control"
@@ -62,7 +62,7 @@
                             </div>
 
                             <div class="mb-3 mb-3">
-                                <div class="form-check form-checkbox-danger">
+                                <div class="form-check form-checkbox-danger d-none">
                                     <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
                                     <label class="form-check-label" for="checkbox-signin">Souviens-moi</label>
                                 </div>

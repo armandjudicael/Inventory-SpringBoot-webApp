@@ -1,7 +1,7 @@
 
 $(function () {
     let namespace = "#menu-magasin ";
-    let clientUrl = "http://localhost:8080/api/v1/magasins";
+    let clientUrl = _url + "api/v1/magasins";
     let NOUVEAU_UTILISATEUR = true;
     /*-------------------------
 

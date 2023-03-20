@@ -2,7 +2,7 @@ $(function() {
 
     let namespace = "#menu-article ";
 
-    let ressource = "http://localhost:8080/api/v1/subsidiaries/";
+    let ressource = _url + "api/v1/subsidiaries/";
 
     $item_table = $("#articleTable tbody");
 
@@ -114,5 +114,16 @@ $(function() {
         regenerate_barcode()
         $('.barcode-list-articles').hide();
     }
+
+
+    // toogle hide button
+
+    $(namespace + "#btn-article-toggle").click(function(){
+        $(this).toggleClass('btn-success');
+        $(this).toggleClass('btn-warning');
+
+        $(this).children('i').toggleClass('uil-eye');
+        $(this).children('i').toggleClass('uil-eye-slash');
+    })
 
 })

@@ -10,7 +10,7 @@ $(function () {
     });
 
     let namespace = "#menu-client ";
-    let cfUrl = "http://localhost:8080/api/v1/externalEntities";
+    let cfUrl = _url + "api/v1/externalEntities";
 
     let filiale_id = $(namespace +'#filiale-id').attr("value-id");
     let user_id = $(namespace+"#user-id").attr("value-id");
@@ -34,6 +34,8 @@ $(function () {
     }
 
     /** nouveau client **/
+
+
     $(namespace + '.btn-nouveau-client').on('click', function () {
         $NOUVEAU_CLIENT = true;
         $(namespace + '#nouveau-client').attr('data-value', 'nouveau-client');
@@ -183,4 +185,9 @@ $(function () {
     init_modal_credit_dette_btn(namespace,filiale_id,user_id);
     /* RECHERCHER CLIENT */
     init_seach_cf_btn(0,namespace,"#table-client",filiale_id);
+
+
+    // client temporaire
+
+    $(namespace + "#table-client tbody tr td.-").closest('tr').hide();
 })

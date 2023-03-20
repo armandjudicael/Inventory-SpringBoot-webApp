@@ -25,7 +25,7 @@
               <div class="mb-1">
                 <label class="form-label">Client</label>
                 <div class="input-group">
-                  <input id="name-client" disabled name="nameClient" type="text" class="form-control" placeholder="Nom du client"
+                  <input id="name-client" name="nameClient" type="text" class="form-control" placeholder="Nom du client"
                          aria-label="Recipient's username">
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                           data-bs-target="#modal-liste-client" id="btn-search-client"><i class="uil-search"></i>

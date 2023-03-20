@@ -15,18 +15,19 @@
         <div class="row">
           <div class="col-4 d-flex justify-content-center">
             <address class="m-t-5 m-b-5">
-              <strong class="text-inverse label-nom-societe">(Nom de la societe)</strong><br>
+              <strong class="text-inverse label-nom-societe">STE TAVARATRA</strong><br>
 
             </address>
           </div>
           <div class="col-8 d-flex justify-content-center">
             <address class="m-t-5 m-b-5">
               <strong class="text-inverse">Bon de <span class="title"></span></strong><br>
-              <span>Bon n°: <span class="label-numero-bon">(XXXXX)</span></span><br>
+              <!--span>Bon n°: <span class="label-numero-bon">(XXXXX)</span></span><br-->
+	      <span class="no-sortie">Reference : <span class="label-reference no-sortie">(XXXXX)</span></span><br>
               <span class="label-date-bon">Le <%= new Date().toLocaleString()  %></span><br>
               Magasin : <span class="label-magasin"></span><br>
               <span class="no-entree no-sortie">Magasin de transfert : <span class="label-magasin-transfert"></span><br></span>
-              <span>Reference : <span class="label-reference">(XXXXX)</span></span><br>
+              
               <span>Opérateur : <span class="label-utilisateur">(username)</span></span>
             </address>
           </div>
@@ -43,17 +44,18 @@
         <div class="table-responsive">
           <table id="liste-article-bon" class="table table-invoice">
             <thead>
-            <tr class="bg-dark">
+            <tr>
               <th class="no-entree no-sortie no-transfert">Code</th>
               <th>Designation</th>
               <th>Unite</th>
-              <th>Quantite</th>
-              <th class="no-sortie no-transfert">Prix Unitaire</th>
+              <th>Qte</th>
+              <th class="no-sortie no-transfert">PU</th>
               <th class="no-sortie no-transfert">Montant</th>
               <th class="no-entree">Description</th>
             </tr>
             </thead>
             <tbody>
+
             </tbody>
           </table>
         </div>

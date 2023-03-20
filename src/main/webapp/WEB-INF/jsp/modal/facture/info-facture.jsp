@@ -61,7 +61,18 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="input-group">
-                      <input type="text" required="" class="form-control dropdown-toggle" placeholder="Search..." id="top-search">
+                      <!--input type="text" required="" class="form-control dropdown-toggle" placeholder="Search..." id="top-search"-->
+                      <div class="btn-group-footer">
+
+                        <button type="button" class="btn btn-creer-avoir btn-danger m-1"><i class="uil-money-withdrawal"></i>&nbsp;Créer avoir</button>
+
+                        <button type="button" class="btn btn-print-facture btn-primary m-1"><i class="uil-print"></i>&nbsp;Imprimer</button>
+
+                        <button class="btn btn-success btn-export-to-excel bg-forest float-end m-1"><img src="${pageContext.request.contextPath}/assets/images/excel.png" alt="user-image" class="icon-excel">&nbsp;</button>
+                        <button type="button" class="btn btn-valider-avoir btn-danger float-end m-1"><i class="uil-money-withdrawal"></i>&nbsp;Valider Avoir
+                        </button>
+
+                      </div>
                       <%--                      <button id="search-btn" class="input-group-text btn-primary" type="submit"><i class="uil-search"></i></button>--%>
                     </div>
                     <br>
@@ -84,17 +95,6 @@
                       </tbody>
                     </table>
                     <%= end_content_table() %>
-                  </div>
-
-                  <div class="btn-group-footer">
-
-                    <button type="button" class="btn btn-creer-avoir btn-danger m-1"><i class="uil-money-withdrawal"></i>&nbsp;Créer avoir</button>
-
-                    <button type="button" class="btn btn-print-facture btn-primary m-1"><i class="uil-print"></i>&nbsp;Imprimer</button>
-
-                    <button class="btn btn-success btn-export-to-excel bg-forest float-end m-1"><img src="${pageContext.request.contextPath}/assets/images/excel.png" alt="user-image" class="icon-excel">&nbsp;</button>
-                    <button type="button" class="btn btn-valider-avoir btn-danger float-end m-1"><i class="uil-money-withdrawal"></i>&nbsp;Valider Avoir
-                    </button>
 
                   </div>
 
@@ -123,8 +123,14 @@
                         <span class="montant-total-restant-pourcentage" nbs></span>
                       </span>
                     </div>
+
+
                   </div>
 
+                  <div class="btn-group-footer d-flex justify-content-end">
+                    <button type="button" class="btn btn-new-payement btn-success m-1"><i class="uil-plus"></i> Nouveau payement</button>
+                    <button type="button" class="btn btn-refresh-payement-list btn-success m-1"><i class="uil-refresh"></i>Actualiser</button>
+                  </div>
                   <div class=" mt-2 col-md-12">
                     <%= start_content_table() %>
                     <table id="table-liste-payement" class="table table-hover table-striped norwap table-sm dt-responsive">
@@ -142,11 +148,6 @@
                       </tbody>
                     </table>
                     <%= end_content_table() %>
-                  </div>
-
-                  <div class="btn-group-footer d-flex">
-                    <button type="button" class="btn btn-new-payement btn-success m-1"><i class="uil-plus"></i> Nouveau payement</button>
-                    <button type="button" class="btn btn-refresh-payement-list btn-success m-1"><i class="uil-refresh"></i>Actualiser</button>
                   </div>
 
                 </div>

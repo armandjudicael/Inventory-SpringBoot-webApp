@@ -60,7 +60,7 @@ $(function () {
         $filiale.nom = $nom;
         $filiale.adresse = $adresse;
         $filiale.numTel = $contact;
-        let url = "http://localhost:8080/api/v1/subsidiaries";
+        let url = _url + "api/v1/subsidiaries";
         execute_ajax_request("post",url,$filiale,(data)=>{
             $filiale = data;
             persist_Fonction(data);
@@ -77,7 +77,7 @@ $(function () {
             }
         };
 
-        let url = "http://localhost:8080/api/v1/magasins";
+        let url = _url + "api/v1/magasins";
         execute_ajax_request("post",url,$default_magasin,(data)=>{
             $default_magasin = data;
             persist_Default_user();
@@ -93,7 +93,7 @@ $(function () {
             magasin : [{id:$default_magasin.id}],
             enabled: true
         };
-        let url = "http://localhost:8080/api/v1/users";
+        let url = _url + "api/v1/users";
         execute_ajax_request("post",url,$admin_filiale_user,(data)=>{
             $admin_filiale_user = data;
         })
@@ -107,7 +107,7 @@ $(function () {
             filiale :{id : filiale.id}
         };
 
-        let url = "http://localhost:8080/api/v1/fonctions";
+        let url = _url + "api/v1/fonctions";
         execute_ajax_request("post",url,$fonction,(data)=>{
             $fonction = data;
             persit_default_store();

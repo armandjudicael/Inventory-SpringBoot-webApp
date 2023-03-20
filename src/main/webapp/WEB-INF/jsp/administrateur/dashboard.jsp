@@ -7,14 +7,14 @@
       <div class="page-title-box">
         <div class="page-title-right">
           <form class="d-flex">
-            <div class="input-group">
+            <div class="input-group d-none">
               <label for="dash-daterange" class="d-none"></label>
               <input type="text" class="form-control form-control-light" id="dash-daterange"/>
               <span class="input-group-text bg-primary border-primary text-white">
                                                     <i class="mdi mdi-calendar-range font-13"></i>
                                                 </span>
             </div>
-            <a href="javascript: void(0);" class="btn btn-primary ms-2">
+            <a href="javascript: void(0);" class="btn btn-primary ms-2 d-none">
               <i class="mdi mdi-autorenew"></i>
             </a>
           </form>
@@ -24,7 +24,7 @@
     </div>
   </div>
   <!-- end page title -->
-  <div class="row">
+  <div class="row d-flex justify-content-around">
     <div class="col-lg-3">
       <div class="card widget-flat">
         <div class="card-body">
@@ -33,7 +33,7 @@
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Soci&eacute;t&eacute; abonn&eacute;</h5>
           <h3 class="mt-3 mb-3">0</h3>
-          <p class="mb-0 text-muted">
+          <p class="mb-0 text-muted d-none">
             <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.72%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -41,7 +41,7 @@
       </div> <!-- end card-->
     </div> <!-- end col-->
 
-    <div class="col-md-3 col-lg-3 col-sm-3">
+    <div class="col-lg-3">
       <div class="card widget-flat">
         <div class="card-body">
           <div class="float-end">
@@ -49,7 +49,7 @@
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Filial Enregistr&eacute;</h5>
           <h3 class="mt-3 mb-3">0</h3>
-          <p class="mb-0 text-muted">
+          <p class="mb-0 text-muted d-none">
             <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -65,7 +65,7 @@
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Magasin</h5>
           <h3 class="mt-3 mb-3">0Ar</h3>
-          <p class="mb-0 text-muted">
+          <p class="mb-0 text-muted d-none">
             <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -91,13 +91,13 @@
 
     <c:forEach var="company" items="${companies}">
 
-      <div id="${company.id}" class="col-3 item-societe">
+      <div id="${company.id}" class="col-lg-3 item-societe">
 
         <div class="card d-block">
           <div class="card-body">
 
             <div class="dropdown card-widgets">
-              <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="dropdown-toggle arrow-none d-none" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="dripicons-dots-3"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-end">
@@ -112,7 +112,7 @@
 
             <!-- project title-->
             <h4 class="mt-0">
-              <img src="http://localhost:8080/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
+              <img src="${pageContext.request.contextPath}/assets/images/logo.png" alt="" class="img-circle logo-entreprise img-fluid">
               <a href="" class="text-title label-nom">${company.nom}</a>
             </h4>
 
@@ -134,7 +134,7 @@
 
           </div>
 
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush d-none">
 
             <li class="list-group-item p-3">
               <!-- project progress-->

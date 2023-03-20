@@ -4,7 +4,7 @@
 <div id="dashboard">
   <input type="hidden" id="user-id" value-id="${connectedUser.id}" value-name="${connectedUser.username}">
   <input type="hidden" id="filiale-id" value-id="${connectedUser.filiale.id}">
-      <div class="row">
+      <div class="row d-flex justify-content-around">
         <div class="col-lg-3">
           <div class="card widget-flat">
             <div class="card-body">
@@ -12,8 +12,8 @@
                 <i class="mdi mdi-account-multiple widget-icon"></i>
               </div>
               <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Caisse</h5>
-              <h3 class="mt-3 mb-3" nbs>${espece}</h3>
-              <p class="mb-0 text-muted">
+              <h3 class="mt-3 mb-3"><span nbs>${espece}</span> Ar</h3>
+              <p class="mb-0 text-muted d-none">
                 <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> <span nbs>5.72</span>%</span>
                 <span class="text-nowrap">Par rapport &agrave; hier</span>
               </p>
@@ -28,8 +28,8 @@
                 <i class="mdi mdi-cart-plus widget-icon"></i>
               </div>
               <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Credit</h5>
-              <h3 class="mt-3 mb-3" nbs>${credit}</h3>
-              <p class="mb-0 text-muted">
+              <h3 class="mt-3 mb-3"><span nbs>${credit}</span> Ar</h3>
+              <p class="mb-0 text-muted d-none">
                 <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> <span nbs>1.08</span>%</span>
                 <span class="text-nowrap">Par rapport &agrave; hier</span>
               </p>
@@ -44,8 +44,8 @@
                 <i class="mdi mdi-account-multiple widget-icon"></i>
               </div>
               <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Encaissement</h5>
-              <h3 class="mt-3 mb-3" nbs>${encaissement}</h3>
-              <p class="mb-0 text-muted">
+              <h3 class="mt-3 mb-3"><span nbs>${encaissement}</span> Ar</h3>
+              <p class="mb-0 text-muted d-none">
                 <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> <span nbs>5.27</span>%</span>
                 <span class="text-nowrap">Par rapport &agrave; hier</span>
               </p>
@@ -60,8 +60,8 @@
                 <i class="mdi mdi-cart-plus widget-icon"></i>
               </div>
               <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Decaissement</h5>
-              <h3 class="mt-3 mb-3" nbs>${depense}</h3>
-              <p class="mb-0 text-muted">
+              <h3 class="mt-3 mb-3"><span nbs>${depense}</span> Ar</h3>
+              <p class="mb-0 text-muted d-none">
                 <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> <span nbs>1.08</span>%</span>
                 <span class="text-nowrap">Par rapport &agrave; hier</span>
               </p>
@@ -78,7 +78,7 @@
     <div class="col-lg-4 box-dashboard">
       <div class="card w-100">
         <div class="card-body">
-          <a href="" class="btn btn-sm btn-link float-end">Exporter
+          <a class="btn btn-sm btn-link float-end btn-export-client">Exporter
             <i class="mdi mdi-download ms-1"></i>
           </a>
           <h4 class="header-title mt-2 mb-3">Credit par client</h4>
@@ -88,7 +88,7 @@
             <table class="table table-special-form table-liste-dette-client table-centered table-striped table-nowrap table-hover mb-0">
               <tbody>
               <c:forEach var="clt" items="${client_list}">
-                <tr id="${clt.id}">
+                <tr id="${clt.id}" class="${clt.numTel}">
                   <td>${clt.nom}</td>
                   <td class="text-end"><span nbs>${clt.totalMontantTrosa}</span> Ar</td>
                 </tr>
@@ -118,28 +118,29 @@
                   <a href="" class="dropdown-item">Exporter excel</a>
                 </div>
               </div>
-              <h4 class="header-title mb-3">Rapport mensuel 2022</h4>
-<%--              <div dir="ltr">--%>
-<%--                <div id="myPlot" class="w-100"></div>--%>
+              <h4 class="header-title mb-3">Rapport mensuel 2023</h4>
+              <div dir="ltr">
+                <div id="myPlot" class="w-100"></div>
 
-<%--                <script>--%>
+                <script>
 
-<%--                    var xArray = ["Italy","France","Spain","USA","Argentina"];--%>
-<%--                    var yArray = [55,49,44,24,15];--%>
+                    var xArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                    "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+                    var yArray = [0,0,0,0,0,0,0,0,0,0,0,0];
 
-<%--                    var data = [{--%>
-<%--                        x:xArray,--%>
-<%--                        y:yArray,--%>
-<%--                        type : "bar"--%>
-<%--                    }];--%>
+                    var data = [{
+                        x:xArray,
+                        y:yArray,
+                        type : "bar"
+                    }];
 
-<%--                    var layout = {title:"World Wide Wine Production"};--%>
+                    var layout = {title:""};
 
-<%--                    Plotly.newPlot("myPlot",data,layout);--%>
+                    Plotly.newPlot("myPlot",data,layout);
 
-<%--                </script>--%>
-<%--&lt;%&ndash;                <div id="high-performing-product" class="apex-charts" data-colors="#727cf5,#e3eaef"></div>&ndash;%&gt;--%>
-<%--              </div>--%>
+                </script>
+                <div id="high-performing-product" class="apex-charts" data-colors="#727cf5,#e3eaef"></div>
+              </div>
             </div> <!-- end card-body-->
           </div> <!-- end card-->
 
@@ -153,7 +154,7 @@
     <div class="col-lg-4 box-dashboard">
       <div class="card w-100">
         <div class="card-body">
-          <a href="" class="btn btn-sm btn-link float-end">Exporter
+          <a class="btn btn-sm btn-link float-end btn-export-fournisseur">Exporter
             <i class="mdi mdi-download ms-1"></i>
           </a>
           <h4 class="header-title mt-2 mb-3">Dette envers Fournisseur</h4>
@@ -200,3 +201,11 @@
 
 
 <%@ include file="template/setting.jsp" %>
+
+<script>
+  _company = "${companyUser}";
+  _filial = "${filialUser}";
+
+  if (_company != "" && _filial != "") createToastConnected("Vous &ecirc;tes connect&eacute;: \n Soci&eacute;t&eacute;: " + _company + ", Filial: " + _filial);
+
+</script>

@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <div id="info-stock" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
   <div class="modal-dialog modal-full-width modal-dialog-scrollable">
-    <div class="modal-content was-validated">
+    <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="standard-modalLabel">Information Stock</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>

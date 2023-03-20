@@ -8,6 +8,10 @@ $(function () {
     $prix_article_reel = 0;
     $prix_remise_article = 0;
 
+    let nomClient;
+
+    let refVente;
+
     let namespace = "#menu-vente ";
 
     $filiale_id = $(namespace + '#filiale-id').attr("value-id");
@@ -72,7 +76,7 @@ $(function () {
             client.cif = cif;
             client.typeCf = 0;
             client.filiale = {id: filialeId};
-            let url = "http://localhost:8080/api/v1/externalEntities";
+            let url = _url + "api/v1/externalEntities";
             execute_ajax_request("post", url, client, (data) => {
                 get_select_affect_to_input(namespace + '#name-client',data.id,data.nom)
                 $(namespace+"#nouveau-client").modal("hide");
@@ -84,6 +88,34 @@ $(function () {
         }
     })
 
+    // Enregistrer client temporaire
+
+    function temporary_client() {
+        let filialeId = $(namespace + '#filiale-id').attr("value-id");
+        let nomClient = $(namespace + 'input#name-client').val();
+        let cin = "";
+        let adresse = "-";
+        let contact = "-";
+        let nif = "";
+        let stat = "";
+        let cif = "";
+        let client = {};
+        client.nom = nomClient;
+        client.cin = cin;
+        client.adresse = adresse;
+        client.numTel = contact;
+        client.nif = nif;
+        client.stat = stat;
+        client.cif = cif;
+        client.typeCf = 0;
+        client.filiale = {id: filialeId};
+        let url = _url + "api/v1/externalEntities";
+        execute_ajax_request("post", url, client, (data) => {
+            console.log("affectation #nameClient ", data.id, data.nom);
+            get_select_affect_to_input(namespace + '#name-client',data.id,data.nom + " (tmp)")
+        });
+    }
+
     $(document).on('dblclick',namespace +'#table-liste-client tbody tr', function () {
         get_select_affect_to_input(namespace + '#name-client', $(this).attr('id'),$(this).children().eq(0).text());
         $(namespace + '#modal-liste-client').modal('hide');
@@ -92,7 +124,9 @@ $(function () {
     /*------------------------------------------------------------------------------
                                             SELECTER ARTICLE
     -------------------------------------------------------------------------------*/
+
     $(document).on('dblclick', namespace + '#table-liste-article tbody tr', function () {
+
         let tr_id = $(this).attr("id");
         let article_id = tr_id.split("-")[0];
         let unite_id = tr_id.split("-")[1];
@@ -102,7 +136,9 @@ $(function () {
         get_select_affect_to_input(namespace + '#designation-article',article_id,$(this).children().eq(0).text());
         $(namespace + '#input-unite-article option').remove();
         set_select_option_value([unite_id, $(this).children().eq(1).text()], namespace + "#input-unite-article");
+
         /* AFFECTATION DU PRIX UNITAIRE */
+
         $(namespace + "#input-prix-unitaire").val($prix_article);
         get_select_affect_to_input(namespace + "#input-prix-unitaire", "", $(this).children().eq(5).text());
         $prix_article_reel = $(namespace + "#input-prix-unitaire").val();
@@ -110,6 +146,7 @@ $(function () {
         // new rules for quantité article
         $(namespace + 'form#form-vente #input-quantite-article').rules('remove', 'max');
         $(namespace + 'form#form-vente #input-quantite-article').rules('add',{ max: quantite_stock});
+
     });
     /*------------------------------------------------------------------------------
                                             PRIX- SPECIAL ARTICLE
@@ -148,8 +185,10 @@ $(function () {
                                             SUPPRESSION D'UN ARTICLE
      -------------------------------------------------------------------------------*/
 
-    $(namespace + '#table-liste-article-vente tbody tr').on('dblclick', function () {
+    $(document).on('dblclick', namespace + '#table-liste-article-vente tbody tr',function () {
         $(this).remove();
+        createToast('bg-danger','','','article supprim&eacute;!');
+        updateLabelFooter()
     })
 
     /* mask et validation */
@@ -171,6 +210,12 @@ $(function () {
         $(namespace + 'form#form-vente').validate();
         return $(namespace + 'form#form-vente').valid();
     }
+
+    /*
+
+    AJOUT D'UN ARTICLE
+
+     */
 
     $('.btn-ajouter-article-vente').on('click',function (){
         if (validation_ajout_article()) {
@@ -203,8 +248,10 @@ $(function () {
     });
 
     /* enregistrement du vente */
+
     $(namespace + '.form-vente .btn-enregistrer-vente').on('click', function () {
         if (validation_enregistrement_vente()) {
+            if (!$(namespace + '#name-client').attr('value-id')) temporary_client();
             $(namespace + '#validation-vente-modal').modal('show')
             $countArticl = $(namespace + '#table-liste-article-vente tbody tr').length;
             $sommeMontant = 0;
@@ -251,8 +298,9 @@ $(function () {
     const enregistrer_vente = ()=>{
 
             $clientId = $(namespace + '#name-client').attr("value-id");
+            console.log($clientId)
             $filiale_id = $(namespace + '#filiale-id').attr("value-id");
-
+            nomClient =  $(namespace + '#name-client').val();
             let nom_client = $(namespace + '#name-client').val();
             let user_id = $(namespace + '#user-id').attr("value-id");
             let date = new Date();
@@ -291,11 +339,19 @@ $(function () {
             $vente.date = date;
             $vente.payements = [pm];
 
-            let url = "http://localhost:8080/api/v1/sales";
+            let url = _url + "api/v1/sales";
             execute_ajax_request("post",url,$vente, (data) =>{
                 // persist_payements(data.id,pm)
               //  impresion
+
+                refVente = data.refVente;
+
+                //console.log(refVente);
+
+
+
                 impression_vente();
+
                 empty_all()
                 $(namespace + '#table-liste-article-vente tbody tr').remove();
                 updateLabelFooter();
@@ -308,25 +364,25 @@ $(function () {
 
     const persist_payements = (vente_id,pm)=>{
         pm.vente = { id : vente_id};
-        let url = "http://localhost:8080/api/v1/payments";
+        let url = _url + "api/v1/payments";
         execute_ajax_request("post",url,pm,(data)=>{
-            console.log(data);
+            //console.log(data);
         })
     }
 
     function impression_vente() {
         $societe = {
-            nom : 'Manantsoa',
-            slogan : 'Manantsoa, Mora, Mandroso',
-            adresse : 'Morafeno, Toamasina',
-            ville : 'Toamasina',
-            contact : '+261 34 56 456 89',
-            nif : '123 456 789 0',
-            stat : '1234 5678 7 12345'
+            nom : 'STE TAVARATRA',
+            slogan : 'Ankino amin\'ny Jehovah ny asanao dia ho lavorary izay kasainao. Ohabolana 16:3',
+            adresse : 'Chez Mme Noeline',
+            ville : 'Grossiste et Marchandises',
+            contact : '032 28 024 69 / 034 08 535 34',
+            nif : '4000323979',
+            stat : '51367 322006 0 00061'
         };
         $infos = {
-            numero_facture : '-',
-            date_facture : new Date(),
+            numero_facture : refVente,
+            date_facture : shortDate(),
             magasin_vente : $magasin = $(namespace + "#select-magasin option:selected").text(),
             nom_client : $(namespace + "#name-client").val(),
             operateur : $(namespace + '#user-id').attr('value-name'),
@@ -334,7 +390,7 @@ $(function () {
             remise_partiel : $remise_article
         }
         generate_facture_A5($societe, $infos, namespace + '#table-liste-article-vente');
-        generate_ticket_caisse($societe, $infos, namespace + '#table-liste-article-vente');
+        //generate_ticket_caisse($societe, $infos, namespace + '#table-liste-article-vente');
     };
 
     function updateLabelFooter(){
@@ -378,7 +434,7 @@ $(function () {
         let filiale_id = $(namespace + '#filiale-id').attr("value-id");
 
         if (ARTICLE_TAB.length===0){
-            let url = "http://localhost:8080/api/v1/subsidiaries/"+filiale_id+"/itemsInfo";
+            let url = _url + "api/v1/subsidiaries/"+filiale_id+"/itemsInfo";
             execute_ajax_request("get",url,null,(data)=> {
                 data.forEach(au=>{
                     let tr = `
@@ -407,10 +463,36 @@ $(function () {
                         <td>`+au.poids +`</td>
                     </tr>`;
 
-                $(namespace+"#table-liste-article tboby").append(tr);
+                $(namespace+"#table-liste-article tbody").append(tr);
 
             })
         }
     }))
+
+    // hide temporary client
+
+    $(namespace + '#btn-search-client').click(function(){
+        setTimeout(function(){
+            $(namespace + '#modal-liste-client #table-liste-client tbody tr').each(function(key,value){
+                if ($(this).children().eq(2).text() == '-')
+                    $(this).hide()
+            });
+        },1000);
+    })
+
+    // separateur des milliers
+
+
+
+
+    /*
+
+    rechercher
+
+     */
+
+
+    fSearch(namespace + '#input-client-search', namespace + '#table-liste-client tbody tr');
+    fSearch(namespace + '#input-article-search', namespace + '#table-liste-article tbody tr');
 
 })

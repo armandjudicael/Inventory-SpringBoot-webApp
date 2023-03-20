@@ -28,6 +28,8 @@ import java.util.stream.Collectors;
 @Service
 public class LoginService{
 
+    static String s_company, s_filial;
+
     @Autowired private CompanyRepository companyRepository;
     @Autowired private MapMultiTenantConnectionProvider mapMultiTenantConnectionProvider;
     @Autowired private TenantUserRepository tenantUserRepository;
@@ -50,11 +52,14 @@ public class LoginService{
     private final String TENANT_LOGIN_VIEW = "login/tenant-user-login";
     private final String CATEGORIES = "categories";
 
-    private ModelAndView initDashboardView(String username,String password,String subsidiaryName,ModelAndView modelAndView){
+    private ModelAndView initDashboardView(String username,String password,String subsidiaryName,String companyName, ModelAndView modelAndView){
         Optional<User> optionalUser = userRepository.checkUser(username,password,subsidiaryName);
         optionalUser.ifPresentOrElse(user -> {
             if (user.getEnabled()) {
+
                 modelAndView.addObject(CONNECTED_USER, user);
+                modelAndView.addObject("companyUser", companyName);
+                modelAndView.addObject("filialUser", subsidiaryName);
                 Long filialeId = user.getFiliale().getId();
                 modelAndView.addObject(CATEGORIES, categorieRepository.findAll());
                 Map<String, Double> cashInfo = cashService.getCashInfo(filialeId);
@@ -89,12 +94,13 @@ public class LoginService{
     public ModelAndView checkTenantandSubsidiary(String username,String password,String key){
         ModelAndView modelAndView = new ModelAndView(TENANT_LOGIN_VIEW);
         Optional<TenantUser> optionalTenantUser = tenantUserRepository.findByUsernameAndPasswordAndKey(username,password,key);
+        System.out.println(optionalTenantUser.isPresent());
         if (optionalTenantUser.isPresent()){
             String[] split = key.split("-");
-            String companyName = split[0].toLowerCase();
+            String companyName = split[0];
             String subsidiaryName = split[1];
             initCurrentDatasourceAndTenantContext(companyName);
-            return initDashboardView(username,password,subsidiaryName,modelAndView);
+            return initDashboardView(username,password,subsidiaryName,companyName,modelAndView);
         }
         return modelAndView;
     }

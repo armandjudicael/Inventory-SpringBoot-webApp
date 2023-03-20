@@ -16,6 +16,16 @@
           <label for="adresse-magasin" class="form-label">Adresse du magasin</label>
           <input name="adresseMagasin" type="text" id="adresse-magasin" class="form-control">
         </div>
+        <div class="mb-3">
+          <label for="limite-valeur" class="form-label">Limite valeur</label>
+          <input name="limiteValeur" type="number" id="limite-valeur" class="form-control">
+        </div>
+        <div class="mb-3">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="check-livraison" checked="">
+            <label class="form-check-label" for="check-livraison">Notification de livraison</label>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>

@@ -28,7 +28,8 @@
                 class="uil-table">&nbsp;</i>Total</a>&nbsp;
         <a id="btn-article-alert" type="button" class="btn s-no-value btn-40 btn-warning mr-1 btn-alert-stock btn-mobile"><i
                 class="uil-apps">&nbsp;</i>Alertes</a>&nbsp;
-        <h4 class="s-value label-valeur-stock">Montant total : <%= "0Ar" %>
+        <h4 class="s-value label-valeur-stock">Montant total : <%= "0Ar" %> <br>
+        <h4 class="s-value label-marge-stock">&nbsp; - &nbsp;Marge en stock : <%= "0Ar" %>
         </h4>
         &nbsp;
         <div class="d-inline-flex s-value">

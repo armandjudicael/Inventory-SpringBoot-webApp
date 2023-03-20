@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-4 d-flex justify-content-center">
             <address class="m-t-5 m-b-5">
-              <strong class="text-inverse label-nom-societe">(Nom de la societe)</strong><br>
+              <strong class="text-inverse label-nom-societe">STE TAVARATRA</strong><br>
 
             </address>
           </div>

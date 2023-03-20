@@ -78,8 +78,8 @@
               <td>${operation.article.designation}</td>
               <td>${operation.unite.designation}</td>
               <td>${operation.typeOperation}</td>
-              <td>${operation.quantiteAjout} ${operation.unite.designation}</td>
-              <td>${operation.quantiteStockApresOperation} ${operation.unite.designation}</td>
+              <td><span nbs>${operation.quantiteAjout}</span> ${operation.unite.designation}</td>
+              <td><span nbs>${operation.quantiteStockApresOperation}</span> ${operation.unite.designation}</td>
               <td>${operation.date}</td>
               <td>${operation.magasin.nomMagasin}</td>
               <td>${operation.description}</td>

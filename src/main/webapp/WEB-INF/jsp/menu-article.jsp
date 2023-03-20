@@ -29,6 +29,8 @@
              data-bs-target="#new-article"><i class="uil-file-plus">&nbsp;</i>Nouveau Article</a>
           <a id="btn-barcode-toggle" class="btn btn-info bg-forest mt-1 btn-mobile"><i
                   class="uil uil-eye-slash"></i> Barcode articles</a>
+          <a id="btn-article-toggle" class="btn btn-success bg-forest mt-1 btn-mobile"><i
+                  class="uil uil-eye"></i> Articles masqu&eacute;s</a>
           <a class="btn btn-success btn-export-to-excel bg-forest float-end mt-1"><img
                   src="${pageContext.request.contextPath}/assets/images/excel.png" alt="user-image" class="icon-excel">&nbsp;</a>
           <a id="refresh-btn" type="button" class="btn btn-success float-end mt-1 me-1 btn-mobile"><i
@@ -107,11 +109,11 @@
               <td value-id="${au.article.categorie.id}">${au.article.categorie.libelle}</td>
               <td nbs>${au.poids}</td>
               <td value-id="${au.niveau}">${au.unite.designation}</td>
-              <td nbs>${au.quantiteNiveau}</td>
+              <td><span nbs>${au.quantiteNiveau}</span> </td>
               <td class="td-action crud-article">
                 <div>
                   <a id="${au.article.id}" data-bs-toggle="modal" data-bs-target="#new-article"
-                     class="btn-sm btn-info editArticleBtn"><i class="uil-pen"></i></a>
+                     class="btn-sm btn-info editArticleBtn"><i class="uil-pen"></i></a> 
                   <a id="${au.article.id}" class="btn-sm btn-danger deleteArticleBtn "><i
                           class="uil-trash-alt"></i></a>
                   <a id="${au.article.id}" class="btn-sm btn-warning hideArticleBtn"><i

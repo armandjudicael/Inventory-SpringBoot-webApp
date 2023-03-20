@@ -8,22 +8,22 @@
   <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
   <meta content="Coderthemes" name="author">
   <!-- App favicon -->
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}..//assets/images/favicon.ico">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/images/favicon.ico">
 
   <!-- third party css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+  <link href="${pageContext.request.contextPath}/assets/css/vendor/jquery-jvectormap-1.2.2.css" rel="stylesheet"
         type="text/css">
   <!-- third party css end -->
 
   <!-- App css -->
-  <link href="${pageContext.request.contextPath}..//assets/css/icons.min.css" rel="stylesheet" type="text/css">
-  <link href="${pageContext.request.contextPath}..//assets/css/app.min.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/icons.min.css" rel="stylesheet" type="text/css">
+  <link href="${pageContext.request.contextPath}/assets/css/app.min.css" rel="stylesheet" type="text/css"
         id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/app-dark.min.css" rel="stylesheet" type="text/css"
         id="dark-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/custom.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
         id="light-style">
-  <link href="${pageContext.request.contextPath}..//assets/css/custom.css" rel="stylesheet" type="text/css"
+  <link href="${pageContext.request.contextPath}/assets/css/custom.css" rel="stylesheet" type="text/css"
         id="dark-style">
 
 
@@ -51,7 +51,7 @@
 
           <!-- LOGO -->
           <a href="" class="topnav-logo">
-            <img src="${pageContext.request.contextPath}../assets//images/logo.png" alt="" height="16">
+            <img src="${pageContext.request.contextPath}/assets//images/logo.png" alt="" height="16">
             I-jeery OnLine v1.0
           </a>
 
@@ -72,7 +72,7 @@
 
 
             <li class="dropdown notification-list">
-              <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#"
+              <a class="nav-link dropdown-toggle arrow-none d-none" data-bs-toggle="dropdown" href="#"
                  id="topbar-notifydrop" role="button" aria-haspopup="true" aria-expanded="false">
                 <i class="dripicons-bell noti-icon"></i>
                 <span class="noti-icon-badge"></span>
@@ -124,13 +124,13 @@
               <a class="nav-link dropdown-toggle nav-user arrow-none me-0" data-bs-toggle="dropdown"
                  id="topbar-userdrop" href="#" role="button" aria-haspopup="true" aria-expanded="false">
      <span class="account-user-avatar">
-                                            <img src="${pageContext.request.contextPath}../assets/images/users/avatar-1.jpg"
+                                            <img src="${pageContext.request.contextPath}/assets/images/users/avatar-1.jpg"
                                                  alt="user-image"
                                                  class="rounded-circle">
                                         </span>
                 <span>
-                                            <span class="account-user-name">Soeng Souy</span>
-                                            <span class="account-position">Founder</span>
+                                            <span class="account-user-name">Administrateur</span>
+                                            <span class="account-position">Société</span>
                                         </span>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown"
@@ -138,25 +138,25 @@
                 <!-- item-->
                 <div class=" dropdown-header noti-title">
                   <h6 class="text-overflow m-0">
-                    Bienvenu!
+                    Menu utilisateur!
                   </h6>
                 </div>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="javascript:void(0);" class="dropdown-item notify-item d-none">
                   <i class="mdi mdi-account-circle me-1"></i>
                   <span>Mon compte</span>
                 </a>
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="javascript:void(0);" class="dropdown-item notify-item d-none">
                   <i class="mdi mdi-account-edit me-1"></i>
                   <span>Parametre</span>
                 </a>
 
 
                 <!-- item-->
-                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                <a href="${pageContext.request.contextPath}/imwa-admin-login" class="dropdown-item notify-item">
                   <i class="mdi mdi-logout me-1"></i>
                   <span>Deconnexion</span>
                 </a>
@@ -192,7 +192,7 @@
           <nav class="navbar navbar-dark navbar-expand-lg topnav-menu">
 
             <div class="collapse navbar-collapse" id="topnav-menu-content">
-              <ul class="navbar-nav">
+              <ul class="navbar-nav d-none">
                 <li class="nav-item dropdown">
                   <a href="/admin/dashboard" class="dropdown-item"><i class="uil-dashboard me-1"></i>Tableau de bord</a>
                 </li>

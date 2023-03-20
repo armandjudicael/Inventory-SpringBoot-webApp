@@ -32,16 +32,7 @@
                         </tr>
                     </thead>
                     <tbody>
-<%--                    <c:forEach var="au" items="${articles}">--%>
-<%--                        <tr id ="${au.itemId}-${au.uniteId}">--%>
-<%--                            <td>${au.itemName}</td>--%>
-<%--                            <td value-id ="${au.uniteId}">${au.uniteName}</td>--%>
-<%--                            <td>${au.quantiteNiveau}</td>--%>
-<%--                            <td>${au.stock}</td>--%>
-<%--                            <td>${au.price}</td>--%>
-<%--                            <td>${au.poids}</td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
+                    
                     </tbody>
                 </table>
                 <%= end_content_table() %>

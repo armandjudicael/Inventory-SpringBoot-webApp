@@ -126,7 +126,7 @@
               </table>
               <%= end_content_table() %>
               <div class="foot-vente" style="position: absolute;bottom: 5%;right: 5%;">
-                <p>Nombre d'article : <span>00</span></p>
+                <p>Nombre d'article : <span class="label-nombre-article">0</span></p>
               </div>
 
             </div>

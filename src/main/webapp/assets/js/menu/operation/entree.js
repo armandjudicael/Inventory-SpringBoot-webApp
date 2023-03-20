@@ -49,7 +49,7 @@ $(function () {
             fr.numTel = contact;
             fr.type = 1;
             fr.filiale = {id: filialeId};
-            let url = "http://localhost:8080/api/v1/externalEntities";
+            let url = _url + "api/v1/externalEntities";
             execute_ajax_request("POST", url, fr, (data) => {
                 get_select_affect_to_input(namespace + '#input-nom-fournisseur', data.id, nomFournisseur);
                 // vider les champs fournisseurs
@@ -70,6 +70,18 @@ $(function () {
         $(namespace + '#modal-liste-article').modal('hide');
         // après selection article, select * unite de l'article
         // ainsi que son prix
+
+        /*
+
+        auto focus
+
+         */
+
+        $(namespace + '#input-quantite-article').trigger('focus');
+
+
+
+
     });
     /* Ajout des articles */
     $(function () {
@@ -180,6 +192,7 @@ $(function () {
     });
 
     function updateLabelFooter(){
+        //console.log('ici')
         $countArticle = $(namespace + '#table-liste-article-entree tbody tr').length;
         $sommeMontant = 0;
         $(namespace + '#table-liste-article-entree tbody tr').each(function (key, value) {
@@ -224,7 +237,7 @@ $(function () {
         trosa.date = new Date;
         trosa.dateEcheance = new Date();
         trosa.reste = $sommeMontant;
-        let url = "http://localhost:8080/api/v1/trosas";
+        let url = _url + "api/v1/trosas";
         execute_ajax_request("post", url, trosa, null);
     }
 
@@ -240,15 +253,17 @@ $(function () {
                 let supplyWrapper = {};
                 supplyWrapper.supplies = supplyTab;
                 supplyWrapper.prixArticleFiliales = pvuafTab;
-                let url = "http://localhost:8080/api/v1/supplies";
+                let url = _url + "api/v1/supplies";
                 execute_ajax_request("post", url, supplyWrapper, (data) =>{
+                    $ref_backup = $(namespace + "#input-reference-facture").val().length == 0 ? "-" : $(namespace + "#input-reference-facture").val();
                     impression_entree();
                     onSuppliesCreated();
                     persist_trosa();
                     $(namespace + "#input-reference-facture").val("");
                 });
             })
-        if ($nArticle === 0) $(namespace + '#btn-' + $modalId).attr('disabled', 'disabled');
+        if ($nArticle == 0 || $ref_backup.length == 0) $(namespace + '#btn-' + $modalId).attr('disabled', 'disabled');
+        else $(namespace + '#btn-' + $modalId).removeAttr('disabled');
     });
 
     /* switch magasin <-> voyage */
@@ -261,18 +276,17 @@ $(function () {
 
     function impression_entree(){
         $societe = {
-            nom : 'Manantsoa',
-            slogan : 'Manantsoa, Mora, Mandroso',
-            adresse : 'Morafeno, Toamasina',
-            ville : 'Toamasina',
-            contact : '+261 34 56 456 89',
-            nif : '123 456 789 0',
-            stat : '1234 5678 7 12345'
-        }
+            nom : 'STE TAVARATRA',
+            slogan : 'Ankino amin\'ny Jehovah ny asanao dia ho lavorary izay kasainao. Ohabolana 16:3',
+            adresse : 'Chez Mme Noeline',
+            ville : 'Grossiste et Marchandises',
+            contact : '032 28 024 69 / 034 08 535 34',
+            nif : '4000323979',
+            stat : '51367 322006 0 00061'        }
         $infos = {
             numero_bon : 'n-0',
-            reference : 'ref-0',
-            date_facture : new Date(),
+            reference : $ref_backup,
+            date_facture : shortDate(),
             magasin : $(namespace + "#select-magasin option:selected").text(),
             fournisseur : $(namespace + "#input-nom-fournisseur").val(),
             nom_client : $(namespace + "#name-client").val(),
@@ -280,5 +294,11 @@ $(function () {
         }
         generate_bon('entree', $societe, $infos, '#table-liste-article-entree');
     };
+
+
+    // rechercher
+
+    fSearch(namespace + '#inpute-article-search', namespace + '#table-liste-article tbody tr');
+    fSearch(namespace + '#input-search-frs', namespace + '#table-liste-fournisseur tbody tr');
 
 })

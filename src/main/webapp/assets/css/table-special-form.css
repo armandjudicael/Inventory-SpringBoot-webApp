@@ -4,8 +4,8 @@
 
  */
 
-.table-special-form {
-
+.table-special-form thead{
+    color: #fff;
 }
 
 .table-special-form tbody tr {
@@ -20,4 +20,8 @@
     position: sticky;
     top: -1px;
     background: #3a444e;
+}
+
+.simplebar-content table thead {
+    color: #fff;
 }

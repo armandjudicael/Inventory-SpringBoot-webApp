@@ -59,7 +59,7 @@ $(function () {
 
             let newVal = $("#nomCategorie").val();
             if (!isUpdateOperation) {
-                let categoriesUrl = 'http://localhost:8080/api/v1/categories';
+                let categoriesUrl = url + 'api/v1/categories';
                 let jsonData = {
                     libelle: newVal
                 };
@@ -83,7 +83,7 @@ $(function () {
                 createToast('bg-success', 'uil-file-check', 'Creation Fait', 'Creation du nouveau cat&eacute;gorie effectu&eacute; avec succ&egrave;s!')
             } else {
                 if (selectedVal !== newVal) {
-                    let url = "http://localhost:8080/api/v1/categories/" + editBtnId;
+                    let url = _url + "api/v1/categories/" + editBtnId;
                     let jsonData = {
                         libelle: newVal
                     };
@@ -129,7 +129,7 @@ $(function () {
 
         let btn = $(this);
         let deleteBtnId = btn.attr("id");
-        let url = "http://localhost:8080/api/v1/categories/" + deleteBtnId;
+        let url = _url + "api/v1/categories/" + deleteBtnId;
         $modalId = "delete-categorie-article";
         create_confirm_dialog('Supprimer categorie', 'Voulez vraiment supprimer cette categorie ? ', $modalId, "Oui, supprimer", "btn-warning")
             .on('click', function () {

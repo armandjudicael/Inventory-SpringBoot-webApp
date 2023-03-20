@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <input type="text" id="inpute-article-search" name="example-input-large" class="form-control w-100 d-block"
+          <input type="text" id="input-search-frs" name="example-input-large" class="form-control w-100 d-block"
                  placeholder="fournisseur &agrave; recherch&eacute;">
         </div>
         <hr>

@@ -53,8 +53,9 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
+
         <button type="submit" id="saveArticleBtn" class="btn btn-primary">Enregistrer</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Annuler</button>
       </div>
     </form><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

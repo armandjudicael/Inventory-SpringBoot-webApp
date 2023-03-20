@@ -50,6 +50,23 @@ body{
     color: #000!important;
 }
 
+.table-invoice th {
+    background: none;
+}
+
+.table-invoice thead {
+    background: none!important;
+}
+.table-invoice tbody, table-invoice {
+    border-bottom: 1px solid black!important;
+}
+
+.table-invoice td {
+    border: 1px solid black;
+    border-top: none!important;
+    border-bottom: none!important;
+}
+
 .table-invoice tbody tr {
     line-height: 20px;
 }

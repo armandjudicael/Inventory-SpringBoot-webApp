@@ -8,7 +8,7 @@
             "            <div class=\"simplebar-mask\">\n" +
             "              <div class=\"simplebar-offset\" style=\"right: 0px; bottom: 0px;\">\n" +
             "                <div class=\"simplebar-content-wrapper\" style=\"height: auto; overflow: hidden scroll;\">\n" +
-            "                  <div class=\"simplebar-content\" style=\"padding: 0px;\">\n" +
+            "                  <div class=\"simplebar-content  scroll-table-custom\" style=\"padding: 0px;\">\n" +
             "                    ";
   }
   public String end_content_table() {

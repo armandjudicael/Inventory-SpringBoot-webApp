@@ -18,10 +18,10 @@
         <div class="row">
           <div class="col-6 d-flex justify-content-center">
             <address class="m-t-5 m-b-5">
-              <strong class="text-inverse label-nom-societe">(Nom de la societe)</strong><br>
-              <strong class="label-adresse">(Adresse)</strong><br>
-              <strong class="label-ville">(Ville)</strong><br>
-              Tel : <strong class="label-contact">-</strong><br>
+              <strong class="text-inverse label-nom-societe">STE TAVARATRA</strong><br>
+              <strong class="label-adresse">Chez Mme Noeline - Ampitarihana</strong><br>
+              <strong class="label-ville"></strong><br>
+              <strong class="label-contact">-</strong><br>
               Nif : <strong class="label-nif">-</strong><br>
               Stat: <strong class="label-stat">-</strong><br>
             </address>
@@ -33,7 +33,7 @@
               Le <span class="label-date"><%= new Date().toLocaleString()  %></span><br>
               Magasin <span class="label-magasin"></span><br>
               <br>
-              Client : <span class="label-nom-client">-</span><br>
+              Client : <strong><span class="label-nom-client">-</span><br></strong>
               Operateur : <span class="label-nom-operateur">-</span><br>
             </address>
           </div>
@@ -44,10 +44,10 @@
       <div class="invoice-content">
         <!-- begin table-responsive -->
         <div class="table-responsive">
-          <table id="table-liste-ventes" class="table table-invoice">
+          <table id="table-liste-ventes" class="table table-invoice row-borderless " style="border-color: #000">
             <thead>
-            <tr class="bg-dark">
-              <th>Quantite</th>
+            <tr>
+              <th>Qte</th>
               <th>Unite</th>
               <th>Designation</th>
               <th>PU</th>

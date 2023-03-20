@@ -31,7 +31,7 @@
         id="dark-style">
   <link href="${pageContext.request.contextPath}/assets/css/table-special-form.css" rel="stylesheet" type="text/css"
         id="light-style">
-  <link href="${pageContext.request.contextPath}/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style">
+  <!--link href="${pageContext.request.contextPath}/assets/css/app-dark.min.css" rel="stylesheet" type="text/css" id="dark-style"-->
 
   <link href="${pageContext.request.contextPath}/assets/css/app.mobile.css" media="only screen and (max-width: 400px)" rel="stylesheet" type="text/css">
 

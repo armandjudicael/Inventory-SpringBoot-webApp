@@ -7,25 +7,25 @@
       <div class="page-title-box">
         <div class="page-title-right">
           <form class="d-flex">
-            <div class="input-group">
+            <div class="input-group d-none">
               <label for="dash-daterange" class="d-none"></label>
               <input type="text" class="form-control form-control-light" id="dash-daterange"/>
               <span class="input-group-text bg-primary border-primary text-white">
                                                     <i class="mdi mdi-calendar-range font-13"></i>
                                                 </span>
             </div>
-            <a  id="refresh-btn" class="btn btn-primary ms-2">
+            <a  id="refresh-btn" class="btn btn-primary ms-2 d-none">
               <i class="mdi mdi-autorenew"></i>
               Actualiser
             </a>
           </form>
         </div>
-        <h4 class="page-title">Tableau de bord societe</h4>
+        <h4 class="page-title">Tableau de bord soci&eacute;t&eacute;</h4>
       </div>
     </div>
   </div>
   <!-- end page title -->
-  <div class="row">
+  <div class="row d-flex justify-content-around">
     <div class="col-lg-3">
       <div class="card widget-flat">
         <div class="card-body">
@@ -34,7 +34,7 @@
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Caisse update</h5>
           <h3 class="mt-3 mb-3">0Ar</h3>
-          <p class="mb-0 text-muted">
+          <p class="mb-0 text-muted d-none">
             <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.72%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -49,8 +49,8 @@
             <i class="mdi mdi-cart-plus widget-icon"></i>
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Credit</h5>
-          <h3 class="mt-3 mb-3">0Ar</h3>
-          <p class="mb-0 text-muted">
+          <h3 class="mt-3 mb-3">0 Ar</h3>
+          <p class="mb-0 text-muted d-none">
             <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -65,8 +65,8 @@
             <i class="mdi mdi-account-multiple widget-icon"></i>
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Customers">Encaissement</h5>
-          <h3 class="mt-3 mb-3">0Ar</h3>
-          <p class="mb-0 text-muted">
+          <h3 class="mt-3 mb-3">0 Ar</h3>
+          <p class="mb-0 text-muted d-none">
             <span class="text-success me-2"><i class="mdi mdi-arrow-up-bold"></i> 5.27%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -81,8 +81,8 @@
             <i class="mdi mdi-cart-plus widget-icon"></i>
           </div>
           <h5 class="text-muted fw-normal mt-0" title="Number of Orders">Decaissement</h5>
-          <h3 class="mt-3 mb-3">0Ar</h3>
-          <p class="mb-0 text-muted">
+          <h3 class="mt-3 mb-3">0 Ar</h3>
+          <p class="mb-0 text-muted d-none">
             <span class="text-danger me-2"><i class="mdi mdi-arrow-down-bold"></i> 1.08%</span>
             <span class="text-nowrap">Par rapport &agrave; hier</span>
           </p>
@@ -106,11 +106,11 @@
 
   <div class="row liste-filial">
     <c:forEach var="sb" items="${subsdiaries}">
-      <div id='${sb.id}' class="col-md-3 col-lg-3 col-sm-3 item-filial">
+      <div id='${sb.id}' class="col-lg-3 item-filial">
         <div class="card d-block">
           <div class="card-body">
             <div class="dropdown card-widgets">
-              <a href="#" class="dropdown-toggle arrow-none" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="dropdown-toggle arrow-none d-none" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="dripicons-dots-3"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-end">
@@ -150,7 +150,7 @@
               </a>
             </div>
           </div> <!-- end card-body-->
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush d-none">
             <li class="list-group-item p-3">
               <!-- project progress-->
               <p class="mb-2 fw-bold">Recette <span class="float-end">100%</span></p>

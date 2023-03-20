@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-start ps-3">
             <address class="m-t-5">
-              <strong class="text-inverse label-nom-societe">Nom de la societe</strong><br>
+              <strong class="text-inverse label-nom-societe">STE TAVARATRA</strong><br>
               <strong class="label-adresse">Adresse</strong><br>
               Tel : <strong class="label-contact">+261 00 00 000 00</strong><br>
               Client : <span class="label-nom-client">Nom du client</span><br>
